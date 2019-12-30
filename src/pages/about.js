@@ -5,11 +5,12 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 
-const IndexPage = () => (
+const AboutPage = () => (
   <Layout>
-    <SEO title="Home" />
-    <PageTitle>Posts</PageTitle>
+    <SEO title="About" />
+    <PageTitle>About</PageTitle>
+    <p>TODO</p>
   </Layout>
 )
 
-export default IndexPage
+export default AboutPage

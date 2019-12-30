@@ -5,6 +5,8 @@ module.exports = {
     author: `@andrewsuzuki`,
   },
   plugins: [
+    // TODO source-filesystem (page content)
+    `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -14,6 +16,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    // TODO remark
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -23,12 +26,23 @@ module.exports = {
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#ffffff`,
-        display: `browser`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site. TODO
+        icon: `src/images/favicon.svg`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-22359344-6",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-nprogress",
+      options: {
+        color: "#0074d9",
+        // TODO override spinner right offset override on mobile
+        showSpinner: true,
+      },
+    },
+    "gatsby-plugin-catch-links",
   ],
 }
