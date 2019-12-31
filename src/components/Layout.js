@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
     <div className="container">
       <div className="main">
         <Header siteTitle={data.site.siteMetadata.title} />
-        <main className="content">{children}</main>
+        <main className="main">{children}</main>
         <footer className="footer">
           © {new Date().getFullYear()} Andrew Suzuki
         </footer>

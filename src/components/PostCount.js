@@ -2,7 +2,7 @@ import React from "react"
 
 const PostCount = ({ count }) => (
   <p>
-    {count} post{count > 1 && "s"}
+    {count === 0 ? "No" : count} post{count !== 1 && "s"}
   </p>
 )
 

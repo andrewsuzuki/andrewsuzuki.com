@@ -4,6 +4,7 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
+import PostInfo from "../components/PostInfo"
 
 const SeriesMessage = ({ series, thisPostSlug }) => {
   if (!series) {
@@ -12,18 +13,20 @@ const SeriesMessage = ({ series, thisPostSlug }) => {
 
   return (
     <div className="series-message">
-      <h2>Series: {series.name}</h2>
-      <ul className="bulleted">
-        {series.posts.map(post => (
-          <li key={post.postSlug}>
-            {post.postSlug === thisPostSlug ? (
-              <strong>{post.title}</strong>
-            ) : (
-              <Link to={post.path}>{post.title}</Link>
-            )}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <h2>Series: {series.name}</h2>
+        <ul className="bulleted">
+          {series.posts.map(post => (
+            <li key={post.postSlug}>
+              {post.postSlug === thisPostSlug ? (
+                <strong>{post.title}</strong>
+              ) : (
+                <Link to={post.path}>{post.title}</Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
@@ -39,14 +42,20 @@ const PostPage = props => {
     <Layout>
       <SEO title={title} />
       <PageTitle>{title}</PageTitle>
-      <p>
-        <em>{post.frontmatter.date}</em>
-      </p>
+      <PostInfo
+        date={post.frontmatter.date}
+        categoryPath={post.fields.categoryWithPath.path}
+        categoryName={post.fields.categoryWithPath.name}
+        tagsWithPaths={post.fields.tagsWithPaths}
+      />
       <SeriesMessage
         series={series}
         thisPostSlug={post.fields.slugWithPath.slug}
       />
-      <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      <section
+        className="content"
+        dangerouslySetInnerHTML={{ __html: post.html }}
+      />
     </Layout>
   )
 }
@@ -61,6 +70,10 @@ export const query = graphql`
         tagsWithPaths {
           tag
           path
+        }
+        categoryWithPath {
+          path
+          name
         }
         slugWithPath {
           slug

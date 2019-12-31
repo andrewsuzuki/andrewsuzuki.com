@@ -8,4 +8,4 @@ tags:
 draft: false
 ---
 
-First post!
+Welcome! This is my new personal website and blog as of 2020.

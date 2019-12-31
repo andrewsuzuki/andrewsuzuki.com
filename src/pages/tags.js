@@ -34,7 +34,7 @@ const TagsPage = props => {
         </button>
       </p>
       <p>
-        {tagsCount} tag{tagsCount > 1 && "s"}
+        {tagsCount} tag{tagsCount !== 1 && "s"}
       </p>
       <div>
         {_.orderBy(

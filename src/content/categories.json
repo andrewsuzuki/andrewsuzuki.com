@@ -2,13 +2,16 @@
   "uncategorized": {
     "name": "Uncategorized"
   },
+  "software": {
+    "name": "Software"
+  },
   "cycling": {
     "name": "Cycling"
   },
+  "diy": {
+    "name": "DIY"
+  },
   "music": {
     "name": "Music"
-  },
-  "software": {
-    "name": "Software"
   }
 }

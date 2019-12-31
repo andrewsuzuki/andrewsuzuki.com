@@ -1,7 +1,7 @@
-import React, { Fragment } from "react"
+import React from "react"
 import { Link } from "gatsby"
 
-import Tag from "./Tag"
+import PostInfo from "./PostInfo"
 
 const PostList = ({ posts }) => (
   <div className="post-listings">
@@ -12,24 +12,12 @@ const PostList = ({ posts }) => (
             {post.node.frontmatter.title}
           </Link>
         </div>
-        <div>
-          <em>{post.node.frontmatter.date}</em>
-          &nbsp;&middot;&nbsp;
-          <Link to={post.node.fields.categoryWithPath.path}>
-            {post.node.fields.categoryWithPath.name}
-          </Link>
-          {post.node.fields.tagsWithPaths &&
-          post.node.fields.tagsWithPaths.length ? (
-            <>
-              &nbsp;&middot;&nbsp;
-              {post.node.fields.tagsWithPaths.map(({ tag }) => (
-                <Fragment key={tag}>
-                  <Tag>{tag}</Tag>{" "}
-                </Fragment>
-              ))}
-            </>
-          ) : null}
-        </div>
+        <PostInfo
+          date={post.node.frontmatter.date}
+          categoryPath={post.node.fields.categoryWithPath.path}
+          categoryName={post.node.fields.categoryWithPath.name}
+          tagsWithPaths={post.node.fields.tagsWithPaths}
+        />
       </div>
     ))}
   </div>

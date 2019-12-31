@@ -13,8 +13,7 @@ const Nav = () => (
             location.pathname === "/" ||
             location.pathname.startsWith("/posts") ||
             location.pathname.startsWith("/categories") ||
-            location.pathname.startsWith("/series") ||
-            location.pathname.startsWith("/tags") // TODO more startsWiths?
+            location.pathname.startsWith("/tags")
               ? "active"
               : null
           }
