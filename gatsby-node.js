@@ -241,6 +241,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     {}
   )
 
+  // Verify series posts against actual post slugs
+  Object.entries(seriesMap).forEach(([seriesSlug, series]) => {
+    if (series.posts) {
+      series.posts.forEach(post => {
+        if (!postSlugToTitleMap[post.postSlug]) {
+          reporter.panicOnBuild(
+            `Series ${seriesSlug} specifies posts that don't exist, or are drafts.`
+          )
+        }
+      })
+    }
+  })
+
   // Create blog post pages
 
   postEdges.forEach(edge => {

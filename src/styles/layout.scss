@@ -11,7 +11,7 @@ html {
   box-sizing: inherit;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, pre {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.main {
+.site {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -100,6 +100,10 @@ h1, h2, h3, h4, h5, h6 {
       height: auto;
       margin-top: 1rem;
       margin-bottom: 1rem;
+    }
+
+    pre {
+      margin: 1em 0;
     }
 
     .series-message {
@@ -235,3 +239,6 @@ button {
     background-color: cyan;
   }
 }
+
+// prism syntax highlighter theme
+@import "./prism-vs-modified.scss";

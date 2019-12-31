@@ -1,3 +1,7 @@
 # andrewsuzuki.com
 
-TODO readme
+TODO:
+- contact form
+- about page content
+- image gallery and lightbox
+- Markdown MDX

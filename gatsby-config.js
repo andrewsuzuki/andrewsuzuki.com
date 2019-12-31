@@ -1,11 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `Andrew Suzuki`, // TODO
-    description: ``, // TODO
+    title: `Andrew Suzuki`,
+    description: `I'm a software engineer, musician, maker, and cyclist. This is my personal website and blog.`,
     author: `@andrewsuzuki`,
   },
   plugins: [
-    // TODO source-filesystem (page content)
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     {
@@ -41,7 +40,14 @@ module.exports = {
           // },
           "gatsby-remark-prismjs",
           "gatsby-remark-copy-linked-files",
-          "gatsby-remark-smartypants",
+          {
+            resolve: "gatsby-remark-smartypants",
+            options: {
+              // -- => en, --- => em
+              dashes: "oldschool",
+            },
+          },
+          // TODO mdx?
         ],
       },
     },
@@ -54,7 +60,9 @@ module.exports = {
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#ffffff`,
-        icon: `src/images/favicon.svg`,
+        // Unfortunately, can't use favicon.svg source on netlify
+        // (doesn't have correct font), so for now use the png version
+        icon: `src/images/favicon-512x512.png`,
       },
     },
     {
