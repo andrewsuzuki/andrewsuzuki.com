@@ -69,40 +69,44 @@ const categoriesSlugs = Object.keys(categoriesMap)
 // Gatsby
 
 /**
- * 1. Handle File node creation from gatsby-plugin-filesystem,
- *    adding slug fields to appropriately well-formed md files
- * 2. Handle MarkdownRemark node creation from gatsby-transformer-remark,
- *    adding slug, series, tag fields. These nodes are children of their
- *    associated File node.
+ * Handle Mdx node creation from gatsby-plugin-mdx,
+ * adding slug (from parent File node), series, tag, category fields.
  */
 exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
   const { createNodeField } = actions
 
-  if (node.sourceInstanceName === "posts" && node.internal.type === "File") {
-    // Handle File nodes from the "posts" filesystem source
+  if (node.internal.type === "Mdx") {
+    // Get the parent File node for directory name
+    const fileNode = getNode(node.parent)
 
-    const parsedFilePath = path.parse(node.absolutePath)
-    const splitDir = parsedFilePath.dir.split("---")
-    if (parsedFilePath.ext === ".md" && splitDir.length === 2) {
-      // Add custom url pathname for blog posts.
-
-      // Determine slug from directory name
-      // The date prefix is not used (only for file browser order)
-      // Example: 2017-04-01---foo-bar
-      const slug = splitDir[1]
-      const slugPath = postSlugToPath(slug)
-
-      createNodeField({
-        node,
-        name: "slugWithPath",
-        value: { slug, path: slugPath },
-      })
+    // Must be a File that came from posts source
+    if (
+      fileNode.internal.type !== "File" ||
+      fileNode.sourceInstanceName !== "posts"
+    ) {
+      reporter.warn(
+        `Markdown Mdx parent node was not a File from 'posts' source, skipping.`
+      )
+      return
     }
-  } else if (
-    node.internal.type === "MarkdownRemark"
-    // && typeof node.slug === "undefined" // handle once
-  ) {
-    // Handle MarkdownRemark nodes
+
+    // Derive slug and slugPath (from parent File node)
+    const parsedFilePath = path.parse(fileNode.absolutePath)
+    const splitDir = parsedFilePath.dir.split("---")
+    if (
+      ![".md", ".mdx"].includes(parsedFilePath.ext) ||
+      splitDir.length !== 2
+    ) {
+      reporter.panicOnBuild(
+        `Post directory format is malformed; must consist of two parts separated by '---'.`
+      )
+      return
+    }
+    // Determine slug from directory name
+    // The date prefix is not used (only for file browser order)
+    // Example: 2017-04-01---foo-bar
+    const slug = splitDir[1]
+    const slugPath = postSlugToPath(slug)
 
     const { frontmatter } = node
 
@@ -135,24 +139,21 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
       }
     })
 
-    // Copy slug from parent node (File) to this MarkdownRemark node
-    const fileNode = getNode(node.parent)
-    const fileNodeSlug = _.get(fileNode, "fields.slugWithPath")
-    if (fileNodeSlug) {
-      createNodeField({
-        node,
-        name: "slugWithPath",
-        value: fileNodeSlug,
-      })
+    // Add fields to this Mdx node
 
-      // attach series slug
-      const seriesSlug = postSlugToSeriesMap[fileNodeSlug.slug]
-      createNodeField({
-        node,
-        name: "seriesSlug",
-        value: seriesSlug || NOT_IN_SERIES,
-      })
-    }
+    // Add slugWithPath
+    createNodeField({
+      node,
+      name: "slugWithPath",
+      value: { slug, path: slugPath },
+    })
+
+    // Add seriesSlug
+    createNodeField({
+      node,
+      name: "seriesSlug",
+      value: postSlugToSeriesMap[slug] || NOT_IN_SERIES,
+    })
 
     // Add categoryWithPath
     createNodeField({
@@ -165,7 +166,7 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
       },
     })
 
-    // Add tagsWithPaths field to the MarkdownRemark node with (tag, path) maps
+    // Add tagsWithPaths field to the Mdx node with (tag, path) maps
     if (frontmatter.tags) {
       const tagsWithPaths = frontmatter.tags.map(tag => ({
         tag,
@@ -199,10 +200,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const result = await graphql(`
     {
-      allMarkdownRemark(
-        limit: 2000
-        filter: { frontmatter: { draft: { ne: true } } }
-      ) {
+      allMdx(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
         edges {
           node {
             fields {
@@ -231,7 +229,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const postEdges = result.data.allMarkdownRemark.edges
+  const postEdges = result.data.allMdx.edges
 
   const postSlugToTitleMap = postEdges.reduce(
     (acc, edge) => ({
@@ -312,5 +310,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // FUTURE more fields here
       },
     })
+  })
+}
+
+// Allow local imports from src (e.g. import Tag from 'components/Tag')
+// NOTE This is a workaround for gatsby-plugin-mdx local imports
+// Follow https://github.com/gatsbyjs/gatsby/issues/20150 for updates
+// and remove this / update imports if relative imports are implemented?
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, "src"), "node_modules"],
+    },
   })
 }

@@ -10,7 +10,7 @@ import Tag from "../components/Tag"
 const TagsPage = props => {
   const [orderKey, setOrderKey] = useState("totalCount")
 
-  const tags = props.data.allMarkdownRemark.group
+  const tags = props.data.allMdx.group
 
   const tagsCount = tags.length
 
@@ -56,10 +56,7 @@ export default TagsPage
 
 export const query = graphql`
   query TagsQuery {
-    allMarkdownRemark(
-      limit: 2000
-      filter: { frontmatter: { draft: { ne: true } } }
-    ) {
+    allMdx(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

@@ -9,8 +9,8 @@ import PostCount from "../components/PostCount"
 
 const CategoryPage = props => {
   const { name } = props.pageContext
-  const posts = props.data.allMarkdownRemark.edges
-  const totalCount = props.data.allMarkdownRemark.totalCount
+  const posts = props.data.allMdx.edges
+  const totalCount = props.data.allMdx.totalCount
 
   return (
     <Layout>
@@ -29,7 +29,7 @@ export default CategoryPage
 
 export const query = graphql`
   query($category: String) {
-    allMarkdownRemark(
+    allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: {

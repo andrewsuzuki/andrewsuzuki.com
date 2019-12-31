@@ -12,10 +12,12 @@ gatsby develop
 
 ## TODO
 
-- contact form
-- about page content
 - image gallery and lightbox
-- markdown MDX
 - all categories page
+- contact form
+- rss.xml
 - social links? github
+- about page content
+- domain, https
 - FUTURE: search
+- FUTURE: resolve componentWillMount deprecation warning. Follow gatsbyjs/gatsby#17865

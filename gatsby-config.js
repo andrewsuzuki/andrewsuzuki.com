@@ -23,21 +23,16 @@ module.exports = {
     },
     "gatsby-transformer-sharp",
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           {
             resolve: "gatsby-remark-images",
             options: {
               maxWidth: 680,
             },
           },
-          // {
-          //   resolve: "gatsby-remark-responsive-iframe",
-          //   options: {
-          //     wrapperStyle: "margin-bottom: 1.0725rem",
-          //   },
-          // },
           "gatsby-remark-prismjs",
           "gatsby-remark-copy-linked-files",
           {
@@ -47,11 +42,11 @@ module.exports = {
               dashes: "oldschool",
             },
           },
-          // TODO mdx?
         ],
       },
     },
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-feed-mdx`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

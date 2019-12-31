@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -32,7 +33,7 @@ const SeriesMessage = ({ series, thisPostSlug }) => {
 }
 
 const PostPage = props => {
-  const post = props.data.markdownRemark
+  const post = props.data.mdx
 
   const { series } = props.pageContext
 
@@ -52,10 +53,9 @@ const PostPage = props => {
         series={series}
         thisPostSlug={post.fields.slugWithPath.slug}
       />
-      <section
-        className="content"
-        dangerouslySetInnerHTML={{ __html: post.html }}
-      />
+      <section className="content">
+        <MDXRenderer>{post.body}</MDXRenderer>
+      </section>
     </Layout>
   )
 }
@@ -64,8 +64,8 @@ export default PostPage
 
 export const query = graphql`
   query($slug: String!) {
-    markdownRemark(fields: { slugWithPath: { slug: { eq: $slug } } }) {
-      html
+    mdx(fields: { slugWithPath: { slug: { eq: $slug } } }) {
+      body
       fields {
         tagsWithPaths {
           tag

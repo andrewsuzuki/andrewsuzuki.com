@@ -10,8 +10,8 @@ import PostCount from "../components/PostCount"
 
 const TagPage = props => {
   const tag = props.pageContext.tag
-  const posts = props.data.allMarkdownRemark.edges
-  const totalCount = props.data.allMarkdownRemark.totalCount
+  const posts = props.data.allMdx.edges
+  const totalCount = props.data.allMdx.totalCount
 
   return (
     <Layout>
@@ -32,7 +32,7 @@ export default TagPage
 
 export const query = graphql`
   query($tag: String) {
-    allMarkdownRemark(
+    allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] }, draft: { ne: true } } }

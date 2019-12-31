@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle"
 import PostList from "../components/PostList"
 
 const IndexPage = props => {
-  const posts = props.data.allMarkdownRemark.edges
+  const posts = props.data.allMdx.edges
 
   return (
     <Layout>
@@ -22,7 +22,7 @@ export default IndexPage
 
 export const query = graphql`
   {
-    allMarkdownRemark(
+    allMdx(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { draft: { ne: true } } }
