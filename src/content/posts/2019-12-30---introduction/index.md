@@ -9,3 +9,5 @@ draft: false
 ---
 
 Welcome! This is my new personal website and blog as of 2020.
+
+Learn more about me [here](/about).

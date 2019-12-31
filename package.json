@@ -1,7 +1,7 @@
 {
   "name": "andrewsuzuki.com",
   "private": true,
-  "description": "Andrew Suzuki Personal Website and Blog",
+  "description": "Andrew Suzuki's Personal Website and Blog",
   "version": "0.1.0",
   "author": "Andrew Suzuki <andrew.b.suzuki@gmail.com>",
   "dependencies": {

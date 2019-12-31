@@ -14,7 +14,7 @@ const CategoryPage = props => {
 
   return (
     <Layout>
-      <SEO title={name} />
+      <SEO title={`Category: ${name}`} />
       <PageTitle>{name}</PageTitle>
       <PostCount count={totalCount} />
       <PostList posts={posts} />

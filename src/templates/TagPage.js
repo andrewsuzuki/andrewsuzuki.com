@@ -15,9 +15,9 @@ const TagPage = props => {
 
   return (
     <Layout>
-      <SEO title={`Posts with Tag: #${tag}`} />
+      <SEO title={`Posts Tagged #${tag}`} />
       <PageTitle>
-        Posts with Tag: <Tag>{tag}</Tag>
+        Posts Tagged <Tag>{tag}</Tag>
       </PageTitle>
       <PostCount count={totalCount} />
       <PostList posts={posts} />
