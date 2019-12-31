@@ -196,7 +196,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const postPageTemplate = path.resolve("src/templates/PostPage.js")
   const tagPageTemplate = path.resolve("src/templates/TagPage.js")
   const categoryPageTemplate = path.resolve("src/templates/CategoryPage.js")
-  const seriesPageTemplate = path.resolve("src/templates/SeriesPage.js")
 
   const result = await graphql(`
     {
@@ -219,6 +218,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
             frontmatter {
               category
+              title
             }
           }
         }
@@ -233,6 +233,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const postEdges = result.data.allMarkdownRemark.edges
 
+  const postSlugToTitleMap = postEdges.reduce(
+    (acc, edge) => ({
+      ...acc,
+      [edge.node.fields.slugWithPath.slug]: edge.node.frontmatter.title,
+    }),
+    {}
+  )
+
   // Create blog post pages
 
   postEdges.forEach(edge => {
@@ -246,7 +254,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       component: postPageTemplate,
       context: {
         slug: slugWithPath.slug,
-        series: seriesMaybe,
+        series: seriesMaybe && {
+          ...seriesMaybe,
+          posts: seriesMaybe.posts.map(post => ({
+            // add post titles of other series posts,
+            // now that they're known
+            ...post,
+            title: postSlugToTitleMap[post.postSlug],
+          })),
+        },
       },
     })
   })
@@ -281,22 +297,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         category,
         name: categoriesMap[category].name,
         // FUTURE more fields here
-      },
-    })
-  })
-
-  // Create post series pages (from series.json)
-
-  seriesSlugs.forEach(slug => {
-    const { name, posts } = seriesMap[slug]
-
-    createPage({
-      path: seriesSlugToPath(slug),
-      component: seriesPageTemplate,
-      context: {
-        seriesSlug: slug,
-        name,
-        posts,
       },
     })
   })

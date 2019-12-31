@@ -101,6 +101,22 @@ h1, h2, h3, h4, h5, h6 {
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
+
+    .series-message {
+      margin: 0.5em 0;
+      background: lightyellow;
+      padding: 1em;
+      display: inline-block;
+
+      h2 {
+        font-size: 1em;
+        margin-top: 0;
+      }
+    }
+
+    ul.bulleted {
+      list-style: disc inside;
+    }
   }
 }
 
