@@ -1,0 +1,14 @@
+{
+  "uncategorized": {
+    "name": "Uncategorized"
+  },
+  "cycling": {
+    "name": "Cycling"
+  },
+  "music": {
+    "name": "Music"
+  },
+  "software": {
+    "name": "Software"
+  }
+}

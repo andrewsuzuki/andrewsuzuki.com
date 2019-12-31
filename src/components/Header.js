@@ -2,7 +2,6 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import { Location } from "@reach/router"
-import Tag from "./Tag"
 
 const Nav = () => (
   <Location>
@@ -13,6 +12,8 @@ const Nav = () => (
           className={
             location.pathname === "/" ||
             location.pathname.startsWith("/posts") ||
+            location.pathname.startsWith("/categories") ||
+            location.pathname.startsWith("/series") ||
             location.pathname.startsWith("/tags") // TODO more startsWiths?
               ? "active"
               : null
@@ -33,10 +34,10 @@ const Nav = () => (
 
 const SecondaryNav = () => (
   <div className="secondary-nav">
-    <Tag>projects</Tag>&nbsp;
-    <Tag>cycling</Tag>&nbsp;
-    <Tag>music</Tag>&nbsp;
-    <Tag>software</Tag>
+    <Link to="/categories/software">software</Link>
+    <Link to="/categories/cycling">cycling</Link>
+    <Link to="/categories/diy">diy</Link>
+    <Link to="/categories/music">music</Link>
   </div>
 )
 

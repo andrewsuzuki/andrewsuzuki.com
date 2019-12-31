@@ -1,32 +1,43 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostList from "../components/PostList"
+import Tag from "../components/Tag"
+import PostCount from "../components/PostCount"
 
-const IndexPage = props => {
+const TagPage = props => {
+  const tag = props.pageContext.tag
   const posts = props.data.allMarkdownRemark.edges
+  const totalCount = props.data.allMarkdownRemark.totalCount
 
   return (
     <Layout>
-      <SEO title="Home" />
-      <PageTitle>Posts</PageTitle>
+      <SEO title={`Posts with Tag: #${tag}`} />
+      <PageTitle>
+        Posts with Tag: <Tag>{tag}</Tag>
+      </PageTitle>
+      <PostCount count={totalCount} />
       <PostList posts={posts} />
+      <p>
+        <Link to="/tags">View All Tags</Link>
+      </p>
     </Layout>
   )
 }
 
-export default IndexPage
+export default TagPage
 
 export const query = graphql`
-  {
+  query($tag: String) {
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { draft: { ne: true } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, draft: { ne: true } } }
     ) {
+      totalCount
       edges {
         node {
           fields {
