@@ -3,6 +3,7 @@ module.exports = {
     title: `Andrew Suzuki`,
     description: `I'm a software engineer, musician, maker, and cyclist. This is my personal website and blog.`,
     author: `@andrewsuzuki`,
+    siteUrl: `https://andrewsuzuki.com`,
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -46,7 +47,13 @@ module.exports = {
       },
     },
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-feed-mdx`,
+    {
+      resolve: `gatsby-plugin-feed-mdx`,
+      // TODO categories
+      // TODO tags?
+      // TODO markdown content? links not showing up?
+      // TODO siteUrl slash for concatenation? bad <link>s
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

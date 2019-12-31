@@ -141,6 +141,13 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
 
     // Add fields to this Mdx node
 
+    // Add slug (mostly for plugin compat, e.g. gatsby-plugin-feed[-mdx])
+    createNodeField({
+      node,
+      name: "slug",
+      value: slug,
+    })
+
     // Add slugWithPath
     createNodeField({
       node,
@@ -190,7 +197,6 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
  * 5. Reduce list of all categories from posts, and create a page for each
  * 6. Reduce list of all series from posts, and create a page for each
  */
-// TODO all-categories page
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
