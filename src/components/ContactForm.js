@@ -20,7 +20,9 @@ export default function ContactForm() {
   } = useForm()
 
   if (submitResult === true) {
-    return <p>Your message was sent successfully!</p>
+    return (
+      <p className="success-message">Your message was sent successfully!</p>
+    )
   }
 
   const onSubmit = async data => {
@@ -33,8 +35,6 @@ export default function ContactForm() {
           ...data,
         }),
       })
-
-      console.log(data, response) // TODO remove
 
       if (response.status !== 200) {
         throw new Error()
