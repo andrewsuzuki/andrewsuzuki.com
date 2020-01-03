@@ -22,6 +22,7 @@ module.exports = {
         path: `${__dirname}/src/content/posts`,
       },
     },
+    "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
       resolve: "gatsby-plugin-mdx",
@@ -29,7 +30,8 @@ module.exports = {
         extensions: [`.mdx`, `.md`],
         gatsbyRemarkPlugins: [
           {
-            resolve: "gatsby-remark-images",
+            // resolve: "gatsby-remark-images",
+            resolve: require.resolve("./gatsby-remark-mdx-image-gallery"),
             options: {
               maxWidth: 680,
             },
@@ -46,7 +48,6 @@ module.exports = {
         ],
       },
     },
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-feed-mdx`,
       // TODO categories

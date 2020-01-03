@@ -1,11 +1,21 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { MDXProvider } from "@mdx-js/react"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostInfo from "../components/PostInfo"
+import Tag from "../components/Tag"
+import FullImageMDX from "../components/FullImageMDX"
+import GalleryMDX from "../components/GalleryMDX"
+
+const mdxComponents = {
+  Tag,
+  FullImageMDX,
+  GalleryMDX,
+}
 
 const SeriesMessage = ({ series, thisPostSlug }) => {
   if (!series) {
@@ -54,7 +64,9 @@ const PostPage = props => {
         thisPostSlug={post.fields.slugWithPath.slug}
       />
       <section className="content">
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <MDXProvider components={mdxComponents}>
+          <MDXRenderer>{post.body}</MDXRenderer>
+        </MDXProvider>
       </section>
     </Layout>
   )
