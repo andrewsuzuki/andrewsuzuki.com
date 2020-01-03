@@ -34,7 +34,9 @@ const Modal = ({ children }) => {
       <div className="modal-overlay" onClick={onClickOverlay} role="dialog">
         {children}
         <div className="modal-close">
-          <button onClick={close}>✖</button>
+          <button onClick={close} title="Close">
+            ✖
+          </button>
         </div>
       </div>
     </>

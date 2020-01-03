@@ -110,7 +110,11 @@ export default function ContactForm() {
           {typeof submitResult === "string" && (
             <p className="error-message">{submitResult}</p>
           )}
-          <button type="submit" disabled={isSubmitting}>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            title="Submit contact form"
+          >
             Submit
           </button>
         </div>

@@ -9,6 +9,10 @@ import "../styles/layout.scss"
 
 export const ModalContext = createContext()
 
+export const Content = ({ children }) => (
+  <section className="content">{children}</section>
+)
+
 const Layout = ({ children }) => {
   const [modal, setModal] = useState(null)
 

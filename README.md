@@ -39,8 +39,6 @@ Strategy:
 
 ## TODO
 
-- titles for Links
-- apply a Content/similar component for all pages?
 - social links? github
 - domain
 - FUTURE: search (with js-search)

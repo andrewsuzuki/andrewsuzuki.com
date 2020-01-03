@@ -7,7 +7,9 @@ const PostInfo = ({ date, categoryPath, categoryName, tagsWithPaths }) => (
   <p className="post-info">
     <em>{date}</em>
     &nbsp;&middot;&nbsp;
-    <Link to={categoryPath}>{categoryName}</Link>
+    <Link to={categoryPath} title={`Category: ${categoryName}`}>
+      {categoryName}
+    </Link>
     {tagsWithPaths && tagsWithPaths.length ? (
       <>
         &nbsp;&middot;&nbsp;

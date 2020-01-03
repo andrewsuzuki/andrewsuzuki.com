@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Layout from "../components/Layout"
+import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostList from "../components/PostList"
@@ -16,8 +16,10 @@ const IndexPage = props => {
     <Layout>
       <SEO title="Home" />
       <PageTitle>Posts</PageTitle>
-      <PostCount count={totalCount} />
-      <PostList posts={posts} />
+      <Content>
+        <PostCount count={totalCount} />
+        <PostList posts={posts} />
+      </Content>
     </Layout>
   )
 }

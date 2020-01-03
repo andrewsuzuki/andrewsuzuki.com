@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import { MDXProvider } from "@mdx-js/react"
 
-import Layout from "../components/Layout"
+import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostInfo from "../components/PostInfo"
@@ -32,7 +32,9 @@ const SeriesMessage = ({ series, thisPostSlug }) => {
               {post.postSlug === thisPostSlug ? (
                 <strong>{post.title}</strong>
               ) : (
-                <Link to={post.path}>{post.title}</Link>
+                <Link to={post.path} title={post.title}>
+                  {post.title}
+                </Link>
               )}
             </li>
           ))}
@@ -63,11 +65,11 @@ const PostPage = props => {
         series={series}
         thisPostSlug={post.fields.slugWithPath.slug}
       />
-      <section className="content">
+      <Content>
         <MDXProvider components={mdxComponents}>
           <MDXRenderer>{post.body}</MDXRenderer>
         </MDXProvider>
-      </section>
+      </Content>
     </Layout>
   )
 }

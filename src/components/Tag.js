@@ -3,7 +3,12 @@ import React from "react"
 import { Link } from "gatsby"
 
 const Tag = ({ children }) => (
-  <Link to={`/tags/${children}`} className="tag" activeClassName="active">
+  <Link
+    to={`/tags/${children}`}
+    title={`Tag: ${children}`}
+    className="tag"
+    activeClassName="active"
+  >
     #{children}
   </Link>
 )

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import Layout from "../components/Layout"
+import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostList from "../components/PostList"
@@ -16,11 +16,15 @@ const CategoryPage = props => {
     <Layout>
       <SEO title={`Category: ${name}`} />
       <PageTitle>{name}</PageTitle>
-      <PostCount count={totalCount} />
-      <PostList posts={posts} />
-      <p>
-        <Link to="/categories">View All Categories</Link>
-      </p>
+      <Content>
+        <PostCount count={totalCount} />
+        <PostList posts={posts} />
+        <p>
+          <Link to="/categories" title="All Categories">
+            View All Categories
+          </Link>
+        </p>
+      </Content>
     </Layout>
   )
 }

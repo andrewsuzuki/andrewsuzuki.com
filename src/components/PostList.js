@@ -8,7 +8,10 @@ const PostList = ({ posts }) => (
     {posts.map(post => (
       <div key={post.node.fields.slugWithPath.path}>
         <div>
-          <Link to={post.node.fields.slugWithPath.path}>
+          <Link
+            to={post.node.fields.slugWithPath.path}
+            title={post.node.frontmatter.title}
+          >
             {post.node.frontmatter.title}
           </Link>
         </div>
