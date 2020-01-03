@@ -203,6 +203,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const postPageTemplate = path.resolve("src/templates/PostPage.js")
   const tagPageTemplate = path.resolve("src/templates/TagPage.js")
   const categoryPageTemplate = path.resolve("src/templates/CategoryPage.js")
+  const allCategoriesPageTemplate = path.resolve(
+    "src/templates/AllCategoriesPage.js"
+  )
 
   const result = await graphql(`
     {
@@ -316,6 +319,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // FUTURE more fields here
       },
     })
+  })
+
+  // Create all categories page (from categories.json)
+  createPage({
+    path: "/categories",
+    component: allCategoriesPageTemplate,
+    context: {
+      categories: categoriesMap,
+    },
   })
 }
 

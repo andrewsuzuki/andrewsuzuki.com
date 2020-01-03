@@ -55,7 +55,7 @@ const TagsPage = props => {
 export default TagsPage
 
 export const query = graphql`
-  query TagsQuery {
+  query {
     allMdx(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
       group(field: frontmatter___tags) {
         fieldValue

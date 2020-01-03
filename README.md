@@ -39,7 +39,6 @@ Strategy:
 
 ## TODO
 
-- series: prev/next buttons at bottom?
 - all categories page
 - contact form
 - rss.xml
@@ -47,7 +46,8 @@ Strategy:
 - about page content
 - domain, https
 - FUTURE: search (with js-search)
-- FUTURE: sub-categories
 - FUTURE: comments
 - FUTURE: ProgressiveImage loading image overlay
 - FUTURE: resolve componentWillMount deprecation warning. Follow gatsbyjs/gatsby#17865
+- FUTURE: prev/next buttons for series at bottom of posts
+- FUTURE: sub-categories, and multiple categories?
