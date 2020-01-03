@@ -42,7 +42,7 @@ Strategy:
 - contact form
 - social links? github
 - about page content
-- domain, https
+- domain
 - FUTURE: search (with js-search)
 - FUTURE: comments
 - FUTURE: ProgressiveImage loading image overlay

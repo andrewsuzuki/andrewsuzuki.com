@@ -404,5 +404,46 @@ button {
   }
 }
 
+.contact-form {
+  .field {
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type=text], input[type=email], textarea {
+      padding: 3px;
+      min-width: 100%;
+      width: 100%;
+      border: 1px inset rgb(169, 169, 169);
+
+      @include media('>=mobile') {
+        min-width: 50%;
+        width: 50%;
+      }
+
+      &.has-error {
+        border-color: red;
+      }
+    }
+
+    textarea {
+      min-height: 5em;
+      max-height: 80vh;
+      max-width: 100%;
+    }
+
+    .error-message {
+      color: red;
+    }
+  }
+}
+
 // prism syntax highlighter theme
 @import "./prism-vs-modified.scss";
