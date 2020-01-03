@@ -34,9 +34,11 @@ export default function ContactForm() {
         }),
       })
 
-      // TODO check response status
-
       console.log(data, response) // TODO remove
+
+      if (response.status !== 200) {
+        throw new Error()
+      }
 
       setSubmitResult(true)
     } catch (err) {
@@ -49,6 +51,9 @@ export default function ContactForm() {
   return (
     <div className="contact-form">
       <form
+        name={NETLIFY_FORM_NAME}
+        action="/contact"
+        method="post"
         onSubmit={handleSubmit(onSubmit)}
         data-netlify="true"
         data-netlify-honeypot="bot-field"
