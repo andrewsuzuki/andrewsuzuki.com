@@ -7,39 +7,17 @@ It is a static website built with [Gatsby](https://www.gatsbyjs.org/) and React.
 ## Development
 
 ```
-gatsby develop
+npm run develop
 ```
 
-## Images
+## Build
 
-Images in .md[x] files come in two formats:
-
-- Full-width (680px), with modal full single
-  - In .md[x]. Normal markdown images (`![alt text](./image.jpg)`) that are:
-    - Local
-    - *Alone in their own paragraphs*. Inline images should not be processed.
-    - Greater than 680px wide
-    - Not gif or svg
-  - Sizes generated:
-    - Small sizes when loading
-    - 680px
-    - Full size for modal
-- Gallery containing thumbnails, with modal carousel
-  - In .md**x**. Special globally-available component `<Gallery />`. images must be:
-    - Local
-    - Not gif or svg
-  - ALTERNATIVE: Normal markdown images, with a special start/end wrapper to place those images in a gallery
-  - Sizes generated:
-    - Thumbnail
-    - Full size for modal carousel. Or srcset??
-
-Strategy:
-1. Traverse markdown ast for (a) single image nodes in paragraphs (b) code blocks with lang=gallery.
-2. For (a) and (b), generate images and replace with the corresponding jsx element with props (FullImage or GalleryImages).
+```
+./build.sh
+```
 
 ## TODO
 
-- social links? github
 - domain
 - FUTURE: search (with js-search)
 - FUTURE: comments

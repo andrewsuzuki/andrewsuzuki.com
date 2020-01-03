@@ -317,6 +317,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer {
   margin: 1.67rem 0 0.67rem;
+  display: block;
+
+  @include media('>=mobile') {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .links {
+    a {
+      margin-left: 0.67em;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
 }
 
 button {

@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header"
 import Modal from "./Modal"
@@ -33,7 +33,23 @@ const Layout = ({ children }) => {
           <Header siteTitle={data.site.siteMetadata.title} />
           <main className="main">{children}</main>
           <footer className="footer">
-            © {new Date().getFullYear()} Andrew Suzuki
+            <div>
+              © {new Date().getFullYear()} {data.site.siteMetadata.title}
+            </div>
+            <div className="links">
+              <a href="/rss.xml" title="RSS">
+                RSS
+              </a>
+              <a
+                href="https://github.com/andrewsuzuki"
+                title="@andrewsuzuki on GitHub"
+              >
+                Github
+              </a>
+              <Link to="/contact" title="Contact">
+                Contact
+              </Link>
+            </div>
           </footer>
         </div>
       </div>
