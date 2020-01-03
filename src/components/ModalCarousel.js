@@ -26,12 +26,12 @@ const ModalCarousel = ({ images, initialIndex }) => {
       )}
       {images.length > 1 && index !== 0 && (
         <div className="modal-nav left">
-          <button onClick={() => setIndex(index - 1)}>◄</button>
+          <button onClick={() => setIndex(index - 1)}>🢀</button>
         </div>
       )}
       {images.length > 1 && index !== images.length - 1 && (
         <div className="modal-nav right">
-          <button onClick={() => setIndex(index + 1)}>►</button>
+          <button onClick={() => setIndex(index + 1)}>🢂</button>
         </div>
       )}
     </>
