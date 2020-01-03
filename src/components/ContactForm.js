@@ -25,7 +25,7 @@ export default function ContactForm() {
 
   const onSubmit = async data => {
     try {
-      const result = await fetch("/", {
+      const response = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: encode({
@@ -34,7 +34,9 @@ export default function ContactForm() {
         }),
       })
 
-      console.log(result) // TODO remove
+      // TODO check response status
+
+      console.log(data, response) // TODO remove
 
       setSubmitResult(true)
     } catch (err) {
@@ -51,10 +53,15 @@ export default function ContactForm() {
         data-netlify="true"
         data-netlify-honeypot="bot-field"
       >
-        <input type="hidden" name="form-name" value={NETLIFY_FORM_NAME} />
+        <input
+          type="hidden"
+          name="form-name"
+          value={NETLIFY_FORM_NAME}
+          ref={register}
+        />
         <p hidden>
           <label>
-            Don’t fill this out: <input name="bot-field" ref={register()} />
+            Don’t fill this out: <input name="bot-field" ref={register} />
           </label>
         </p>
         <div className="field">
