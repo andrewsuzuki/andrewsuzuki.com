@@ -39,9 +39,7 @@ Strategy:
 
 ## TODO
 
-- all categories page
 - contact form
-- rss.xml
 - social links? github
 - about page content
 - domain, https

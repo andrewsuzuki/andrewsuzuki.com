@@ -1,3 +1,7 @@
+const url = require("url")
+const _ = require("lodash")
+const visit = require("unist-util-visit")
+
 module.exports = {
   siteMetadata: {
     title: `Andrew Suzuki`,
@@ -48,12 +52,101 @@ module.exports = {
         ],
       },
     },
+    "gatsby-plugin-catch-links",
     {
       resolve: `gatsby-plugin-feed-mdx`,
-      // TODO categories
-      // TODO tags?
-      // TODO markdown content? links not showing up?
-      // TODO siteUrl slash for concatenation? bad <link>s
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map(edge => {
+                const postUrl = url.resolve(
+                  site.siteMetadata.siteUrl,
+                  edge.node.fields.slug
+                )
+
+                const excerptNodes = []
+                visit(edge.node.mdxAST, node => {
+                  if (node.type === `text` || node.type === `inlineCode`) {
+                    excerptNodes.push(node.value)
+                  }
+                  return
+                })
+
+                const pruneLength = 280
+                const excerpt = _.truncate(
+                  excerptNodes
+                    .join(" ")
+                    .split(" ")
+                    .filter(a => a)
+                    .reduce((acc, s, i) => {
+                      if (i === 0) {
+                        return s
+                      } else if ([".", "!", "?"].includes(s)) {
+                        return `${acc}${s}`
+                      } else {
+                        return `${acc} ${s}`
+                      }
+                    }, ""),
+                  {
+                    length: pruneLength,
+                    omission: `…`,
+                  }
+                )
+
+                return {
+                  description: excerpt,
+                  title: edge.node.frontmatter.title,
+                  date: edge.node.frontmatter.date,
+                  categories: [edge.node.frontmatter.category],
+                  url: postUrl,
+                  guid: postUrl,
+                }
+              })
+            },
+            query: `
+              {
+                allMdx(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                  filter: { frontmatter: { draft: { ne: true } } },
+                ) {
+                  edges {
+                    node {
+                      mdxAST
+                      fields {
+                        slug
+                      }
+                      frontmatter {
+                        category
+                        title
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Andrew Suzuki's Blog",
+            // optional configuration to insert feed reference in pages:
+            // if `string` is used, it will be used to create RegExp and then test if pathname of
+            // current page satisfied this regular expression;
+            // if not provided or `undefined`, all pages will have feed reference inserted
+            match: "^/posts/",
+          },
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -81,6 +174,5 @@ module.exports = {
         showSpinner: false,
       },
     },
-    "gatsby-plugin-catch-links",
   ],
 }
