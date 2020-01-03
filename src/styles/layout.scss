@@ -54,12 +54,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .progressive-image-wrapper {
   position: relative;
-  // TODO?
-  .progressive-image-loading-image {
-    display: block;
-    width: 100%;
-    transition: opacity 0.3s 0.3s;
-  }
+
+  // FUTURE
+  // .progressive-image-loading-image {
+  //   display: block;
+  //   width: 100%;
+  //   transition: opacity 0.3s 0.3s;
+  // }
 }
 
 .site {
