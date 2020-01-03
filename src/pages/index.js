@@ -5,14 +5,18 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostList from "../components/PostList"
+import PostCount from "../components/PostCount"
 
 const IndexPage = props => {
   const posts = props.data.allMdx.edges
+
+  const totalCount = posts.length
 
   return (
     <Layout>
       <SEO title="Home" />
       <PageTitle>Posts</PageTitle>
+      <PostCount count={totalCount} />
       <PostList posts={posts} />
     </Layout>
   )

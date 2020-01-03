@@ -39,12 +39,13 @@ Strategy:
 
 ## TODO
 
-- contact form
+- titles for Links
+- apply a Content/similar component for all pages?
 - social links? github
-- about page content
 - domain
 - FUTURE: search (with js-search)
 - FUTURE: comments
+- FUTURE: better about
 - FUTURE: ProgressiveImage loading image overlay
 - FUTURE: resolve componentWillMount deprecation warning. Follow gatsbyjs/gatsby#17865
 - FUTURE: prev/next buttons for series at bottom of posts
