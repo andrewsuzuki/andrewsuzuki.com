@@ -7,10 +7,12 @@ import { flexSearchCreateOptions } from "../flexSearchCreateOptions"
 // obj => loaded (the index)
 export const SearchIndexContext = createContext(null)
 
+const w = typeof window === "undefined" ? {} : window
+
 const fetchIndex = () =>
   // default to global if we have it already
-  window.__FLEXSEARCH__
-    ? Promise.resolve(window.__FLEXSEARCH__)
+  w.__FLEXSEARCH__
+    ? Promise.resolve(w.__FLEXSEARCH__)
     : // load json data into window variable
       fetch(`/search-index.json`)
         .then(response => {
@@ -30,7 +32,7 @@ const fetchIndex = () =>
           })
 
           // make global on window object
-          window.__FLEXSEARCH__ = index
+          w.__FLEXSEARCH__ = index
 
           return index
         })
@@ -41,7 +43,7 @@ const fetchIndex = () =>
         })
 
 const SearchIndexProvider = ({ children }) => {
-  const [searchIndex, setSearchIndex] = useState(window.__FLEXSEARCH__ || null)
+  const [searchIndex, setSearchIndex] = useState(w.__FLEXSEARCH__ || null)
 
   useEffect(() => {
     fetchIndex().then(result => {
