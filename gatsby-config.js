@@ -10,6 +10,7 @@ module.exports = {
     siteUrl: `https://andrewsuzuki.com`,
   },
   plugins: [
+    `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
     {
