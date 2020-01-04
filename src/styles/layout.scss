@@ -1,5 +1,7 @@
 @import "./include-media.scss";
 
+$lightgray: rgb(221, 221, 221);
+
 /* Reset */
 
 html {
@@ -280,8 +282,10 @@ h1, h2, h3, h4, h5, h6 {
 
     a {
       display: inline-block;
-      margin-right: 0.5em;
+      padding: 0.125em;
+      margin-right: 0.375em;
       font-size: 1.25em;
+      background: $lightgray;
 
       &:last-of-type {
         margin-right: 0;
@@ -323,6 +327,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .links {
+    margin-top: 0.167em; // mobile
+
+    @include media('>=mobile') {
+      margin-top: 0;
+    }
+
     a {
       margin-left: 0.67em;
 
@@ -334,7 +344,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button {
-  border: 1px outset rgb(221, 221, 221);
+  background: $lightgray;
+  border: 1px outset $lightgray;
   cursor: pointer;
 
   &.active {
@@ -419,8 +430,8 @@ button {
 }
 
 input[type=text], input[type=email], textarea {
-  padding: 3px;
-  border: 1px inset rgb(169, 169, 169);
+  padding: 0.33em;
+  border: 1px solid rgb(137, 137, 137);
 }
 
 .search {
@@ -463,7 +474,7 @@ input[type=text], input[type=email], textarea {
     }
 
     textarea {
-      min-height: 5em;
+      min-height: 6em;
       max-height: 80vh;
       max-width: 100%;
     }
