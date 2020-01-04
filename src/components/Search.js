@@ -39,10 +39,8 @@ const Search = () => {
           <PostCount count={results.length} what="result" />
           <PostList
             posts={results.map(result => ({
-              // doesn't need it, but let's map fields directly
-              // for future-proofing
               title: result.title,
-              date: result.date,
+              date: result.date && result.date.substr(0, 10),
               slugWithPath: result.slugWithPath,
               categoryWithPath: result.categoryWithPath,
               tagsWithPaths: result.tagsWithPaths,

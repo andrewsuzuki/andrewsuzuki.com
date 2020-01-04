@@ -18,9 +18,6 @@ npm run develop
 
 ## TODO
 
-- robots?
-- public repo, private old
-- search (with flexsearch)
 - FUTURE: comments
 - FUTURE: better about
 - FUTURE: ProgressiveImage loading image overlay
