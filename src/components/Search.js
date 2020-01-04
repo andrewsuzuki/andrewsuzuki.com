@@ -4,9 +4,11 @@ import { SearchIndexContext } from "./SearchIndexProvider"
 import PostList from "./PostList"
 import PostCount from "./PostCount"
 
+const SEARCH_THROTTLE_FPS = 4
+
 const Search = () => {
   const index = useContext(SearchIndexContext)
-  const [s, setS] = useThrottle("", 2, true)
+  const [s, setS] = useThrottle("", SEARCH_THROTTLE_FPS, true)
   const [results, setResults] = useState([])
 
   useEffect(() => {
