@@ -18,9 +18,9 @@ npm run develop
 
 ## TODO
 
-- domain
-- production branch
-- FUTURE: search (with js-search)
+- robots?
+- public repo, private old
+- search (with flexsearch)
 - FUTURE: comments
 - FUTURE: better about
 - FUTURE: ProgressiveImage loading image overlay

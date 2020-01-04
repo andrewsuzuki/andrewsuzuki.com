@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
-import PostList from "../components/PostList"
+import PostList, { graphqlPostEdgesToPosts } from "../components/PostList"
 import PostCount from "../components/PostCount"
 
 const IndexPage = props => {
@@ -18,7 +18,7 @@ const IndexPage = props => {
       <PageTitle>Posts</PageTitle>
       <Content>
         <PostCount count={totalCount} />
-        <PostList posts={posts} />
+        <PostList posts={graphqlPostEdgesToPosts(posts)} />
       </Content>
     </Layout>
   )

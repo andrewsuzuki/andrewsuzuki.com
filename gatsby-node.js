@@ -6,6 +6,10 @@
 
 const _ = require("lodash")
 const path = require("path")
+const fs = require("fs")
+const visit = require("unist-util-visit")
+const FlexSearch = require("flexsearch")
+const { flexSearchCreateOptions } = require("./src/flexSearchCreateOptions")
 
 // Helpers
 
@@ -212,11 +216,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       allMdx(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
         edges {
           node {
+            mdxAST
             fields {
               seriesSlug
               slugWithPath {
                 slug
                 path
+              }
+              categoryWithPath {
+                path
+                name
               }
               tagsWithPaths {
                 tag
@@ -226,6 +235,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             frontmatter {
               category
               title
+              date
             }
           }
         }
@@ -329,6 +339,84 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       categories: categoriesMap,
     },
   })
+
+  // Build search index (NOTE doesn't have to do with page creation, but
+  // this seems to be the only Gastsby Node API that exposes graphql.)
+
+  const activity = reporter.activityTimer(`build flexsearch index`)
+  activity.start()
+
+  const index = new FlexSearch(flexSearchCreateOptions)
+
+  // To save final space in the final export, maintain a map
+  // of ad hoc integers to actual post documents (for display)
+  let id = 0
+  const postDocs = {}
+
+  postEdges
+    .map(edge => {
+      // extract text nodes from mdx (markdown) AST, then
+      // crudely join them together to form search content
+      const ast = edge.node.mdxAST || {}
+      const textNodes = []
+      visit(ast, "text", textNode => {
+        textNodes.push(textNode.value)
+      })
+      return {
+        node: edge.node,
+        crudeContent: textNodes.join(" "),
+      }
+    })
+    .forEach(({ node, crudeContent }) => {
+      const thisId = id++
+      postDocs[thisId] = {
+        title: node.frontmatter.title,
+        date: node.frontmatter.date,
+
+        slugWithPath: node.fields.slugWithPath,
+        categoryWithPath: node.fields.categoryWithPath,
+        tagsWithPaths: node.fields.tagsWithPaths,
+      }
+
+      const indexedTags = node.fields.tagsWithPaths
+        ? node.fields.tagsWithPaths.reduce((acc, { tag }, i) => {
+            // only take first three tags (tag0, tag1, tag2)
+            if (i > 2) {
+              return acc
+            }
+            return {
+              ...acc,
+              [`tag${i}`]: tag,
+            }
+          }, {})
+        : {}
+
+      const year = new Date(node.frontmatter.date).getFullYear()
+
+      // Add as "document"
+      index.add({
+        id: thisId,
+        title: node.frontmatter.title,
+        category: node.fields.categoryWithPath.name,
+        ...indexedTags,
+        year: `${year}`,
+        content: crudeContent,
+      })
+    })
+
+  await fs.promises.writeFile(
+    `./public/search-index.json`,
+    JSON.stringify({
+      postDocs,
+      index: index.export({
+        serialize: false, // don't stringify (yet)
+        index: true, // export index
+        doc: false, // don't export search docs as we're exporting our own (with additional data)
+      }),
+    })
+  )
+
+  activity.end()
 }
 
 // Allow local imports from src (e.g. import Tag from 'components/Tag')

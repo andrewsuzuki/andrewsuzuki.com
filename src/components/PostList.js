@@ -3,26 +3,34 @@ import { Link } from "gatsby"
 
 import PostInfo from "./PostInfo"
 
+export const graphqlPostEdgesToPosts = posts =>
+  posts.map(post => ({
+    title: post.node.frontmatter.title,
+    date: post.node.frontmatter.date,
+    slugWithPath: post.node.fields.slugWithPath,
+    categoryWithPath: post.node.fields.categoryWithPath,
+    tagsWithPaths: post.node.fields.tagsWithPaths,
+  }))
+
 const PostList = ({ posts }) => (
   <div className="post-listings">
-    {posts.map(post => (
-      <div key={post.node.fields.slugWithPath.path}>
-        <div>
-          <Link
-            to={post.node.fields.slugWithPath.path}
-            title={post.node.frontmatter.title}
-          >
-            {post.node.frontmatter.title}
-          </Link>
+    {posts.map(
+      ({ title, date, slugWithPath, categoryWithPath, tagsWithPaths }) => (
+        <div key={slugWithPath.path}>
+          <div>
+            <Link to={slugWithPath.path} title={title}>
+              {title}
+            </Link>
+          </div>
+          <PostInfo
+            date={date}
+            categoryPath={categoryWithPath.path}
+            categoryName={categoryWithPath.name}
+            tagsWithPaths={tagsWithPaths}
+          />
         </div>
-        <PostInfo
-          date={post.node.frontmatter.date}
-          categoryPath={post.node.fields.categoryWithPath.path}
-          categoryName={post.node.fields.categoryWithPath.name}
-          tagsWithPaths={post.node.fields.tagsWithPaths}
-        />
-      </div>
-    ))}
+      )
+    )}
   </div>
 )
 

@@ -34,17 +34,20 @@ const Nav = () => (
 
 const SecondaryNav = () => (
   <div className="secondary-nav">
+    <Link to="/search" title="Search" className="search-link">
+      Search
+    </Link>
     <Link to="/categories/software" title="Category: Software">
-      software
+      Software
     </Link>
     <Link to="/categories/cycling" title="Category: Cycling">
-      cycling
+      Cycling
     </Link>
     <Link to="/categories/diy" title="Category: DIY">
-      diy
+      DIY
     </Link>
     <Link to="/categories/music" title="Category: Music">
-      music
+      Music
     </Link>
   </div>
 )
@@ -57,6 +60,7 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      {/* <Search /> */}
     </div>
     <div className="right">
       <Nav />

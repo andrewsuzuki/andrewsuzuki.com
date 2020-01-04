@@ -57,414 +57,433 @@ h1, h2, h3, h4, h5, h6 {
 
   // FUTURE
   // .progressive-image-loading-image {
-  //   display: block;
-  //   width: 100%;
-  //   transition: opacity 0.3s 0.3s;
-  // }
-}
+    //   display: block;
+    //   width: 100%;
+    //   transition: opacity 0.3s 0.3s;
+    // }
+  }
 
-.site {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+  .site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 
-  .main {
-    flex: 1;
+    .main {
+      flex: 1;
 
-    > *:last-child,
-    > .content > *:last-child {
-      margin-bottom: 0;
-    }
+      > *:last-child,
+      > .content > *:last-child {
+        margin-bottom: 0;
+      }
 
-    p {
-      margin-top: 1em;
-      margin-bottom: 1em;
-    }
-
-    h2 {
-      margin-top: 0.83em;
-      margin-bottom: 0.83em;
-    }
-
-    h3 {
-      margin-top: 1em;
-      margin-bottom: 1em;
-    }
-
-    h4 {
-      margin-top: 1.33em;
-      margin-bottom: 1.33em;
-    }
-
-    h5 {
-      margin-top: 1.67em;
-      margin-bottom: 1.67em;
-    }
-
-    h6 {
-      margin-top: 2.33em;
-      margin-bottom: 2.33em;
-    }
-
-    h1.page-title {
-      font-size: 2rem;
-      margin-bottom: 0.67em;
-    }
-
-    pre {
-      margin: 1em 0;
-    }
-
-    .series-message {
-      margin-top: 1em;
-      margin-bottom: 1em;
-
-      > div {
-        display: inline-block;
-        padding: 1em;
-        background: lightyellow;
+      p {
+        margin-top: 1em;
+        margin-bottom: 1em;
       }
 
       h2 {
-        font-size: 1em;
-        margin-top: 0;
+        margin-top: 0.83em;
+        margin-bottom: 0.83em;
       }
-    }
 
-    ul.bulleted {
-      list-style: disc inside;
-    }
+      h3 {
+        margin-top: 1em;
+        margin-bottom: 1em;
+      }
 
-    .post-info {
-      margin-top: 0;
-      margin-bottom: 1em;
-    }
+      h4 {
+        margin-top: 1.33em;
+        margin-bottom: 1.33em;
+      }
 
-    .post-listings {
-      > div {
+      h5 {
+        margin-top: 1.67em;
+        margin-bottom: 1.67em;
+      }
+
+      h6 {
+        margin-top: 2.33em;
+        margin-bottom: 2.33em;
+      }
+
+      h1.page-title {
+        font-size: 2rem;
+        margin-bottom: 0.67em;
+      }
+
+      pre {
+        margin: 1em 0;
+      }
+
+      .series-message {
         margin-top: 1em;
         margin-bottom: 1em;
 
-        &:last-of-type {
-          margin-bottom: 0;
+        > div {
+          display: inline-block;
+          padding: 1em;
+          background: lightyellow;
         }
 
+        h2 {
+          font-size: 1em;
+          margin-top: 0;
+        }
+      }
+
+      ul.bulleted {
+        list-style: disc inside;
+      }
+
+      .post-info {
+        margin-top: 0;
+        margin-bottom: 1em;
+      }
+
+      .post-listings {
         > div {
-          &:first-child {
-            a {
-              font-size: 1.33em;
+          margin-top: 1em;
+          margin-bottom: 1em;
+
+          &:last-of-type {
+            margin-bottom: 0;
+          }
+
+          > div {
+            &:first-child {
+              a {
+                font-size: 1.33em;
+              }
             }
           }
-        }
 
-        .post-info {
-          margin-top: 2px;
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    .full-image-mdx {
-      display: block;
-      width: 100%;
-      margin: 2em 0;
-
-      .progressive-image-wrapper {
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
-
-    .gallery-thumbnails {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      margin: 2em 0;
-
-      > a {
-        display: block;
-        position: relative;
-        overflow: hidden;
-
-        &:hover {
-          opacity: 0.9;
-        }
-
-        @mixin thumbnail($columns, $marginRatio: 0.02) {
-          $width: percentage((1 - (($columns - 1) * $marginRatio)) / $columns);
-
-          width: $width;
-          margin-bottom: percentage($marginRatio);
-
-          // Clear margin-right for thumbnails in the last column
-          &:not(:nth-child(#{$columns}n)) {
-            margin-right: percentage($marginRatio);
-          }
-
-          // Clear margin-bottom for thumbnails in the last row
-          &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}),
-          &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}) ~ a {
+          .post-info {
+            margin-top: 2px;
             margin-bottom: 0;
           }
         }
+      }
 
-        @include media('<mobile') {
-          @include thumbnail(4);
-        }
+      .full-image-mdx {
+        display: block;
+        width: 100%;
+        margin: 2em 0;
 
-        @include media('>=mobile', '<tablet') {
-          @include thumbnail(5);
-        }
-
-        @include media('>=tablet') {
-          @include thumbnail(6);
-        }
-
-        &:before {
-          // Maintain square
-          content: "";
-          float: left;
-          padding-top: 100%;
-        }
-
-        > .progressive-image-wrapper {
-          width: 100%;
-          height: 100%;
-
+        .progressive-image-wrapper {
           img {
-            // Place image in center of square container
-            position: absolute;
-            left: 50%;
-            top: 50%;
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+
+      .gallery-thumbnails {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin: 2em 0;
+
+        > a {
+          display: block;
+          position: relative;
+          overflow: hidden;
+
+          &:hover {
+            opacity: 0.9;
+          }
+
+          @mixin thumbnail($columns, $marginRatio: 0.02) {
+            $width: percentage((1 - (($columns - 1) * $marginRatio)) / $columns);
+
+            width: $width;
+            margin-bottom: percentage($marginRatio);
+
+            // Clear margin-right for thumbnails in the last column
+            &:not(:nth-child(#{$columns}n)) {
+              margin-right: percentage($marginRatio);
+            }
+
+            // Clear margin-bottom for thumbnails in the last row
+            &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}),
+            &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}) ~ a {
+              margin-bottom: 0;
+            }
+          }
+
+          @include media('<mobile') {
+            @include thumbnail(4);
+          }
+
+          @include media('>=mobile', '<tablet') {
+            @include thumbnail(5);
+          }
+
+          @include media('>=tablet') {
+            @include thumbnail(6);
+          }
+
+          &:before {
+            // Maintain square
+            content: "";
+            float: left;
+            padding-top: 100%;
+          }
+
+          > .progressive-image-wrapper {
+            width: 100%;
             height: 100%;
-            width: auto;
-            transform: translate(-50%, -50%);
+
+            img {
+              // Place image in center of square container
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              height: 100%;
+              width: auto;
+              transform: translate(-50%, -50%);
+            }
           }
         }
       }
     }
   }
-}
 
-.tag {
-  background: lightyellow;
+  .tag {
+    background: lightyellow;
 
-  &.active {
-    background: yellow;
-  }
-}
-
-.header {
-  margin: 0.67rem 0 1.67rem;
-
-  @include media('>=tablet') {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .right {
-    text-align: right;
-
-    @include media('<tablet') {
-      text-align: left;
+    &.active {
+      background: yellow;
     }
   }
 
-  .site-title {
-    font-size: 1.67em;
-  }
-
-  .nav {
-    margin-top: 0.33rem;
+  .header {
+    margin: 0.67rem 0 1.67rem;
 
     @include media('>=tablet') {
-      margin-top: 0;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
     }
 
-    a {
-      display: inline-block;
-      margin-right: 0.5em;
-      font-size: 1.25em;
+    .right {
+      text-align: right;
 
-      &:last-of-type {
-        margin-right: 0;
-      }
-
-      &.active {
-        background: cyan;
+      @include media('<tablet') {
+        text-align: left;
       }
     }
-  }
 
-  .secondary-nav {
-    margin-top: 0.33rem;
+    .site-title {
+      font-size: 1.67em;
+    }
 
-    a {
-      display: inline-block;
-      margin-right: 0.5em;
-      font-size: 0.8em;
+    .nav {
+      margin-top: 0.33rem;
 
-      &:last-of-type {
-        margin-right: 0;
+      @include media('>=tablet') {
+        margin-top: 0;
       }
 
-    }
-  }
-}
+      a {
+        display: inline-block;
+        margin-right: 0.5em;
+        font-size: 1.25em;
 
-.footer {
-  margin: 1.67rem 0 0.67rem;
-  display: block;
+        &:last-of-type {
+          margin-right: 0;
+        }
 
-  @include media('>=mobile') {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .links {
-    a {
-      margin-left: 0.67em;
-
-      &:first-child {
-        margin-left: 0;
+        &.active {
+          background: cyan;
+        }
       }
     }
-  }
-}
 
-button {
-  border: 1px outset rgb(221, 221, 221);
-  cursor: pointer;
+    .secondary-nav {
+      margin-top: 0.33rem;
 
-  &.active {
-    border-color: cyan;
-    background-color: cyan;
-  }
-}
+      a {
+        display: inline-block;
+        margin-right: 0.5em;
+        font-size: 0.8em;
+        text-transform: lowercase;
 
-.modal-overlay {
-  position: fixed;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  flex-wrap: wrap;
+        &:last-of-type {
+          margin-right: 0;
+        }
 
-  .modal-inner {
-    max-width: 100vw;
-    max-height: 100vh;
-    overflow: hidden;
-
-    &.progressive-image-wrapper {
-      img {
-        max-width: 100vw;
-        max-height: 100vh;
+        &.search-link {
+          color: green;
+        }
       }
     }
   }
 
-  .modal-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
+  .footer {
+    margin: 1.67rem 0 0.67rem;
+    display: block;
 
-    span {
-      display: block;
-      padding: 10px 15px;
-      color: white;
-      text-align: center;
+    @include media('>=mobile') {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .links {
+      a {
+        margin-left: 0.67em;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
     }
   }
 
-  .modal-close, .modal-nav {
-    button {
-      font-size: 1.33em;
-      line-height: 1;
-      padding: 0.33em;
+  button {
+    border: 1px outset rgb(221, 221, 221);
+    cursor: pointer;
+
+    &.active {
+      border-color: cyan;
+      background-color: cyan;
     }
   }
 
-  .modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-
-  .modal-nav {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    margin-top: -25px;
+  .modal-overlay {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    flex-wrap: wrap;
 
-    &.left {
-      left: 20px;
+    .modal-inner {
+      max-width: 100vw;
+      max-height: 100vh;
+      overflow: hidden;
+
+      &.progressive-image-wrapper {
+        img {
+          max-width: 100vw;
+          max-height: 100vh;
+        }
+      }
     }
 
-    &.right {
-      right: 20px;
+    .modal-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+
+      span {
+        display: block;
+        padding: 10px 15px;
+        color: white;
+        text-align: center;
+      }
+    }
+
+    .modal-close, .modal-nav {
+      button {
+        font-size: 1.33em;
+        line-height: 1;
+        padding: 0.33em;
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .modal-nav {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: 50%;
+      margin-top: -25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.left {
+        left: 20px;
+      }
+
+      &.right {
+        right: 20px;
+      }
     }
   }
-}
 
-.contact-form {
-  .field {
-    margin-bottom: 1em;
+  input[type=text], input[type=email], textarea {
+    padding: 3px;
+    border: 1px inset rgb(169, 169, 169);
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-    }
-
-    input[type=text], input[type=email], textarea {
-      padding: 3px;
+  .search {
+    input[type=text] {
       min-width: 100%;
       width: 100%;
-      border: 1px inset rgb(169, 169, 169);
 
       @include media('>=mobile') {
         min-width: 50%;
         width: 50%;
       }
-
-      &.has-error {
-        border-color: red;
-      }
-    }
-
-    textarea {
-      min-height: 5em;
-      max-height: 80vh;
-      max-width: 100%;
-    }
-
-    .error-message {
-      color: red;
     }
   }
-}
 
-.success-message {
-  color: green;
-}
+  .contact-form {
+    .field {
+      margin-bottom: 1em;
 
-// prism syntax highlighter theme
-@import "./prism-vs-modified.scss";
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+      }
+
+      input[type=text], input[type=email], textarea {
+        min-width: 100%;
+        width: 100%;
+
+        @include media('>=mobile') {
+          min-width: 50%;
+          width: 50%;
+        }
+
+        &.has-error {
+          border-color: red;
+        }
+      }
+
+      textarea {
+        min-height: 5em;
+        max-height: 80vh;
+        max-width: 100%;
+      }
+
+      .error-message {
+        color: red;
+      }
+    }
+  }
+
+  .success-message {
+    color: green;
+  }
+
+  // prism syntax highlighter theme
+  @import "./prism-vs-modified.scss";

@@ -1,8 +1,9 @@
 import React from "react"
 
-const PostCount = ({ count }) => (
+const PostCount = ({ count, what = "post" }) => (
   <p>
-    {count === 0 ? "No" : count} post{count !== 1 && "s"}
+    {count === 0 ? "No" : count} {what}
+    {count !== 1 && "s"}
   </p>
 )
 

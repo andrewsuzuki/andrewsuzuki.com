@@ -4,7 +4,7 @@ import { graphql, Link } from "gatsby"
 import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
-import PostList from "../components/PostList"
+import PostList, { graphqlPostEdgesToPosts } from "../components/PostList"
 import Tag from "../components/Tag"
 import PostCount from "../components/PostCount"
 
@@ -21,7 +21,7 @@ const TagPage = props => {
       </PageTitle>
       <Content>
         <PostCount count={totalCount} />
-        <PostList posts={posts} />
+        <PostList posts={graphqlPostEdgesToPosts(posts)} />
         <p>
           <Link to="/tags" title="All Tags">
             View All Tags
