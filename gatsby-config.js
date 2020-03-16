@@ -175,5 +175,11 @@ module.exports = {
         showSpinner: false,
       },
     },
+    {
+      // Add Netlify _headers [and optionally _redirects] to publish directory
+      // Automatically generates Cache-Control and Link headers
+      resolve: "gatsby-plugin-netlify",
+      options: {},
+    },
   ],
 }

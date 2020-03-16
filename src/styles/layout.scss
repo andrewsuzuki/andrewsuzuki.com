@@ -455,7 +455,7 @@ input[type=text], input[type=email], textarea {
     }
 
     label {
-      display: block;
+      display: table; // like inline-block, but with break
       font-weight: bold;
     }
 
