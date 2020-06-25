@@ -9,17 +9,30 @@ html {
   font-size: 16px;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
-body, h1, h2, h3, h4, h5, h6, p, ol, ul, pre {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+pre {
   margin: 0;
   padding: 0;
   font-weight: normal;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
@@ -30,7 +43,12 @@ img {
 
 /* Styles */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: bold;
   font-family: sans-serif;
 
@@ -43,11 +61,11 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   padding: 0 15px;
 
-  @include media('>=mobile', '<tablet') {
+  @include media(">=mobile", "<tablet") {
     padding: 0 44px;
   }
 
-  @include media('>=tablet') {
+  @include media(">=tablet") {
     width: 680px;
     padding: 0;
     margin: 0 auto;
@@ -199,21 +217,21 @@ h1, h2, h3, h4, h5, h6 {
           }
 
           // Clear margin-bottom for thumbnails in the last row
-          &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}),
-          &:nth-child(#{$columns}n+1):nth-last-child(-n+#{$columns}) ~ a {
+          &:nth-child(#{$columns}n + 1):nth-last-child(-n + #{$columns}),
+          &:nth-child(#{$columns}n + 1):nth-last-child(-n + #{$columns}) ~ a {
             margin-bottom: 0;
           }
         }
 
-        @include media('<mobile') {
+        @include media("<mobile") {
           @include thumbnail(4);
         }
 
-        @include media('>=mobile', '<tablet') {
+        @include media(">=mobile", "<tablet") {
           @include thumbnail(5);
         }
 
-        @include media('>=tablet') {
+        @include media(">=tablet") {
           @include thumbnail(6);
         }
 
@@ -254,7 +272,7 @@ h1, h2, h3, h4, h5, h6 {
 .header {
   margin: 0.67rem 0 1.67rem;
 
-  @include media('>=tablet') {
+  @include media(">=tablet") {
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
@@ -264,7 +282,7 @@ h1, h2, h3, h4, h5, h6 {
   .right {
     text-align: right;
 
-    @include media('<tablet') {
+    @include media("<tablet") {
       text-align: left;
     }
   }
@@ -276,7 +294,7 @@ h1, h2, h3, h4, h5, h6 {
   .nav {
     margin-top: 0.33rem;
 
-    @include media('>=tablet') {
+    @include media(">=tablet") {
       margin-top: 0;
     }
 
@@ -321,7 +339,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 1.67rem 0 0.67rem;
   display: block;
 
-  @include media('>=mobile') {
+  @include media(">=mobile") {
     display: flex;
     justify-content: space-between;
   }
@@ -329,7 +347,7 @@ h1, h2, h3, h4, h5, h6 {
   .links {
     margin-top: 0.167em; // mobile
 
-    @include media('>=mobile') {
+    @include media(">=mobile") {
       margin-top: 0;
     }
 
@@ -395,7 +413,8 @@ button {
     }
   }
 
-  .modal-close, .modal-nav {
+  .modal-close,
+  .modal-nav {
     button {
       font-size: 1.33em;
       line-height: 1;
@@ -429,17 +448,19 @@ button {
   }
 }
 
-input[type=text], input[type=email], textarea {
+input[type="text"],
+input[type="email"],
+textarea {
   padding: 0.33em;
   border: 1px solid rgb(137, 137, 137);
 }
 
 .search {
-  input[type=text] {
+  input[type="text"] {
     min-width: 100%;
     width: 100%;
 
-    @include media('>=mobile') {
+    @include media(">=mobile") {
       min-width: 50%;
       width: 50%;
     }
@@ -455,15 +476,19 @@ input[type=text], input[type=email], textarea {
     }
 
     label {
-      display: table; // like inline-block, but with break
-      font-weight: bold;
+      span {
+        display: table; // like inline-block, but with break
+        font-weight: bold;
+      }
     }
 
-    input[type=text], input[type=email], textarea {
+    input[type="text"],
+    input[type="email"],
+    textarea {
       min-width: 100%;
       width: 100%;
 
-      @include media('>=mobile') {
+      @include media(">=mobile") {
         min-width: 50%;
         width: 50%;
       }

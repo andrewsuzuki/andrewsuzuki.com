@@ -65,40 +65,46 @@ export default function ContactForm() {
           ref={register}
         />
         <p hidden>
-          <label>
+          <label htmlFor="bot-field">
             Don’t fill this out: <input name="bot-field" ref={register} />
           </label>
         </p>
         <div className="field">
-          <label htmlFor="contact-name">Name</label>
-          <input
-            type="text"
-            placeholder="Name"
-            name="name"
-            id="contact-name"
-            className={errors.name ? "has-error" : null}
-            ref={register({ required: true, maxLength: 80 })}
-          />
+          <label htmlFor="contact-name">
+            <span>Name</span>
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              id="contact-name"
+              className={errors.name ? "has-error" : null}
+              ref={register({ required: true, maxLength: 80 })}
+            />
+          </label>
         </div>
         <div className="field">
-          <label htmlFor="contact-email">Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            id="contact-email"
-            className={errors.email ? "has-error" : null}
-            ref={register({ required: true, pattern: /^\S+@\S+$/i })}
-          />
+          <label htmlFor="contact-email">
+            <span>Email</span>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              id="contact-email"
+              className={errors.email ? "has-error" : null}
+              ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+            />
+          </label>
         </div>
         <div className="field">
-          <label htmlFor="contact-message">Message</label>
-          <textarea
-            name="message"
-            id="contact-message"
-            className={errors.message ? "has-error" : null}
-            ref={register({ required: true })}
-          />
+          <label htmlFor="contact-message">
+            <span>Message</span>
+            <textarea
+              name="message"
+              id="contact-message"
+              className={errors.message ? "has-error" : null}
+              ref={register({ required: true })}
+            />
+          </label>
         </div>
 
         <div className="field">

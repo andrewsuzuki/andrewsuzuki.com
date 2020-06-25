@@ -22,6 +22,4 @@ npm run develop
 - FUTURE: better about
 - FUTURE: ProgressiveImage loading image overlay
 - image generation first pass warnings
-- FUTURE: resolve componentWillMount deprecation warning. Follow gatsbyjs/gatsby#17865
 - FUTURE: prev/next buttons for series at bottom of posts
-- FUTURE: sub-categories, and multiple categories?
