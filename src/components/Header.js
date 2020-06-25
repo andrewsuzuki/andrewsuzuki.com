@@ -39,15 +39,15 @@ const SecondaryNav = () => (
     <Link to="/tags/software" title="Tag: Software">
       Software
     </Link>
-    <Link to="/tags/cycling" title="Tags: Cycling">
+    <Link to="/tags/cycling" title="Tag: Cycling">
       Cycling
     </Link>
     <Link to="/tags/diy" title="Tag: DIY">
       DIY
     </Link>
-    <Link to="/tags/music" title="Tag: Music">
+    {/* <Link to="/tags/music" title="Tag: Music">
       Music
-    </Link>
+    </Link> */}
   </div>
 )
 

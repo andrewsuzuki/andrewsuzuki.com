@@ -11,7 +11,7 @@ const AboutPage = () => (
     <PageTitle>About</PageTitle>
     <Content>
       <p>My name is Andrew Suzuki.</p>
-      <p>I am a software engineer, cyclist, maker, and musician.</p>
+      <p>I'm a software engineer, cyclist, maker, and musician.</p>
       <p>I live in New Haven, CT.</p>
       <p>
         <Link to="/contact" title="Contact">
