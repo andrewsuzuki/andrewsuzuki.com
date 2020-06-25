@@ -57,8 +57,6 @@ const PostPage = props => {
       <PageTitle>{title}</PageTitle>
       <PostInfo
         date={post.frontmatter.date}
-        categoryPath={post.fields.categoryWithPath.path}
-        categoryName={post.fields.categoryWithPath.name}
         tagsWithPaths={post.fields.tagsWithPaths}
       />
       <SeriesMessage
@@ -85,10 +83,6 @@ export const query = graphql`
           tag
           path
         }
-        categoryWithPath {
-          path
-          name
-        }
         slugWithPath {
           slug
         }
@@ -96,7 +90,6 @@ export const query = graphql`
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
-        category
       }
     }
   }

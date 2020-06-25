@@ -48,10 +48,6 @@ export const query = graphql`
             slugWithPath {
               path
             }
-            categoryWithPath {
-              path
-              name
-            }
             tagsWithPaths {
               tag
               path
@@ -60,7 +56,6 @@ export const query = graphql`
           frontmatter {
             title
             date(formatString: "YYYY-MM-DD")
-            category
           }
         }
       }

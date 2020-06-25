@@ -106,11 +106,16 @@ module.exports = {
                   }
                 )
 
+                const { tagsWithPaths } = edge.node.fields
+                const rssCategories = tagsWithPaths
+                  ? tagsWithPaths.map(({ tag }) => tag)
+                  : []
+
                 return {
                   description: excerpt,
                   title: edge.node.frontmatter.title,
                   date: edge.node.frontmatter.date,
-                  categories: [edge.node.frontmatter.category],
+                  categories: rssCategories,
                   url: postUrl,
                   guid: postUrl,
                 }
@@ -127,9 +132,11 @@ module.exports = {
                       mdxAST
                       fields {
                         slug
+                        tagsWithPaths {
+                          tag
+                        }
                       }
                       frontmatter {
-                        category
                         title
                         date
                       }

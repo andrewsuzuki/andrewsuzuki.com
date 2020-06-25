@@ -1,15 +1,10 @@
 import React, { Fragment } from "react"
-import { Link } from "gatsby"
 
 import Tag from "./Tag"
 
-const PostInfo = ({ date, categoryPath, categoryName, tagsWithPaths }) => (
+const PostInfo = ({ date, tagsWithPaths }) => (
   <p className="post-info">
     <em>{date}</em>
-    &nbsp;&middot;&nbsp;
-    <Link to={categoryPath} title={`Category: ${categoryName}`}>
-      {categoryName}
-    </Link>
     {tagsWithPaths && tagsWithPaths.length ? (
       <>
         &nbsp;&middot;&nbsp;

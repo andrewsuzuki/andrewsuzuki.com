@@ -13,7 +13,6 @@ const Nav = () => (
           className={
             location.pathname === "/" ||
             location.pathname.startsWith("/posts") ||
-            location.pathname.startsWith("/categories") ||
             location.pathname.startsWith("/tags")
               ? "active"
               : null
@@ -37,16 +36,16 @@ const SecondaryNav = () => (
     <Link to="/search" title="Search" className="search-link">
       Search
     </Link>
-    <Link to="/categories/software" title="Category: Software">
+    <Link to="/tags/software" title="Tag: Software">
       Software
     </Link>
-    <Link to="/categories/cycling" title="Category: Cycling">
+    <Link to="/tags/cycling" title="Tags: Cycling">
       Cycling
     </Link>
-    <Link to="/categories/diy" title="Category: DIY">
+    <Link to="/tags/diy" title="Tag: DIY">
       DIY
     </Link>
-    <Link to="/categories/music" title="Category: Music">
+    <Link to="/tags/music" title="Tag: Music">
       Music
     </Link>
   </div>

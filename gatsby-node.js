@@ -21,10 +21,6 @@ function tagSlugToPath(tagSlug) {
   return `/tags/${tagSlug}`
 }
 
-function categorySlugToPath(categorySlug) {
-  return `/categories/${categorySlug}`
-}
-
 function seriesSlugToPath(seriesSlug) {
   return `/series/${seriesSlug}`
 }
@@ -64,17 +60,11 @@ const postSlugToSeriesMap = seriesSlugs.reduce((acc, seriesSlug) => {
       }
 }, {})
 
-// Categories setup
-
-const categoriesMap = require("./src/content/categories.json")
-
-const categoriesSlugs = Object.keys(categoriesMap)
-
 // Gatsby
 
 /**
  * Handle Mdx node creation from gatsby-plugin-mdx,
- * adding slug (from parent File node), series, tag, category fields.
+ * adding slug (from parent File node), series, and tag fields.
  */
 exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
   const { createNodeField } = actions
@@ -117,11 +107,6 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
     // Validate frontmatter
     const validators = [
       [frontmatter.title, "missing title"],
-      [frontmatter.category, "missing category"],
-      [
-        categoriesSlugs.includes(frontmatter.category),
-        "specified category not found in categories.json",
-      ],
       [frontmatter.date, "missing date"],
       [
         /^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/.test(
@@ -129,10 +114,7 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
         ),
         "invalid iso 8601 date",
       ],
-      [
-        (typeof frontmatter.draft === "boolean",
-        "missing draft, or not boolean"),
-      ],
+      [typeof frontmatter.draft === "boolean", "missing draft, or not boolean"],
     ]
     validators.forEach(([ok, error]) => {
       if (!ok) {
@@ -166,17 +148,6 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
       value: postSlugToSeriesMap[slug] || NOT_IN_SERIES,
     })
 
-    // Add categoryWithPath
-    createNodeField({
-      node,
-      name: "categoryWithPath",
-      value: {
-        slug: frontmatter.category,
-        path: categorySlugToPath(frontmatter.category),
-        name: categoriesMap[frontmatter.category].name,
-      },
-    })
-
     // Add tagsWithPaths field to the Mdx node with (tag, path) maps
     if (frontmatter.tags) {
       const tagsWithPaths = frontmatter.tags.map(tag => ({
@@ -198,18 +169,13 @@ exports.onCreateNode = ({ node, actions, reporter, getNode }) => {
  * 2. Get all blog posts through graphql
  * 3. Create a page for each blog post
  * 4. Reduce list of all tags from posts, and create a page for each
- * 5. Reduce list of all categories from posts, and create a page for each
- * 6. Reduce list of all series from posts, and create a page for each
+ * 5. Reduce list of all series from posts, and create a page for each
  */
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   const postPageTemplate = path.resolve("src/templates/PostPage.js")
   const tagPageTemplate = path.resolve("src/templates/TagPage.js")
-  const categoryPageTemplate = path.resolve("src/templates/CategoryPage.js")
-  const allCategoriesPageTemplate = path.resolve(
-    "src/templates/AllCategoriesPage.js"
-  )
 
   const result = await graphql(`
     {
@@ -223,17 +189,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 slug
                 path
               }
-              categoryWithPath {
-                path
-                name
-              }
               tagsWithPaths {
                 tag
                 path
               }
             }
             frontmatter {
-              category
               title
               date
             }
@@ -317,29 +278,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 
-  // Create category pages (from categories.json)
-
-  categoriesSlugs.forEach(category => {
-    createPage({
-      path: categorySlugToPath(category),
-      component: categoryPageTemplate,
-      context: {
-        category,
-        name: categoriesMap[category].name,
-        // FUTURE more fields here
-      },
-    })
-  })
-
-  // Create all categories page (from categories.json)
-  createPage({
-    path: "/categories",
-    component: allCategoriesPageTemplate,
-    context: {
-      categories: categoriesMap,
-    },
-  })
-
   // Build search index (NOTE doesn't have to do with page creation, but
   // this seems to be the only Gastsby Node API that exposes graphql.)
 
@@ -374,7 +312,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         date: node.frontmatter.date,
 
         slugWithPath: node.fields.slugWithPath,
-        categoryWithPath: node.fields.categoryWithPath,
         tagsWithPaths: node.fields.tagsWithPaths,
       }
 
@@ -397,7 +334,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       index.add({
         id: thisId,
         title: node.frontmatter.title,
-        category: node.fields.categoryWithPath.name,
         ...indexedTags,
         year: `${year}`,
         content: crudeContent,

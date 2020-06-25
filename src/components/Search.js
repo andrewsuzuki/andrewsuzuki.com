@@ -42,7 +42,6 @@ const Search = () => {
               title: result.title,
               date: result.date && result.date.substr(0, 10),
               slugWithPath: result.slugWithPath,
-              categoryWithPath: result.categoryWithPath,
               tagsWithPaths: result.tagsWithPaths,
             }))}
           />
