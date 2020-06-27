@@ -144,8 +144,12 @@ h6 {
       }
     }
 
-    ul.bulleted {
+    ul {
       list-style: disc inside;
+
+      ul {
+        margin-left: 1.5em;
+      }
     }
 
     .post-info {

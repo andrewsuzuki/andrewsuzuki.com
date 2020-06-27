@@ -18,8 +18,9 @@ npm run develop
 
 ## TODO
 
-- FUTURE: comments
-- FUTURE: better about
-- FUTURE: ProgressiveImage loading image overlay
+- comments
+- better about
+- ProgressiveImage loading image overlay
 - image generation first pass warnings
-- FUTURE: prev/next buttons for series at bottom of posts
+- top-of-page image gallery of all post images (like the radavist)
+- prev/next buttons for series at bottom of posts

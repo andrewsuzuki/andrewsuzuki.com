@@ -26,7 +26,7 @@ const SeriesMessage = ({ series, thisPostSlug }) => {
     <div className="series-message">
       <div>
         <h2>Series: {series.name}</h2>
-        <ul className="bulleted">
+        <ul>
           {series.posts.map(post => (
             <li key={post.postSlug}>
               {post.postSlug === thisPostSlug ? (
