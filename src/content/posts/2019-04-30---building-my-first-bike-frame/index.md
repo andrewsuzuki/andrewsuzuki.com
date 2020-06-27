@@ -9,9 +9,9 @@ tags:
 draft: false
 ---
 
-I've wanted to fabricate my own steel bike frame "[from scratch](https://www.youtube.com/watch?v=7s664NsLeFM)" ever since I saw a frame jig sitting in the back corner of the Bradley Street Bicycle Co-op ([BSBC](http://bsbc.co/)). A frame jig (technically a [fixture](https://www.quora.com/What-is-the-difference-between-a-jig-and-a-fixture)) is an adjustable metal structure that holds and locates the tubes of a bike frame before they can be welded. My friend John Martin (BSBC's founder) had obtained it from a framebuilder based out of Artisan's Asylum in Boston, and has built a few frames with it over the years.
+I've wanted to fabricate my own steel bike frame "[from scratch](https://www.youtube.com/watch?v=7s664NsLeFM)" ever since I saw a frame jig sitting in the back corner of the Bradley Street Bicycle Co-op ([BSBC](http://bsbc.co/)). A frame jig (technically a [fixture](https://www.quora.com/What-is-the-difference-between-a-jig-and-a-fixture)) is an adjustable metal structure that holds and locates the tubes of a bike frame before they can be joined. My friend John Martin (BSBC's founder) had obtained it from a framebuilder based out of Artisan's Asylum in Boston, and has built a few frames with it over the years.
 
-In January 2019, I was growing tired of riding my rim-brake-equipped commuter bike during winter. I wanted disc brakes for better braking performance in rain and snow, and hopefully fewer grinding noises that occurred when my wheel would pick up salt and sand from the roads. After returning from our Tucson bikepacking trip, I set out to design and fabricate a new frame for commuting duties!
+In January 2019, I was growing tired of riding my rim-brake-equipped commuter bike during winter. I wanted disc brakes for better braking performance in rain and snow, and hopefully fewer of the grinding noises that occurred when my wheel would pick up salt and sand from the roads. After returning from our Tucson bikepacking trip, I set out to design and fabricate a new frame for commuting duties!
 
 The key features I wanted were:
 - Disc brakes
@@ -29,7 +29,7 @@ The basic geometry is based off the Surly Troll XL. The main difference is that 
 
 I used [BikeCAD](https://www.bikecad.ca) to design the frame. You begin by entering primary dimensions such as head tube length/angle, front center, seat tube length/angle, chainstay length, and BB drop. From there, I mocked up the components, often by seeing what user inputs were available, then measuring the components with calipers.
 
-To determine the actual tubing dimensions, I went back and forth between the individual tube requirements (usually just length), and what was available at [Nova Cycles](https://www.cycle-frames.com/) (bicycle tubing supplier) at different diameters and wall thicknesses. To my surprise, I ended up being able to use "standard"/traditional tube diameters for all of the main tubes.
+To determine the actual tubing dimensions, I went back and forth between the individual tube requirements (usually just length), and what was available at [Nova Cycles](https://www.cycle-frames.com/) (bicycle tubing supplier) at different diameters and wall thicknesses. To my surprise, I ended up being able to use "traditional" diameters (25.4mm and 28.6mm) for all three main tubes.
 
 The hardest part of tubing selection was finding the right chainstays. The goal for most dirt-ready bikes is to maximize tire clearance while also being able to fit a large-enough chainring. In my case, since I'm mostly going to be riding on pavement with the aforementioned gotta-go-fast tires, my requirement for a chainring was quite large at 42t (at least for an MTB). Therefore, I had to find a chainstay that would snake right between the large chainring and large tire in accordance with my defined chainstay length, bb-chainstay offset, chainline, etc. To make things even more complicated, many available chainstays don't have any bend specs available (especially from Nova), and BikeCAD has a different way of dimensioning the chainstay bends than manufacturers. In the end, I did some trig and finally decided on one of Columbus' available s-bend chainstays, though it was still a bit of a wager as I wasn't 100% sure it would work with my requirements. More-experienced framebuilders often bend chainstays to spec themselves, but I decided that putting together a bending setup would be too much of a time/money commitment for my first frame.
 
@@ -86,11 +86,11 @@ After brazing the tubes, I brazed on some water bottle and brake hose bosses usi
 
 ![Disc brake tab attachment with Anvil Feng Shui](./DSC_0493.JPG)
 
-ISO is still the standard disc brake tab mount for metal MTB frames. The main benefit compared to post mount is that the holes are unthreaded, which avoids the possibility of a post mount thread being stripped. It's also the easiest standard to conceptualize -- the ISO tab's inner face is in plane with the end of the hub's [quick-release] axle, the holes are a fixed distance apart, and the holes are at two different defined radii from the center of the axle.
+ISO is still the standard disc brake tab mount for metal MTB frames. The main benefit compared to post mount is that the holes are unthreaded, which avoids the possibility of a post mount thread becoming stripped. It's also the easiest standard to conceptualize -- the ISO tab's inner face is in plane with the end of the hub's [quick-release] axle, the holes are a fixed distance apart, and the holes are at two different defined radii from the center of the axle.
 
 There are two ways to go about disc brake frames:
 - Purchase a ready-made dropout that has an integrated disc brake mount, or a modular system that allows a disc brake mount to be bolted on. Paragon Machine Works sells a few different solutions.
-- Use a normal dropout, then attach a disc brake mount to the stays separately. I went for this method. The mount is usually placed on the seatstay, with a brace tube attached between the seatstay and chainstay to prevent the it from buckling. The mount can sometimes be placed on the chainstay, though in my case there wasn't enough clearance for the caliper given the angle/placement of the seatstay.
+- Use a normal dropout, then attach a disc brake mount to the stays separately. I went for this method. The mount is usually placed on the seatstay, with a brace tube attached between the seatstay and chainstay to prevent the seatstay from buckling. The mount can sometimes be placed on the chainstay, though in my case there wasn't enough clearance for the caliper given the angle/placement of the seatstay.
 
 To locate the tab holes in plane and at the correct distances from the axle, a specialized fixture must be used. I purchased an Anvil Feng Shui and Anvil 137.5mm dummy axle for this.
 
@@ -145,7 +145,7 @@ The dynafile was kinda unwieldy, and I went through belts quickly, though perhap
 
 The trickiest part was smoothing the fillets under the seatstay-seat tube joint. It was impossible to get a file in there. I ended up leaving close to as-is. Next time I will build up a larger fillet, attach the seatstays farther from the center, and/or use smaller-diameter seatstays.
 
-Overall, smoothing the fillets was probably the most time-consuming part of the build. I could have spent even longer, maybe adding some more material and getting rid of pinholes. I wasn't too concerned with aesthetics though, and thought it was good enough for my first frame. Now that I have at least some brazing skill, the results should be much better for my next frame.
+Overall, smoothing the fillets was probably the most time-consuming part of the build. I could have spent even longer, maybe adding some more material and getting rid of pinholes. I wasn't too concerned with aesthetics though, and thought it was good enough for my first frame. Now that I have at least some brazing skill, the next frame should be much better.
 
 ## Paint
 
@@ -182,7 +182,7 @@ The last step is cleaning up the various frame-component interfaces:
 ## Done!
 
 ```gallery
-![Front](./DSC_0598.JPG)
+![Side](./DSC_0598.JPG)
 ![Side close-up](./DSC_0601.JPG)
 ![Dante taking it for a spin](./20190418_192931.jpg)
 ```
