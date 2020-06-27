@@ -274,10 +274,10 @@ h6 {
 }
 
 .header {
-  margin: 0.67rem 0 1.67rem;
+  margin: 1rem 0 1.67rem;
 
   @include media(">=tablet") {
-    margin-top: 1rem;
+    margin: 1.5rem 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -340,7 +340,7 @@ h6 {
 }
 
 .footer {
-  margin: 1.67rem 0 0.67rem;
+  margin: 2rem 0 1.5rem;
   display: block;
 
   @include media(">=mobile") {
