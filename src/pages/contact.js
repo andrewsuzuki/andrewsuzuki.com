@@ -7,7 +7,7 @@ import ContactForm from "../components/ContactForm"
 
 const ContactPage = () => (
   <Layout>
-    <SEO title="Contact" />
+    <SEO title="Contact" description="Send me an email" />
     <PageTitle>Contact</PageTitle>
     <Content>
       <p>Feel free to send me an email using the form below.</p>

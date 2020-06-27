@@ -13,9 +13,11 @@ const TagPage = props => {
   const posts = props.data.allMdx.edges
   const totalCount = props.data.allMdx.totalCount
 
+  const title = `Posts Tagged #${tag}`
+
   return (
     <Layout>
-      <SEO title={`Posts Tagged #${tag}`} />
+      <SEO title={title} description={title} />
       <PageTitle>
         Posts Tagged <Tag>{tag}</Tag>
       </PageTitle>

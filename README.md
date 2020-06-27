@@ -20,9 +20,9 @@ npm run develop
 
 - comments
 - better about
-- ProgressiveImage loading image overlay
-- image generation first pass warnings
-- image modal: click next, shows old image while loading
-- top-of-page image gallery of all post images (like the radavist)
-- featured image?
 - prev/next buttons for series at bottom of posts
+- images
+  - image modal: show loader when clicking to next image
+  - top-of-page image gallery of all post images (like Radavist)
+  - ProgressiveImage loading image overlay
+  - image generation first pass warnings?

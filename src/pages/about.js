@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle"
 
 const AboutPage = () => (
   <Layout>
-    <SEO title="About" />
+    <SEO title="About" description="About Andrew Suzuki" />
     <PageTitle>About</PageTitle>
     <Content>
       <p>My name is Andrew Suzuki.</p>

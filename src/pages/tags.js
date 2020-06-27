@@ -16,7 +16,7 @@ const TagsPage = props => {
 
   return (
     <Layout>
-      <SEO title="All Tags" />
+      <SEO title="All Tags" description="See and sort all post tags" />
       <PageTitle>All Tags</PageTitle>
       <Content>
         <p>

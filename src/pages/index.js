@@ -14,7 +14,7 @@ const IndexPage = props => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Home" description={null} />
       <PageTitle>Posts</PageTitle>
       <Content>
         <PostCount count={totalCount} />

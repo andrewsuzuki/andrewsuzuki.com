@@ -78,34 +78,36 @@ module.exports = {
                   edge.node.fields.slug
                 )
 
-                const excerptNodes = []
-                visit(edge.node.mdxAST, node => {
-                  if (node.type === `text` || node.type === `inlineCode`) {
-                    excerptNodes.push(node.value)
-                  }
-                  return
-                })
-
-                const pruneLength = 280
-                const excerpt = _.truncate(
-                  excerptNodes
-                    .join(" ")
-                    .split(" ")
-                    .filter(a => a)
-                    .reduce((acc, s, i) => {
-                      if (i === 0) {
-                        return s
-                      } else if ([".", "!", "?"].includes(s)) {
-                        return `${acc}${s}`
-                      } else {
-                        return `${acc} ${s}`
-                      }
-                    }, ""),
-                  {
-                    length: pruneLength,
-                    omission: `…`,
-                  }
-                )
+                // NOTE excerpt was used for description, but now I'm
+                // writing post descriptions manually. Uncomment if that changes
+                // and default to excerpt.
+                // const excerptNodes = []
+                // visit(edge.node.mdxAST, node => {
+                //   if (node.type === `text` || node.type === `inlineCode`) {
+                //     excerptNodes.push(node.value)
+                //   }
+                //   return
+                // })
+                // const pruneLength = 280
+                // const excerpt = _.truncate(
+                //   excerptNodes
+                //     .join(" ")
+                //     .split(" ")
+                //     .filter(a => a)
+                //     .reduce((acc, s, i) => {
+                //       if (i === 0) {
+                //         return s
+                //       } else if ([".", "!", "?"].includes(s)) {
+                //         return `${acc}${s}`
+                //       } else {
+                //         return `${acc} ${s}`
+                //       }
+                //     }, ""),
+                //   {
+                //     length: pruneLength,
+                //     omission: `…`,
+                //   }
+                // )
 
                 const { tagsWithPaths } = edge.node.fields
                 const rssCategories = tagsWithPaths
@@ -113,7 +115,7 @@ module.exports = {
                   : []
 
                 return {
-                  description: excerpt,
+                  description: edge.node.frontmatter.description,
                   title: edge.node.frontmatter.title,
                   date: edge.node.frontmatter.date,
                   categories: rssCategories,

@@ -1,6 +1,7 @@
 ---
 title: Building my first bike frame
 date: "2019-04-30T21:00:00.000Z"
+description: How I designed and fabricated a steel disc mtb/commuter frame from scratch
 tags:
   - framebuilding
   - cycling

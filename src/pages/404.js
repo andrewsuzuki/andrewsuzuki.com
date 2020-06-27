@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle"
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="404 Not found" />
+    <SEO title="404 Not Found" />
     <PageTitle>404 Page Not Found</PageTitle>
     <Content>
       <p>The requested page doesn't exist.</p>

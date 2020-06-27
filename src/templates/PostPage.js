@@ -45,27 +45,22 @@ const SeriesMessage = ({ series, thisPostSlug }) => {
 }
 
 const PostPage = props => {
-  const post = props.data.mdx
-
+  const {
+    body,
+    fields: { tagsWithPaths, slugWithPath },
+    frontmatter: { title, description, date },
+  } = props.data.mdx
   const { series } = props.pageContext
-
-  const { title } = post.frontmatter
 
   return (
     <Layout>
-      <SEO title={title} />
+      <SEO title={title} description={description} />
       <PageTitle>{title}</PageTitle>
-      <PostInfo
-        date={post.frontmatter.date}
-        tagsWithPaths={post.fields.tagsWithPaths}
-      />
-      <SeriesMessage
-        series={series}
-        thisPostSlug={post.fields.slugWithPath.slug}
-      />
+      <PostInfo date={date} tagsWithPaths={tagsWithPaths} />
+      <SeriesMessage series={series} thisPostSlug={slugWithPath.slug} />
       <Content>
         <MDXProvider components={mdxComponents}>
-          <MDXRenderer>{post.body}</MDXRenderer>
+          <MDXRenderer>{body}</MDXRenderer>
         </MDXProvider>
       </Content>
     </Layout>
@@ -89,6 +84,7 @@ export const query = graphql`
       }
       frontmatter {
         title
+        description
         date(formatString: "YYYY-MM-DD")
       }
     }
