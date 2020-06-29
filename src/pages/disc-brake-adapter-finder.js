@@ -4,8 +4,10 @@ import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 
+// TODO Unsupported adapters in UI
 // TODO Suggest 1.5mm of washers for 180->183 and 200->203?
 // Alternatively, Paul says "160 plus 40 does not equal 203, but that’s ok" with no mention of washers
+// TODO Await North Shore Billet response regarding 1112864081 and 1112864089; remove one if identical
 
 const MAX_ADAPTERS = 2
 
@@ -133,9 +135,8 @@ const BRAND_HAYES = "Hayes"
 const BRAND_PAUL = "Paul"
 const BRAND_CAMPAGNOLO = "Campagnolo"
 const BRAND_ASSOLUTION = "A.S. Solutions"
+const BRAND_NSB = "North Shore Billet"
 // const BRAND_KCNC = "KCNC"
-// const BRAND_NSB = "North Shore Billet"
-// const BRAND_PMW = "Paragon Machine Works"
 
 const allAdapters = [
   // Avid/SRAM
@@ -528,8 +529,224 @@ const allAdapters = [
     configs: [[MOUNT_FM140F, MOUNT_PM160]],
   },
 
-  // TODO Promax
-  // TODO Hope
+  // Promax
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter for IS Mount Fork, Fits 160mm Front and 140mm Rear Rotors",
+    mpn: "IS160F",
+    upc: "657993207130",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140],
+    ],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter for IS Mount Frame/Fork, Fits 180mm Front and 160mm Rear Rotors",
+    mpn: "IS160R/IS180F",
+    upc: "657993207154",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM180],
+      [MOUNT_IS160R, MOUNT_PM160],
+    ],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapor for IS Mount Frame, Fits 180mm Rear Rotors",
+    mpn: "IS180R",
+    upc: "657993207178",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM180],
+      [MOUNT_IS160F, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter for Post Mount Frame/Fork, Fits 180mm and 160mm Rotors",
+    mpn: "PM180F",
+    upc: "657993207192",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM180, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Flat Mount Disc Brake Adapter for Flat Mount Fork, Fits 140mm and 160mm Front Rotors",
+    mpn: "FH160F/FH140F",
+    upc: "657993207215",
+    configs: [
+      [MOUNT_FM140F, MOUNT_FM140R],
+      [MOUNT_FM140F, MOUNT_FM160R],
+    ],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Flat Mount Disc Brake Adapter for Flat Mount Frame, Fits 160mm Rear Rotors",
+    mpn: "FM160R",
+    upc: "657993207239",
+    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Flat Mount Disc Brake Adapter for Flat Mount Fork, Fits 160mm Front Rotors (increased height and improved cable routing)",
+    mpn: "FM160F",
+    upc: "657993207253",
+    configs: [[MOUNT_FM140F, MOUNT_FM160R]],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter - For Flat Mount Fork, Fits 140mm Front Rotors",
+    mpn: "FP140F",
+    upc: "657993207277",
+    configs: [[MOUNT_FM140F, MOUNT_PM140]],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter - For Flat Mount Fork, Fits 160mm Front Rotors",
+    mpn: "FP160F",
+    upc: "657993207291",
+    configs: [[MOUNT_FM140F, MOUNT_PM160]],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter - For Flat Mount Frame, Fits 140mm Rear Rotors",
+    mpn: "FP140R",
+    upc: "657993207314",
+    configs: [[MOUNT_FM140R, MOUNT_PM140]],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter - For Flat Mount Frame, Fits 160mm Rear Rotors",
+    mpn: "FP160R",
+    upc: "657993207338",
+    configs: [[MOUNT_FM140R, MOUNT_PM160]],
+  },
+  {
+    brand: BRAND_PROMAX,
+    model:
+      "Post Mount Disc Brake Adapter for Post Mount Frame/Fork, Fits 203mm Rotors",
+    mpn: "PM203F",
+    upc: "657993207352",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM203],
+      [MOUNT_PM140, MOUNT_PM183], // unsupported
+    ],
+  },
+
+  // Hope
+  {
+    brand: BRAND_HOPE,
+    model: "M-Post Disc Brake Adaptor - 160 To Post 200",
+    mpn: "HBMMN",
+    upc: "5055168088419",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM200],
+      [MOUNT_PM140, MOUNT_PM180], // unsupported
+      [MOUNT_PM180, MOUNT_PM220], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "P-Post Disc Brake Adaptor - 200 To Post 220",
+    mpn: "HBMPN",
+    upc: "5056033475440",
+    configs: [[MOUNT_PM200, MOUNT_PM220]],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "Q-Post Disc Brake Adaptor - 203 To Post 220",
+    mpn: "HBMQN",
+    upc: "5056033475464",
+    configs: [[MOUNT_PM203, MOUNT_PM220]],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "160mm Post Mount to 180mm Post Mount Disc Brake Adaptor, +20mm",
+    mpn: "HBMLN",
+    upc: "5055168088389",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM140, MOUNT_PM160], // unsupported
+      [MOUNT_PM180, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "183 Rear/ 203 Front 74mm to IS",
+    mpn: "HBMBN",
+    upc: "5055168037318",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM203],
+      [MOUNT_IS160R, MOUNT_PM183],
+    ],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "203 Post Caliper to Post Fork",
+    mpn: "HBMCN",
+    upc: "5055168037325",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM203],
+      [MOUNT_PM140, MOUNT_PM183], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "Rear IS to Post 203",
+    mpn: "HBMGN",
+    upc: "5055168037356",
+    configs: [[MOUNT_IS160R, MOUNT_PM203]],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "160mm Rear 74mm to IS",
+    mpn: "HBMFN",
+    upc: "5055168033716",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM160],
+      [MOUNT_IS160F, MOUNT_PM180], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "183 Front 74mm to Post Mount",
+    mpn: "HBMHN",
+    upc: "5055168037363",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM183],
+      [MOUNT_PM180, MOUNT_PM203], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "183 Front 74mm to IS",
+    mpn: "HBMJN",
+    upc: "5055168037370",
+    configs: [[MOUNT_IS160F, MOUNT_PM183]],
+  },
+  {
+    brand: BRAND_HOPE,
+    model: "140 Rear or 160m Front 74mm to IS",
+    mpn: "HBMAN",
+    upc: "5055168033709",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140],
+    ],
+  },
 
   // Tektro
   {
@@ -658,7 +875,111 @@ const allAdapters = [
     configs: [[MOUNT_IS160F, MOUNT_PM160]],
   },
 
-  // TODO Hayes
+  // Hayes
+  {
+    brand: BRAND_HAYES,
+    model: "Post Disc Brake Adaptor for IS Mount, Front 180mm Rotor Diameter",
+    mpn: "98-18640",
+    upc: "844171001035",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM180],
+      // [MOUNT_IS160R, MOUNT_PM160], // unsupported, use 98-15073
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model:
+      "Post Disc Brake Adaptor for Post Mount Frame, +20mm, typically for 180mm Rotor Diameter (four-bolt version)",
+    mpn: "98-18639",
+    upc: "844171001028",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM200],
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model: "Post Mount Disc Brake Adaptor - 180 mm Mount for 203 mm Rotor",
+    mpn: "98-30027",
+    upc: "844171057773",
+    configs: [
+      [MOUNT_PM180, MOUNT_PM203],
+      [MOUNT_PM160, MOUNT_PM183], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model:
+      "Post Mount Disc Brake Adaptor - 160 mm Mount for 180 mm Rotor (two-bolt version)",
+    mpn: "98-32223",
+    upc: "844171036266",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM140, MOUNT_PM160], // unsupported
+      [MOUNT_PM180, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model:
+      "Post Disc Brake Adaptor for IS Mount, Front 200mm/Rear 180mm Rotor Diameter",
+    mpn: "98-18642",
+    upc: "844171001059",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM200],
+      [MOUNT_IS160R, MOUNT_PM180],
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model:
+      "Post Disc Brake Adaptor for IS Mount, Front 160mm/Rear 140mm Rotor Diameter",
+    mpn: "98-15068",
+    upc: "844171000410",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140],
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model: "Post Disc Brake Adaptor for IS Mount, Front 203mm Rotor Diameter",
+    mpn: "98-15069",
+    upc: "844171000427",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM203],
+      [MOUNT_IS160R, MOUNT_PM183], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model:
+      "Post Disc Brake Adaptor for Post Mount Frame, +43mm, typically for 203mm Rotor Diameter",
+    mpn: "98-15072",
+    upc: "844171000441",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM203],
+      [MOUNT_PM140, MOUNT_PM183], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model: "Post Disc Brake Adaptor for IS Mount, Rear 160mm Rotor Diameter",
+    mpn: "98-15073",
+    upc: "844171000458",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM160],
+      [MOUNT_IS160F, MOUNT_PM180], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_HAYES,
+    model: "Post Disc Brake Adaptor for IS Mount, Rear 203mm Rotor Diameter",
+    mpn: "98-15074",
+    upc: "844171000465",
+    configs: [[MOUNT_IS160R, MOUNT_PM203]],
+  },
 
   // Paul
   {
@@ -807,6 +1128,138 @@ const allAdapters = [
       [MOUNT_IS160R, MOUNT_FM160R],
     ],
   },
+
+  // North Shore Billet (NSB)
+  {
+    brand: BRAND_NSB,
+    model: "203mm (+43mm) Post Mount",
+    mpn: "1112867225",
+    upc: null,
+    configs: [
+      [MOUNT_PM160, MOUNT_PM203],
+      [MOUNT_PM140, MOUNT_PM183],
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "200mm (+40mm) Post Mount",
+    mpn: "1112867205",
+    upc: null,
+    configs: [
+      [MOUNT_PM160, MOUNT_PM200],
+      [MOUNT_PM140, MOUNT_PM180], // unsupported
+      [MOUNT_PM180, MOUNT_PM220], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "185mm (+25mm) Post Mount",
+    mpn: "1112867185",
+    upc: null,
+    configs: [[MOUNT_PM160, MOUNT_PM185]],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "180mm>203mm (+23mm) Post Mount",
+    mpn: "16836948097",
+    upc: null,
+    configs: [
+      [MOUNT_PM180, MOUNT_PM203],
+      [MOUNT_PM160, MOUNT_PM183], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "180mm (+20mm) Post Mount",
+    mpn: "1112867145",
+    upc: null,
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM140, MOUNT_PM160], // unsupported
+      [MOUNT_PM200, MOUNT_PM220], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "203mm>220mm (+17mm) Post Mount",
+    mpn: "32255817711715",
+    upc: null,
+    configs: [[MOUNT_PM203, MOUNT_PM220]],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "140mm Rear (+0mm) IS Mount",
+    mpn: "1112864081",
+    upc: null,
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM140],
+      [MOUNT_IS160F, MOUNT_PM160], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "160mm Rear (+20mm) IS Mount",
+    mpn: "1112864085",
+    upc: null,
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM160],
+      [MOUNT_IS160F, MOUNT_PM180], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "160mm Front (+0mm) IS Mount",
+    mpn: "1112864089",
+    upc: null,
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "180mm Rear (+40mm) IS Mount",
+    mpn: "1112864093",
+    upc: null,
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM180],
+      [MOUNT_IS160F, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "183mm Rear Hope-only (+43mm) IS Mount",
+    mpn: "1112864097",
+    upc: null,
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM183],
+      [MOUNT_IS160F, MOUNT_PM203], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "185mm Rear (+45mm) IS Mount",
+    mpn: "1112864101",
+    upc: null,
+    configs: [[MOUNT_IS160R, MOUNT_PM185]],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "200mm Rear (+60mm) IS Mount",
+    mpn: "1112864105",
+    upc: null,
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM200],
+      [MOUNT_IS160F, MOUNT_PM220], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_NSB,
+    model: "203mm Rear (+63mm) IS Mount",
+    mpn: "1112864109",
+    upc: null,
+    configs: [[MOUNT_IS160R, MOUNT_PM203]],
+  },
 ]
 
 // from => to => set of adapter indices for final lookup
@@ -924,7 +1377,7 @@ const AdapterList = ({ adapters }) => {
           {mpn && (
             <>
               <br />
-              <small>Manufacturer's Part Number: {mpn}</small>
+              <small>Manufacturer Part Number: {mpn}</small>
             </>
           )}
           {upc && (
@@ -1047,6 +1500,9 @@ const DiscBrakeAdapterFinder = () => {
       : // If PM180 mount [and caliper is post mount], allow >= 180
       mount === MOUNT_PM180
       ? allRotors.filter(r => r >= ROTOR_180)
+      : // If PM203 mount [and caliper is post mount], allow >= 203
+      mount === MOUNT_PM203
+      ? allRotors.filter(r => r >= ROTOR_203)
       : allRotors
 
   useEffect(() => {
@@ -1089,6 +1545,7 @@ const DiscBrakeAdapterFinder = () => {
                 <MountOption mount={MOUNT_PM140} />
                 <MountOption mount={MOUNT_PM160} />
                 <MountOption mount={MOUNT_PM180} />
+                <MountOption mount={MOUNT_PM203} />
               </optgroup>
             </select>
           </label>
@@ -1152,12 +1609,20 @@ const DiscBrakeAdapterFinder = () => {
             </a>{" "}
             for details.
           </p>
-          {mount.startsWith("FM") && caliper === CALIPER_FLAT && (
-            <p>
-              "Flat mount" does not include calipers with integrated mount
-              plates or adapters such as Shimano BR-UR300 or Hope RX4. These
-              calipers are generally used without mount plates or adapters.
-            </p>
+          {caliper === CALIPER_FLAT && (
+            <>
+              <p>
+                Flat mount caliper exceptions:
+                <ul>
+                  <li>
+                    Shimano BR-UR300 (no plate or adapter, use 160mm rotors)
+                  </li>
+                  <li>
+                    Hope RX4 Flat Mount (no plate or adapter, use 160mm rotors)
+                  </li>
+                </ul>
+              </p>
+            </>
           )}
           {caliper === CALIPER_POST && (
             <p>
@@ -1169,19 +1634,39 @@ const DiscBrakeAdapterFinder = () => {
           {mount.startsWith("IS") && caliper === CALIPER_POST && (
             <>
               <p>
-                IS exceptions:
+                IS mount exceptions:
                 <ul>
                   <li>
-                    Pre-2014 Fox 40 Downhill Forks (~IS200F). Use a virtual
-                    rotor size of 160mm (size down 40-45mm).
+                    Pre-2014 Fox 40, Marzocchi Monster, and Marzocchi 888
+                    Downhill Forks (IS203F a.k.a. IS 8"). Use a virtual rotor
+                    size of 160mm (size actual 200-205mm rotor down 40-45mm).
                   </li>
                   <li>
-                    PVD StepDown Rear (~IS140R). Size virtual rotor up 20mm.
+                    Pre-2010 Rockshox BoXXer has a proprietary adapter. Use
+                    Hayes #98-15071 (UPC 844171000434) or DiscoBrakes
+                    #OBE-BMS920 (UPC 5055429913641) with 203mm rotor.
+                  </li>
+                  <li>
+                    Forks with 20mm thru-axles (20x110mm <em>non-boost</em>) and
+                    a normal IS mount should use Hayes #98-15282 (UPC
+                    844171000472) to offset the post mount inboard. See{" "}
+                    <a
+                      href="https://www.notubes.com/news/say-what-the-difference-between-20x110mm-thru-axles-and-20x110mm-boost-thru-axles-explained/"
+                      title="20x110mm explained"
+                    >
+                      this article
+                    </a>
+                    .
+                  </li>
+                  <li>
+                    PVD StepDown Rear (~IS140R) should size actual rotor up 20mm
+                    (e.g. 160mm actual rotor should use 180mm adapter).
+                  </li>
+                  <li>
+                    Surly Troll/Ogre/ECR/Pugsley w/ adjustable dropouts have a
+                    proprietary adapter.
                   </li>
                   <li>All-City Nature Boy has a proprietary adapter.</li>
-                  <li>
-                    Surly Troll/Ogre/ECR/Pugsley has a proprietary adapter.
-                  </li>
                 </ul>
               </p>
             </>
