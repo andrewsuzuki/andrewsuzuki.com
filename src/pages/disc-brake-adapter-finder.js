@@ -5,9 +5,6 @@ import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 
 // TODO Unsupported adapters in UI
-// TODO Suggest 1.5mm of washers for 180->183 and 200->203?
-// Alternatively, Paul says "160 plus 40 does not equal 203, but that’s ok" with no mention of washers
-// TODO Await North Shore Billet response regarding 1112864081 and 1112864089; remove one if identical
 
 const MAX_ADAPTERS = 2
 
@@ -139,6 +136,18 @@ const BRAND_NSB = "North Shore Billet"
 // const BRAND_KCNC = "KCNC"
 
 const allAdapters = [
+  // 1.5mm Washers
+  {
+    brand: "Generic",
+    model: "M6 1.5mm Washers",
+    mpn: null,
+    upc: null,
+    configs: [
+      [MOUNT_PM180, MOUNT_PM183],
+      [MOUNT_PM200, MOUNT_PM203],
+    ],
+  },
+
   // Avid/SRAM
   {
     brand: BRAND_AVID_SRAM,
@@ -216,7 +225,48 @@ const allAdapters = [
       [MOUNT_PM180, MOUNT_PM220], // unsupported (guess)
     ],
   },
-  // TODO Four Avid spacer kits
+  {
+    brand: BRAND_AVID_SRAM,
+    model: "20mm Disc Post Spacer Kit with Titanium Standard Bolts",
+    mpn: "00.5318.008.004",
+    upc: "710845714405",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM200],
+    ],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model:
+      "20mm Disc Post Spacer Kit with Titanium CPS Bolts (CPS Calipers Only)",
+    mpn: "00.5318.008.005",
+    upc: "710845714412",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM200],
+    ],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model: "10mm Post Mount Disc Brake Adaptor, Fits 170mm Front Rotors",
+    mpn: "00.5318.008.000",
+    upc: "710845714368",
+    configs: [[MOUNT_PM160, MOUNT_PM170]],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model:
+      "20mm Post Mount Disc Brake Adaptor, Fits 180mm Front and 160mm Rear Rotors",
+    mpn: "00.5318.008.003",
+    upc: "710845714399",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM200],
+    ],
+  },
 
   // SRAM (non-Avid)
   {
@@ -1188,7 +1238,7 @@ const allAdapters = [
   },
   {
     brand: BRAND_NSB,
-    model: "140mm Rear (+0mm) IS Mount",
+    model: "140mm Rear (+0mm) IS Mount", // NOTE identical to 1112864089
     mpn: "1112864081",
     upc: null,
     configs: [
@@ -1208,7 +1258,7 @@ const allAdapters = [
   },
   {
     brand: BRAND_NSB,
-    model: "160mm Front (+0mm) IS Mount",
+    model: "160mm Front (+0mm) IS Mount", // NOTE identical to 1112864081
     mpn: "1112864089",
     upc: null,
     configs: [
@@ -1292,6 +1342,19 @@ const adjList = allAdapters.reduce(
   {}
 )
 
+function pathHasWashers(path) {
+  const l = path.length
+  if (l < 2) {
+    return false
+  }
+  const p = path[l - 2]
+  const w = path[l - 1]
+  return (
+    (p === MOUNT_PM180 && w === MOUNT_PM183) ||
+    (p === MOUNT_PM200 && w === MOUNT_PM203)
+  )
+}
+
 // Find all paths from one mount to another using a depth-first search
 function allAdapterPaths(from, to) {
   const paths = []
@@ -1303,10 +1366,7 @@ function allAdapterPaths(from, to) {
     currentPath.push(f)
 
     if (f === to) {
-      // Limit path length
-      if (currentPath.length - 1 <= MAX_ADAPTERS) {
-        paths.push([...currentPath])
-      }
+      paths.push([...currentPath]) // (filtered later)
     } else if (adjList[f]) {
       adjList[f].forEach(adj => {
         if (!visited.has(adj)) {
@@ -1321,38 +1381,81 @@ function allAdapterPaths(from, to) {
 
   pathsInner(from)
 
-  return (
-    paths
-      .filter(path =>
-        path.length < 3
-          ? true
-          : !(
-              // Don't allow stacking with (!FM -> FM) (e.g. A.S. Solutions)
-              (
-                (!path[0].startsWith("FM") && path[1].startsWith("FM")) ||
-                (!path[1].startsWith("FM") && path[2].startsWith("FM")) ||
-                // Don't allow stacking multiple PM-PM adapters
-                path.every(p => p.startsWith("PM")) ||
-                // Don't allow FM140F -> FM140R -> FM160R, since the mount plate
-                // (lower) adapter is likely already compatible with FM160R
-                (path[0] === MOUNT_FM140F &&
-                  path[1] === MOUNT_FM140R &&
-                  path[2] === MOUNT_FM160R)
-              )
-            )
-      )
-      // Sort by path length ascending
-      .sort((a, b) => a.length - b.length)
-  )
+  return paths
+    .filter(path => {
+      const adapterCount = path.length - 1
+      if (adapterCount <= 1) {
+        return true
+      }
+
+      // Has more than one adapter...
+
+      const hasWashers = pathHasWashers(path)
+
+      // Filter out if too many adapters
+      // (one over max is ok if it has washers)
+      if (
+        adapterCount > MAX_ADAPTERS &&
+        !(adapterCount === MAX_ADAPTERS + 1 && hasWashers)
+      ) {
+        return false
+      }
+
+      // Don't allow more than one adapter when there's a (!FM -> FM) in the path
+      if (
+        (!path[0].startsWith("FM") && path[1].startsWith("FM")) ||
+        (!path[1].startsWith("FM") && path[2].startsWith("FM"))
+      ) {
+        return false
+      }
+
+      // Don't allow stacking multiple PM-PM adapters
+      let pmStack = 0
+      for (let i = 0; i < path.length - (hasWashers ? 1 : 0); i++) {
+        pmStack = path[i].startsWith("PM") ? pmStack + 1 : 0
+        if (pmStack > 2) {
+          return false
+        }
+      }
+
+      // Don't allow FM140F -> FM140R -> FM160R, since the mount plate
+      // (lower) adapter is likely already compatible with FM160R
+      if (
+        path[0] === MOUNT_FM140F &&
+        path[1] === MOUNT_FM140R &&
+        path[2] === MOUNT_FM160R
+      ) {
+        return false
+      }
+
+      return true
+    })
+    .sort((pathA, pathB) => {
+      const aHasWashers = pathHasWashers(pathA)
+      const bHasWashers = pathHasWashers(pathB)
+      if (!aHasWashers && bHasWashers) {
+        // a should come first
+        return -1
+      } else if (aHasWashers && !bHasWashers) {
+        // b should come first
+        return 1
+      } else {
+        // default to length
+        return pathA.length - pathB.length
+      }
+    })
 }
 
 function pathToAdapters(path) {
-  const [from, to, next] = path
+  const [from, to, ...restPath] = path
   switch (path.length) {
     case 2:
       return [[...adapterLookup[from][to]].map(i => allAdapters[i])]
     case 3:
-      return pathToAdapters([from, to]).concat(pathToAdapters([to, next]))
+    case 4:
+      return pathToAdapters([from, to]).concat(
+        pathToAdapters([to, ...restPath])
+      )
     default:
       return []
   }
@@ -1429,39 +1532,66 @@ const Results = ({ mount, caliper, rotor }) => {
               </div>
             )
           case 2:
-            // Single adapter
+            // Single adapter (or washers)
             const [adapters] = pathToAdapters(path)
+            const isWashers = pathHasWashers(path)
             return (
               <div key={`${path[0]}-${path[1]}`}>
                 <h3>
-                  {hasMultiplePaths && `${i + 1}. `}Solution With Single Adapter
+                  {hasMultiplePaths && `${i + 1}. `}
+                  {isWashers ? "Washers" : "Solution With Single Adapter"}
                 </h3>
                 {adapters.length > 1 && <p>Pick one adapter:</p>}
+                {isWashers && "This configuration only requires washers."}
                 <AdapterList adapters={adapters} />
               </div>
             )
           case 3:
-            // Two adapters
-            const [lowerAdapters, upperAdapters] = pathToAdapters(path)
+          case 4:
+            // Two adapters, or two adapters + washers
+            // Note that upperAdapters could be washers too (with washersMaybe undefined)
+            const [lowerAdapters, upperAdapters, washersMaybe] = pathToAdapters(
+              path
+            )
+
+            const hasWashers = pathHasWashers(path)
+            const hasOneAdapterAndWashers = hasWashers && !washersMaybe
 
             const intermediateName = mountNames[path[1]]
 
             return (
               <div key={`${path[0]}-${path[1]}-${path[2]}`}>
                 <h3>
-                  {hasMultiplePaths && `${i + 1}. `}Solution With Two Adapters:{" "}
-                  {intermediateName} Intermediate
+                  {hasMultiplePaths && `${i + 1}. `}Solution With{" "}
+                  {hasOneAdapterAndWashers ? "Single Adapter" : "Two Adapters"}
+                  {hasWashers && " and 1.5mm washers"}:{" "}
+                  {!hasOneAdapterAndWashers &&
+                    `${intermediateName} Intermediate`}
                 </h3>
                 <p>
                   Uses two adapters with {intermediateName} as an intermediate
-                  step. Pick one of the lower adapters and one of the upper
-                  adapters for this brake. Not ideal, but it should work in a
-                  pinch.
+                  step{hasWashers && ", and 1.5mm washers on top"}. Pick one of
+                  the lower adapters and one of the upper adapters for this
+                  brake. Not as ideal as a single adapter, but it should work.
                 </p>
-                <h4>Lower adapters</h4>
+                <h4>{!hasOneAdapterAndWashers && "Lower "}Adapters</h4>
                 <AdapterList adapters={lowerAdapters} />
-                <h4>Upper adapters</h4>
-                <AdapterList adapters={upperAdapters} />
+                {!hasOneAdapterAndWashers && (
+                  <>
+                    <h4>Upper Adapters</h4>
+                    <AdapterList adapters={upperAdapters} />
+                  </>
+                )}
+                {hasWashers && (
+                  <>
+                    <h4>Washers</h4>
+                    <AdapterList
+                      adapters={
+                        hasOneAdapterAndWashers ? upperAdapters : washersMaybe
+                      }
+                    />
+                  </>
+                )}
               </div>
             )
           default:
@@ -1611,64 +1741,61 @@ const DiscBrakeAdapterFinder = () => {
           </p>
           {caliper === CALIPER_FLAT && (
             <>
-              <p>
-                Flat mount caliper exceptions:
-                <ul>
-                  <li>
-                    Shimano BR-UR300 (no plate or adapter, use 160mm rotors)
-                  </li>
-                  <li>
-                    Hope RX4 Flat Mount (no plate or adapter, use 160mm rotors)
-                  </li>
-                </ul>
-              </p>
+              <p>Flat mount caliper exceptions:</p>
+              <ul>
+                <li>
+                  Shimano BR-UR300 (no plate or adapter, use 160mm rotors)
+                </li>
+                <li>
+                  Hope RX4 Flat Mount (no plate or adapter, use 160mm rotors)
+                </li>
+              </ul>
             </>
           )}
           {caliper === CALIPER_POST && (
             <p>
-              For Avid/SRAM adapters, do not use the supplied cup washers for
-              standard post mount calipers. Only use cup washers for SRAM CPS
-              (OEM/lower-end) calipers.
+              If you have an Avid/SRAM CPS caliper (found on OEM and lower-end
+              bikes), you must purchase an Avid/SRAM adapter. For all Avid/SRAM
+              adapters (CPS <em>or</em> standard), consult Avid/SRAM's manual to
+              determine washer order (if any are required at all).
             </p>
           )}
           {mount.startsWith("IS") && caliper === CALIPER_POST && (
             <>
-              <p>
-                IS mount exceptions:
-                <ul>
-                  <li>
-                    Pre-2014 Fox 40, Marzocchi Monster, and Marzocchi 888
-                    Downhill Forks (IS203F a.k.a. IS 8"). Use a virtual rotor
-                    size of 160mm (size actual 200-205mm rotor down 40-45mm).
-                  </li>
-                  <li>
-                    Pre-2010 Rockshox BoXXer has a proprietary adapter. Use
-                    Hayes #98-15071 (UPC 844171000434) or DiscoBrakes
-                    #OBE-BMS920 (UPC 5055429913641) with 203mm rotor.
-                  </li>
-                  <li>
-                    Forks with 20mm thru-axles (20x110mm <em>non-boost</em>) and
-                    a normal IS mount should use Hayes #98-15282 (UPC
-                    844171000472) to offset the post mount inboard. See{" "}
-                    <a
-                      href="https://www.notubes.com/news/say-what-the-difference-between-20x110mm-thru-axles-and-20x110mm-boost-thru-axles-explained/"
-                      title="20x110mm explained"
-                    >
-                      this article
-                    </a>
-                    .
-                  </li>
-                  <li>
-                    PVD StepDown Rear (~IS140R) should size actual rotor up 20mm
-                    (e.g. 160mm actual rotor should use 180mm adapter).
-                  </li>
-                  <li>
-                    Surly Troll/Ogre/ECR/Pugsley w/ adjustable dropouts have a
-                    proprietary adapter.
-                  </li>
-                  <li>All-City Nature Boy has a proprietary adapter.</li>
-                </ul>
-              </p>
+              <p>IS mount exceptions:</p>
+              <ul>
+                <li>
+                  Pre-2014 Fox 40, Marzocchi Monster, and Marzocchi 888 Downhill
+                  Forks (IS203F a.k.a. IS 8"). Use a virtual rotor size of 160mm
+                  (size actual 200-205mm rotor down 40-45mm).
+                </li>
+                <li>
+                  Pre-2010 Rockshox BoXXer has a proprietary adapter. Use Hayes
+                  #98-15071 (UPC 844171000434) or DiscoBrakes #OBE-BMS920 (UPC
+                  5055429913641) with 203mm rotor.
+                </li>
+                <li>
+                  Forks with 20mm thru-axles (20x110mm <em>non-boost</em>) and a
+                  normal IS mount should use Hayes #98-15282 (UPC 844171000472)
+                  to offset the post mount inboard. See{" "}
+                  <a
+                    href="https://www.notubes.com/news/say-what-the-difference-between-20x110mm-thru-axles-and-20x110mm-boost-thru-axles-explained/"
+                    title="20x110mm explained"
+                  >
+                    this article
+                  </a>
+                  .
+                </li>
+                <li>
+                  PVD StepDown Rear (~IS140R) should size actual rotor up 20mm
+                  (e.g. 160mm actual rotor should use 180mm adapter).
+                </li>
+                <li>
+                  Surly Troll/Ogre/ECR/Pugsley w/ adjustable dropouts have a
+                  proprietary adapter.
+                </li>
+                <li>All-City Nature Boy has a proprietary adapter.</li>
+              </ul>
             </>
           )}
           <Results mount={mount} caliper={caliper} rotor={rotor} />
