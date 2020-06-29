@@ -1,6 +1,7 @@
 @import "./include-media.scss";
 
 $lightgray: rgb(221, 221, 221);
+$lightyellow: lightyellow;
 
 /* Reset */
 
@@ -135,7 +136,7 @@ h6 {
       > div {
         display: inline-block;
         padding: 1em;
-        background: lightyellow;
+        background: $lightyellow;
       }
 
       h2 {
@@ -146,8 +147,14 @@ h6 {
 
     ul {
       list-style: disc inside;
+    }
 
-      ul {
+    ol {
+      list-style: decimal inside;
+    }
+
+    ul, ol {
+      ul, ol {
         margin-left: 1.5em;
       }
     }
@@ -266,7 +273,7 @@ h6 {
 }
 
 .tag {
-  background: lightyellow;
+  background: $lightyellow;
 
   &.active {
     background: yellow;
@@ -471,7 +478,7 @@ textarea {
   }
 }
 
-.contact-form {
+.form {
   .field {
     margin-bottom: 1em;
 
@@ -481,7 +488,7 @@ textarea {
 
     label {
       span {
-        display: table; // like inline-block, but with break
+        display: table;
         font-weight: bold;
       }
     }
@@ -516,6 +523,13 @@ textarea {
 
 .success-message {
   color: green;
+}
+
+.big-button-link {
+  display: table;
+  padding: 0.5em 0.8em;
+  font-size: 1.2em;
+  background: $lightyellow;
 }
 
 // prism syntax highlighter theme

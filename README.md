@@ -18,7 +18,6 @@ npm run develop
 
 ## TODO
 
-- comments
 - better about
 - prev/next buttons for series at bottom of posts
 - images

@@ -79,8 +79,8 @@ module.exports = {
                 )
 
                 // NOTE excerpt was used for description, but now I'm
-                // writing post descriptions manually. Uncomment if that changes
-                // and default to excerpt.
+                // writing post descriptions manually. Uncomment if descriptions become optional,
+                // defaulting to excerpt.
                 // const excerptNodes = []
                 // visit(edge.node.mdxAST, node => {
                 //   if (node.type === `text` || node.type === `inlineCode`) {
@@ -141,6 +141,7 @@ module.exports = {
                       }
                       frontmatter {
                         title
+                        description
                         date
                       }
                     }

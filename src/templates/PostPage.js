@@ -7,11 +7,13 @@ import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 import PostInfo from "../components/PostInfo"
+import BigButtonLink from "../components/BigButtonLink"
 import Tag from "../components/Tag"
 import FullImageMDX from "../components/FullImageMDX"
 import GalleryMDX from "../components/GalleryMDX"
 
 const mdxComponents = {
+  BigButtonLink,
   Tag,
   FullImageMDX,
   GalleryMDX,

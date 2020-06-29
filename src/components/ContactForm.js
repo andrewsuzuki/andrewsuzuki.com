@@ -51,6 +51,7 @@ export default function ContactForm() {
   return (
     <div className="contact-form">
       <form
+        className="form"
         name={NETLIFY_FORM_NAME}
         action="/contact"
         method="post"
