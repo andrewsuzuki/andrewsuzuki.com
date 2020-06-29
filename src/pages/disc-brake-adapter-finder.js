@@ -4,6 +4,9 @@ import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 
+// TODO Suggest 1.5mm of washers for 180->183 and 200->203?
+// Alternatively, Paul says "160 plus 40 does not equal 203, but that’s ok" with no mention of washers
+
 const MAX_ADAPTERS = 2
 
 const SIDE_FRONT = "front"
@@ -14,6 +17,7 @@ const MOUNT_PM140 = "PM140"
 const MOUNT_PM160 = "PM160"
 const MOUNT_PM170 = "PM170" // output-only
 const MOUNT_PM180 = "PM180"
+const MOUNT_PM183 = "PM183" // output-only
 const MOUNT_PM185 = "PM185" // output-only
 const MOUNT_PM200 = "PM200" // output-only
 const MOUNT_PM203 = "PM203" // output-only
@@ -28,6 +32,7 @@ const ROTOR_140 = 140
 const ROTOR_160 = 160
 const ROTOR_170 = 170
 const ROTOR_180 = 180
+const ROTOR_183 = 183
 const ROTOR_185 = 185
 const ROTOR_200 = 200
 const ROTOR_203 = 203
@@ -40,6 +45,7 @@ const mountNames = {
   [MOUNT_PM160]: "Post Mount 160",
   [MOUNT_PM170]: "Post Mount 170",
   [MOUNT_PM180]: "Post Mount 180",
+  [MOUNT_PM183]: "Post Mount 183",
   [MOUNT_PM185]: "Post Mount 185",
   [MOUNT_PM200]: "Post Mount 200",
   [MOUNT_PM203]: "Post Mount 203",
@@ -55,6 +61,7 @@ const allRotors = [
   ROTOR_160,
   ROTOR_170,
   ROTOR_180,
+  ROTOR_183,
   ROTOR_185,
   ROTOR_200,
   ROTOR_203,
@@ -74,6 +81,8 @@ function caliperMount(caliper, rotor) {
         return MOUNT_PM170
       case ROTOR_180:
         return MOUNT_PM180
+      case ROTOR_183:
+        return MOUNT_PM183
       case ROTOR_185:
         return MOUNT_PM185
       case ROTOR_200:
@@ -250,10 +259,64 @@ const allAdapters = [
   },
 
   // Shimano
-  // TODO more
   {
     brand: BRAND_SHIMANO,
-    model: "Front 140/160mm Mount Plate",
+    model: "SM-MA-F203S/S",
+    mpn: "ISMMAF203PPA [warning: multiple products with this code]",
+    upc: "689228108110",
+    configs: [[MOUNT_PM160, MOUNT_PM203]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-F203P/S",
+    mpn: "ISMMAF203PPA [warning: multiple products with this code]",
+    upc: "689228108127",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM203],
+      // [MOUNT_IS160R, MOUNT_PM183], // unsupported, but might work
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-R140P/D",
+    mpn: "ISMMAR140PDH",
+    upc: "689228874961",
+    configs: [[MOUNT_FM140R, MOUNT_PM140]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-R160P/S",
+    mpn: "ISMMAR160PSA",
+    upc: "689228108158",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM160],
+      // [MOUNT_IS160F, MOUNT_PM180], // unsupported, use SM-MA-F180P/S
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-R160P/D",
+    mpn: "ISMMAR160PDH",
+    upc: "689228874978",
+    configs: [[MOUNT_FM140R, MOUNT_PM160]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-R160D/D",
+    mpn: "ISMMAR160DDA",
+    upc: "689228561601",
+    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-R203P/S",
+    mpn: "ISMMAR203PSA",
+    upc: "689228108813",
+    configs: [[MOUNT_IS160R, MOUNT_PM203]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "Front 140/160mm Mount Plate, a.k.a. Adapter for BR-RS505 Front",
     mpn: "Y8N230000",
     upc: "689228353657",
     configs: [
@@ -263,13 +326,208 @@ const allAdapters = [
   },
   {
     brand: BRAND_SHIMANO,
-    model: "R160D/D",
-    mpn: "ISMMAR160DDA",
-    upc: "689228561601",
-    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+    model: "SM-MA-F140P/D",
+    mpn: "ISMMAF140PDA",
+    upc: "689228350618",
+    configs: [[MOUNT_FM140F, MOUNT_PM140]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-F160P/D",
+    mpn: "ISMMAF160PDA",
+    upc: "689228350625",
+    configs: [[MOUNT_FM140F, MOUNT_PM160]],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-F160P/S",
+    mpn: "ISMMAF160PSA",
+    upc: "689228108103",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      // [MOUNT_IS160R, MOUNT_PM140], // unsupported, use SM-MA90-R140P/S
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-F180P/S",
+    mpn: "ISMMAF180PSA",
+    upc: "689228108141",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM180],
+      // [MOUNT_IS160R, MOUNT_PM160], // unsupported, use SM-MA-R160P/S
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-R180P/S",
+    mpn: "ISMMAR180PSA",
+    upc: "689228108165",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM180],
+      // [MOUNT_IS160F, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA90-R160P/S (XTR-level)",
+    mpn: "ISMMA90R160PS",
+    upc: "689228430457",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM160],
+      // [MOUNT_IS160F, MOUNT_PM180], // unsupported, use SM-MA90-F180P/S
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA90-F203P/PM (XTR-level)",
+    mpn: "ISMMA90F203PPM",
+    upc: "689228887435",
+    configs: [
+      [MOUNT_PM180, MOUNT_PM203],
+      // [MOUNT_PM160, MOUNT_PM183], // unsupported, but might work
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA90-F180P/P (XTR-level)",
+    mpn: "ISMMA90F180PPC",
+    upc: "689228595576",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      // [MOUNT_PM140, MOUNT_PM160], // unsupported
+      // [MOUNT_PM180, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA90-R180P/S (XTR-level)",
+    mpn: "ISMMA90R180PS",
+    upc: "689228430440",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM180],
+      // [MOUNT_IS160F, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA90-F160P/S (XTR-level)",
+    mpn: "ISMMA90F160PS",
+    upc: "689228430488",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      // [MOUNT_IS160R, MOUNT_PM140], // unsupported, use SM-MA90-R140P/S
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA90-R140P/S (XTR-level)",
+    mpn: "ISMMA90R140PS",
+    upc: "689228430495",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM140],
+      // [MOUNT_IS160F, MOUNT_PM160], // unsupported, use SM-MA90-F160P/S
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-F180P/P2",
+    mpn: "ESMMAF180PP2A",
+    upc: "192790506128",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      // [MOUNT_PM140, MOUNT_PM160], // unsupported
+      // [MOUNT_PM180, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "SM-MA-F203P/PM",
+    mpn: "ESMMAF203PPMA",
+    upc: "192790506111",
+    configs: [[MOUNT_PM160, MOUNT_PM203]],
   },
 
-  // TODO TRP
+  // TRP
+  {
+    brand: BRAND_TRP,
+    model: "Flat Mount Fork to Flat Mount Caliper for 140 or 160 mm Rotor",
+    mpn: "ABAD000095",
+    upc: "4717592021714",
+    configs: [
+      [MOUNT_FM140F, MOUNT_FM140R],
+      [MOUNT_FM140F, MOUNT_FM160R],
+    ],
+  },
+  {
+    brand: BRAND_TRP,
+    model: "Flat Mount Frame to Flat Mount Caliper for 160 mm Rotor",
+    mpn: "ABAD000099",
+    upc: "4717592021875",
+    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+  },
+  {
+    brand: BRAND_TRP,
+    model: "A-7 Post Mount Frame/Fork | Post Mount Caliper +43 mm",
+    mpn: "ABAD000128",
+    upc: "4717592029758",
+    configs: [[MOUNT_PM160, MOUNT_PM203]],
+  },
+  {
+    brand: BRAND_TRP,
+    model:
+      "A-12 Post Mount Frame/Fork | Post Mount Caliper +13 mm (manufacturer typo? should be +23 mm)",
+    mpn: "ABAD000093",
+    upc: "4717592029239",
+    configs: [
+      [MOUNT_PM180, MOUNT_PM203],
+      [MOUNT_PM160, MOUNT_PM183], // unsupported (guess)
+    ],
+  },
+  {
+    brand: BRAND_TRP,
+    model: "A-11 Post Mount Frame/Fork - Post Mount Caliper +20 mm",
+    mpn: "ABAD000141",
+    upc: "4717592018592",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      // [MOUNT_PM180, MOUNT_PM200], // unsupported (TRP doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_TRP,
+    model:
+      "Rear Flat Mount Frame to Post Mount Caliper Adaptor for 160 mm Rotors",
+    mpn: "ABAD000075",
+    upc: "4717592021882",
+    configs: [[MOUNT_FM140R, MOUNT_PM160]],
+  },
+  {
+    brand: BRAND_TRP,
+    model:
+      "Rear Flat Mount Frame to Post Mount Caliper Adaptor for 140 mm Rotors",
+    mpn: "ABAD000067",
+    upc: "4717592021844",
+    configs: [[MOUNT_FM140R, MOUNT_PM140]],
+  },
+  {
+    brand: BRAND_TRP,
+    model:
+      "Front Flat Mount Fork to Post Mount Caliper Adaptor for 140 mm Rotors",
+    mpn: "ABAD000058",
+    upc: "4717592021035",
+    configs: [[MOUNT_FM140F, MOUNT_PM140]],
+  },
+  {
+    brand: BRAND_TRP,
+    model:
+      "Front Flat Mount Fork to Post Mount Caliper Adaptor for 160 mm Rotors",
+    mpn: "ABHD000686",
+    upc: "4717592021059",
+    configs: [[MOUNT_FM140F, MOUNT_PM160]],
+  },
+
   // TODO Promax
   // TODO Hope
 
@@ -290,8 +548,8 @@ const allAdapters = [
     mpn: "ABAD000015",
     upc: "4717592009217",
     configs: [
-      // [MOUNT_IS160F, MOUNT_PM180], // unsupported
       [MOUNT_IS160R, MOUNT_PM160],
+      // [MOUNT_IS160F, MOUNT_PM180], // unsupported
     ],
   },
   {
@@ -300,8 +558,8 @@ const allAdapters = [
     mpn: "ABAD000020",
     upc: "4717592010565",
     configs: [
-      // [MOUNT_IS160F, MOUNT_PM200], // unsupported
       [MOUNT_IS160R, MOUNT_PM180],
+      // [MOUNT_IS160F, MOUNT_PM200], // unsupported
     ],
   },
   {
@@ -312,9 +570,201 @@ const allAdapters = [
     configs: [[MOUNT_IS160F, MOUNT_PM203]],
   },
 
-  // TODO Magura
+  // Magura
+  {
+    brand: BRAND_MAGURA,
+    model: "QM9 Adaptor for 203mm Rotor on Rear IS Mounts",
+    mpn: "0722325",
+    upc: "4055184003947",
+    configs: [[MOUNT_IS160R, MOUNT_PM203]],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model: 'QM26 Adaptor for 203mm Rotor on 7" (180mm) Post Mounts',
+    mpn: "0724131",
+    upc: "4055184004968",
+    configs: [
+      [MOUNT_PM180, MOUNT_PM203],
+      [MOUNT_PM160, MOUNT_PM183], // unsupported (guess)
+    ],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model:
+      "QM12 Adaptor for 160mm Rotor on Rear IS Mounts or 180mm Rotor on Front IS Mounts",
+    mpn: "0722426",
+    upc: "4055184004234",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM180],
+      [MOUNT_IS160R, MOUNT_PM160],
+    ],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model:
+      "QM45 Disc Brake Adapter - 180mm-220mm Rotor (Front) or 140mm-180mm Rotor (Rear)",
+    mpn: "2701940",
+    upc: "4055184025888",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM220],
+      [MOUNT_PM160, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model: "QM44 Disc Adapter - 180mm-203mm Rotor",
+    mpn: "2701967",
+    upc: "4055184026878",
+    configs: [
+      [MOUNT_PM180, MOUNT_PM203],
+      [MOUNT_PM160, MOUNT_PM183], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model: "QM40 Adaptor for a 180mm Rotor on 160mm Post Mounts",
+    mpn: "2700515",
+    upc: "4055184010266",
+    configs: [
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM140, MOUNT_PM160], // unsupported
+      // [MOUNT_PM180, MOUNT_PM200], // unsupported (Magura doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model: "QM42 Adaptor for a 203mm Rotor on 160mm Post Mounts",
+    mpn: "2700517",
+    upc: "4055184010280",
+    configs: [[MOUNT_PM160, MOUNT_PM203]],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model: "QM41 Adaptor for a 180mm Rotor on Rear I.S. Mounts",
+    mpn: "2700516",
+    upc: "4055184010273",
+    configs: [
+      [MOUNT_IS160R, MOUNT_PM180],
+      // [MOUNT_IS160F, MOUNT_PM200], // unsupported (Magura doesn't have 200mm rotors)
+    ],
+  },
+  {
+    brand: BRAND_MAGURA,
+    model:
+      "QM43 Adaptor for a 160mm Rotor on Front I.S. Mounts, also for a 203mm Rotor on [Pre-2014] Fox 40",
+    mpn: "2700518",
+    upc: "4055184010297",
+    configs: [[MOUNT_IS160F, MOUNT_PM160]],
+  },
+
   // TODO Hayes
-  // TODO Paul
+
+  // Paul
+  {
+    brand: BRAND_PAUL,
+    model: "+0mm IS, Black",
+    mpn: "049BLACK01",
+    upc: "817496012741",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140],
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+20mm IS, Black",
+    mpn: "049BLACK02",
+    upc: "817496012765",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM180],
+      [MOUNT_IS160R, MOUNT_PM160],
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+40mm IS, Black",
+    mpn: "049BLACK03",
+    upc: "817496012789",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM200],
+      [MOUNT_IS160R, MOUNT_PM180],
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+20mm Post Mount, Black",
+    mpn: "049BLACK04",
+    upc: "817496012802",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      // [MOUNT_PM180, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+40mm Post Mount, Black",
+    mpn: "049BLACK05",
+    upc: "817496012826",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM180],
+      [MOUNT_PM160, MOUNT_PM200],
+      // [MOUNT_PM180, MOUNT_PM220], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+0mm IS, Silver",
+    mpn: "049SILVER01",
+    upc: "817496012741",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140],
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+20mm IS, Silver", // not on QBP
+    mpn: "049SILVER02",
+    upc: "817496012765",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM180],
+      [MOUNT_IS160R, MOUNT_PM160],
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+40mm IS, Silver",
+    mpn: "049SILVER03", // not on QBP
+    upc: "817496012789",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM200],
+      [MOUNT_IS160R, MOUNT_PM180],
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+20mm Post Mount, Silver",
+    mpn: "049SILVER04", // not on QBP
+    upc: "817496012802",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      // [MOUNT_PM180, MOUNT_PM200], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_PAUL,
+    model: "+40mm Post Mount, Silver",
+    mpn: "049SILVER05",
+    upc: "817496012826",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM180],
+      [MOUNT_PM160, MOUNT_PM200],
+      // [MOUNT_PM180, MOUNT_PM220], // unsupported
+    ],
+  },
 
   // Campagnolo
   {
@@ -429,7 +879,12 @@ function allAdapterPaths(from, to) {
                 (!path[0].startsWith("FM") && path[1].startsWith("FM")) ||
                 (!path[1].startsWith("FM") && path[2].startsWith("FM")) ||
                 // Don't allow stacking multiple PM-PM adapters
-                path.every(p => p.startsWith("PM"))
+                path.every(p => p.startsWith("PM")) ||
+                // Don't allow FM140F -> FM140R -> FM160R, since the mount plate
+                // (lower) adapter is likely already compatible with FM160R
+                (path[0] === MOUNT_FM140F &&
+                  path[1] === MOUNT_FM140R &&
+                  path[2] === MOUNT_FM160R)
               )
             )
       )
@@ -547,7 +1002,8 @@ const Results = ({ mount, caliper, rotor }) => {
                 <p>
                   Uses two adapters with {intermediateName} as an intermediate
                   step. Pick one of the lower adapters and one of the upper
-                  adapters for this brake. Not ideal, but can work in a pinch.
+                  adapters for this brake. Not ideal, but it should work in a
+                  pinch.
                 </p>
                 <h4>Lower adapters</h4>
                 <AdapterList adapters={lowerAdapters} />
@@ -698,10 +1154,9 @@ const DiscBrakeAdapterFinder = () => {
           </p>
           {mount.startsWith("FM") && caliper === CALIPER_FLAT && (
             <p>
-              "Flat mount" does <strong>not</strong> include calipers with
-              integrated mount plates or adapters such as Shimano BR-UR300 or
-              Hope RX4. These calipers are generally used without mount plates
-              or adapters.
+              "Flat mount" does not include calipers with integrated mount
+              plates or adapters such as Shimano BR-UR300 or Hope RX4. These
+              calipers are generally used without mount plates or adapters.
             </p>
           )}
           {caliper === CALIPER_POST && (
@@ -710,6 +1165,26 @@ const DiscBrakeAdapterFinder = () => {
               standard post mount calipers. Only use cup washers for SRAM CPS
               (OEM/lower-end) calipers.
             </p>
+          )}
+          {mount.startsWith("IS") && caliper === CALIPER_POST && (
+            <>
+              <p>
+                IS exceptions:
+                <ul>
+                  <li>
+                    Pre-2014 Fox 40 Downhill Forks (~IS200F). Use a virtual
+                    rotor size of 160mm (size down 40-45mm).
+                  </li>
+                  <li>
+                    PVD StepDown Rear (~IS140R). Size virtual rotor up 20mm.
+                  </li>
+                  <li>All-City Nature Boy has a proprietary adapter.</li>
+                  <li>
+                    Surly Troll/Ogre/ECR/Pugsley has a proprietary adapter.
+                  </li>
+                </ul>
+              </p>
+            </>
           )}
           <Results mount={mount} caliper={caliper} rotor={rotor} />
         </>
