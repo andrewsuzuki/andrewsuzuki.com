@@ -4,19 +4,6 @@ import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 
-// TODO don't allow stacking FM140R-FM160R on top of A.S. Solutions
-// TODO adapter descriptions/notes?
-
-// Other notes:
-// - Show under results:
-//   - Brief differences between Shimano/Magura/SRAM/Avid/Tektro-TRP
-// - Show under results when mount=FM and caliper=FM:
-//   - "Flat mount" doesn't include Shimano BR-UR300 or Hope RX4 with integrated mount plates / 160mm adapters
-// - Show under results when mount=PM/IS and caliper=FM:
-//   - AS Solutions flat mount adapter compatibility is based on specific frame and caliper geometry
-// - Show under results when caliper=PM:
-//   - For SRAM/Avid adapters, omit cup washers unless it's a CPS (lower-end) caliper
-
 const MAX_ADAPTERS = 2
 
 const SIDE_FRONT = "front"
@@ -30,6 +17,7 @@ const MOUNT_PM180 = "PM180"
 const MOUNT_PM185 = "PM185" // output-only
 const MOUNT_PM200 = "PM200" // output-only
 const MOUNT_PM203 = "PM203" // output-only
+const MOUNT_PM220 = "PM220" // output-only
 const MOUNT_FM140F = "FM140F"
 const MOUNT_FM140R = "FM140R"
 const MOUNT_FM160R = "FM160R" // output-only
@@ -43,6 +31,7 @@ const ROTOR_180 = 180
 const ROTOR_185 = 185
 const ROTOR_200 = 200
 const ROTOR_203 = 203
+const ROTOR_220 = 220
 
 const mountNames = {
   [MOUNT_IS160F]: "IS Front",
@@ -54,6 +43,7 @@ const mountNames = {
   [MOUNT_PM185]: "Post Mount 185",
   [MOUNT_PM200]: "Post Mount 200",
   [MOUNT_PM203]: "Post Mount 203",
+  [MOUNT_PM220]: "Post Mount 220",
   [MOUNT_FM140F]: "Flat Mount 140 Front",
   [MOUNT_FM140R]: "Flat Mount 140 Rear",
   [MOUNT_FM160R]: "Flat Mount 160 Rear",
@@ -68,6 +58,7 @@ const allRotors = [
   ROTOR_185,
   ROTOR_200,
   ROTOR_203,
+  ROTOR_220,
 ]
 
 function caliperMount(caliper, rotor) {
@@ -89,6 +80,8 @@ function caliperMount(caliper, rotor) {
         return MOUNT_PM200
       case ROTOR_203:
         return MOUNT_PM203
+      case ROTOR_220:
+        return MOUNT_PM220
       default:
         break
     }
@@ -119,26 +112,76 @@ function deriveSide(mount) {
   }
 }
 
+const BRAND_AVID_SRAM = "Avid/SRAM"
+const BRAND_SRAM = "SRAM"
+const BRAND_SHIMANO = "Shimano"
+const BRAND_TRP = "TRP"
+const BRAND_PROMAX = "Promax"
+const BRAND_HOPE = "Hope"
+const BRAND_TEKTRO = "Tektro"
+const BRAND_MAGURA = "Magura"
+const BRAND_HAYES = "Hayes"
+const BRAND_PAUL = "Paul"
+const BRAND_CAMPAGNOLO = "Campagnolo"
+const BRAND_ASSOLUTION = "A.S. Solutions"
+// const BRAND_KCNC = "KCNC"
+// const BRAND_NSB = "North Shore Billet"
+// const BRAND_PMW = "Paragon Machine Works"
+
 const allAdapters = [
+  // Avid/SRAM
   {
-    brand: "Avid",
-    model: "IS160F-PM180 or IS160R-PM160",
+    brand: BRAND_AVID_SRAM,
+    model: "0mm IS",
+    mpn: "00.5318.009.000",
+    upc: "710845714429",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      [MOUNT_IS160R, MOUNT_PM140],
+    ],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model: "20mm IS",
+    mpn: "00.5318.009.001",
+    upc: "710845714528",
     configs: [
       [MOUNT_IS160F, MOUNT_PM180],
       [MOUNT_IS160R, MOUNT_PM160],
     ],
   },
   {
-    brand: "Avid",
-    model: "IS160F-PM200 or IS160R-PM180",
+    brand: BRAND_AVID_SRAM,
+    model: "30mm IS",
+    mpn: "00.5318.009.002",
+    upc: "710845714535",
+    configs: [[MOUNT_IS160R, MOUNT_PM170]],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model: "40mm IS",
+    mpn: "00.5318.009.003",
+    upc: "710845714542",
     configs: [
       [MOUNT_IS160F, MOUNT_PM200],
       [MOUNT_IS160R, MOUNT_PM180],
     ],
   },
   {
-    brand: "Avid",
-    model: "PM +20mm",
+    brand: BRAND_AVID_SRAM,
+    model: "60mm IS",
+    mpn: "00.5318.009.004",
+    upc: "710845714566",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM220], // unsupported (guess)
+      [MOUNT_IS160R, MOUNT_PM200],
+    ],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model: "20mm Post-Mount",
+    mpn: "00.5318.007.004",
+    upc: "710845768231",
     configs: [
       [MOUNT_PM140, MOUNT_PM160],
       [MOUNT_PM160, MOUNT_PM180],
@@ -146,30 +189,173 @@ const allAdapters = [
     ],
   },
   {
-    brand: "Shimano",
-    model: "FM Mount Plate 140 or 160",
+    brand: BRAND_AVID_SRAM,
+    model: "30mm Post-Mount",
+    mpn: "00.5318.007.000",
+    upc: "710845714429",
+    configs: [[MOUNT_PM140, MOUNT_PM170]],
+  },
+  {
+    brand: BRAND_AVID_SRAM,
+    model: "40mm Post-Mount",
+    mpn: "00.5318.007.003",
+    upc: "710845714450",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM180],
+      [MOUNT_PM160, MOUNT_PM200],
+      [MOUNT_PM180, MOUNT_PM220], // unsupported (guess)
+    ],
+  },
+  // TODO Four Avid spacer kits
+
+  // SRAM (non-Avid)
+  {
+    brand: BRAND_SRAM,
+    model: "Post Bracket 20P (Stainless Rainbow Bolts)",
+    mpn: "00.5318.007.005",
+    upc: "710845843518",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM160],
+      [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM200],
+    ],
+  },
+  {
+    brand: BRAND_SRAM,
+    model: "Post Bracket 40P (Stainless Rainbow Bolts)",
+    mpn: "00.5318.007.006",
+    upc: "710845843518",
+    configs: [
+      [MOUNT_PM140, MOUNT_PM180],
+      [MOUNT_PM160, MOUNT_PM200],
+      [MOUNT_PM180, MOUNT_PM220], // unsupported (guess)
+    ],
+  },
+  {
+    brand: BRAND_SRAM,
+    model: "0/20mm Flat Mount, Fits 140 and 160mm Front Rotors",
+    mpn: "00.5318.018.000",
+    upc: "710845780622",
     configs: [
       [MOUNT_FM140F, MOUNT_FM140R],
       [MOUNT_FM140F, MOUNT_FM160R],
     ],
   },
   {
-    brand: "A.S. Solutions",
+    brand: BRAND_SRAM,
+    model: "20mm Flat Mount, Fits 160mm Rear Rotors",
+    mpn: "00.5318.018.001",
+    upc: "710845780646",
+    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+  },
+
+  // Shimano
+  // TODO more
+  {
+    brand: BRAND_SHIMANO,
+    model: "Front 140/160mm Mount Plate",
+    mpn: "Y8N230000",
+    upc: "689228353657",
+    configs: [
+      [MOUNT_FM140F, MOUNT_FM140R],
+      [MOUNT_FM140F, MOUNT_FM160R],
+    ],
+  },
+  {
+    brand: BRAND_SHIMANO,
+    model: "R160D/D",
+    mpn: "ISMMAR160DDA",
+    upc: "689228561601",
+    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+  },
+
+  // TODO TRP
+  // TODO Promax
+  // TODO Hope
+
+  // Tektro
+  {
+    brand: BRAND_TEKTRO,
+    model: "Front 160mm Post Mount",
+    mpn: "ABAD000003",
+    upc: "4717592009200",
+    configs: [
+      [MOUNT_IS160F, MOUNT_PM160],
+      // [MOUNT_IS160R, MOUNT_PM140], // unsupported
+    ],
+  },
+  {
+    brand: BRAND_TEKTRO,
+    model: "Rear 160mm Post Mount",
+    mpn: "ABAD000015",
+    upc: "4717592009217",
+    configs: [
+      // [MOUNT_IS160F, MOUNT_PM180], // unsupported
+      [MOUNT_IS160R, MOUNT_PM160],
+    ],
+  },
+  {
+    brand: BRAND_TEKTRO,
+    model: "Rear 180mm",
+    mpn: "ABAD000020",
+    upc: "4717592010565",
+    configs: [
+      // [MOUNT_IS160F, MOUNT_PM200], // unsupported
+      [MOUNT_IS160R, MOUNT_PM180],
+    ],
+  },
+  {
+    brand: BRAND_TEKTRO,
+    model: "Front 203mm",
+    mpn: "ABAD000016",
+    upc: "4717592010169",
+    configs: [[MOUNT_IS160F, MOUNT_PM203]],
+  },
+
+  // TODO Magura
+  // TODO Hayes
+  // TODO Paul
+
+  // Campagnolo
+  {
+    brand: BRAND_CAMPAGNOLO,
+    model: "H11 Flat Mount Disc Adaptor Kit for 140mm to 160mm Rear Caliper",
+    mpn: "AC18-DBADR6",
+    upc: "8050046167399",
+    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+  },
+
+  // A.S. Solutions
+  {
+    brand: BRAND_ASSOLUTION,
+    model: "140PM-140FM",
+    mpn: "ASS0003",
+    upc: null,
+    configs: [[MOUNT_PM140, MOUNT_FM140R]],
+  },
+  {
+    brand: BRAND_ASSOLUTION,
+    model: "140PM-160FM",
+    mpn: "ASS0005",
+    upc: null,
+    configs: [[MOUNT_PM140, MOUNT_FM160R]],
+  },
+  {
+    brand: BRAND_ASSOLUTION,
+    model: "160PM-160FM",
+    mpn: "ASS0004",
+    upc: null,
+    configs: [[MOUNT_PM160, MOUNT_FM160R]],
+  },
+  {
+    brand: BRAND_ASSOLUTION,
     model: "IS-FM",
+    mpn: "ASS0007",
+    upc: null,
     configs: [
       [MOUNT_IS160F, MOUNT_FM180R],
       [MOUNT_IS160R, MOUNT_FM160R],
     ],
-  },
-  {
-    brand: "KCNC",
-    model: "Flat to Post, Front 140mm",
-    configs: [[MOUNT_FM140F, MOUNT_PM140]],
-  },
-  {
-    brand: "KCNC",
-    model: "Flat to Post, Rear 160mm",
-    configs: [[MOUNT_FM140R, MOUNT_PM160]],
   },
 ]
 
@@ -232,8 +418,24 @@ function allAdapterPaths(from, to) {
 
   pathsInner(from)
 
-  // Sort by path length ascending
-  return paths.sort((a, b) => a.length - b.length)
+  return (
+    paths
+      .filter(path =>
+        path.length < 3
+          ? true
+          : !(
+              // Don't allow stacking with (!FM -> FM) (e.g. A.S. Solutions)
+              (
+                (!path[0].startsWith("FM") && path[1].startsWith("FM")) ||
+                (!path[1].startsWith("FM") && path[2].startsWith("FM")) ||
+                // Don't allow stacking multiple PM-PM adapters
+                path.every(p => p.startsWith("PM"))
+              )
+            )
+      )
+      // Sort by path length ascending
+      .sort((a, b) => a.length - b.length)
+  )
 }
 
 function pathToAdapters(path) {
@@ -250,13 +452,35 @@ function pathToAdapters(path) {
 
 const AdapterList = ({ adapters }) => {
   return (
-    <ul>
-      {adapters.map(({ brand, model }) => (
-        <li key={`${brand}%%%${model}`}>
-          {brand} {model}
-        </li>
+    <div>
+      {adapters.map(({ brand, model, mpn, upc }) => (
+        <div key={`${brand}%%%${model}`} style={{ margin: "1em 0" }}>
+          <strong>{brand}</strong> {model}
+          {brand === BRAND_ASSOLUTION && (
+            <>
+              <br />
+              <small>
+                {BRAND_ASSOLUTION} adapters are not compatible with all
+                frame/fork and caliper geometries. Print out one of their
+                templates to check.
+              </small>
+            </>
+          )}
+          {mpn && (
+            <>
+              <br />
+              <small>Manufacturer's Part Number: {mpn}</small>
+            </>
+          )}
+          {upc && (
+            <>
+              <br />
+              <small>UPC: {upc}</small>
+            </>
+          )}
+        </div>
       ))}
-    </ul>
+    </div>
   )
 }
 
@@ -266,7 +490,11 @@ const Results = ({ mount, caliper, rotor }) => {
   const side = deriveSide(mount)
 
   if (paths.length === 0) {
-    return <p>No adapters found.</p>
+    return (
+      <p>
+        <em>No adapters found.</em>
+      </p>
+    )
   }
 
   const hasMultiplePaths = paths.length > 1
@@ -300,7 +528,7 @@ const Results = ({ mount, caliper, rotor }) => {
                 <h3>
                   {hasMultiplePaths && `${i + 1}. `}Solution With Single Adapter
                 </h3>
-                <p>Pick one adapter:</p>
+                {adapters.length > 1 && <p>Pick one adapter:</p>}
                 <AdapterList adapters={adapters} />
               </div>
             )
@@ -453,6 +681,36 @@ const DiscBrakeAdapterFinder = () => {
       {isCompleted && (
         <>
           <h2>Results</h2>
+          <p>
+            Generally, try to use the same brand adapter(s) as your caliper. In
+            practice, most brands are compatible. Most adapter and caliper
+            brands follow Shimano's standards fairly closely. The major
+            exception to this is Avid/SRAM. Final post mount caliper position
+            using Avid/SRAM adapters with Shimano and other calipers can be off
+            by as much as ~1mm. See{" "}
+            <a
+              href="http://www.peterverdone.com/disc-brake-mounting-systems/"
+              title="Disc Brake Mounting Systems"
+            >
+              this page
+            </a>{" "}
+            for details.
+          </p>
+          {mount.startsWith("FM") && caliper === CALIPER_FLAT && (
+            <p>
+              "Flat mount" does <strong>not</strong> include calipers with
+              integrated mount plates or adapters such as Shimano BR-UR300 or
+              Hope RX4. These calipers are generally used without mount plates
+              or adapters.
+            </p>
+          )}
+          {caliper === CALIPER_POST && (
+            <p>
+              For Avid/SRAM adapters, do not use the supplied cup washers for
+              standard post mount calipers. Only use cup washers for SRAM CPS
+              (OEM/lower-end) calipers.
+            </p>
+          )}
           <Results mount={mount} caliper={caliper} rotor={rotor} />
         </>
       )}
