@@ -4,8 +4,6 @@ import Layout, { Content } from "../components/Layout"
 import SEO from "../components/SEO"
 import PageTitle from "../components/PageTitle"
 
-// TODO Unsupported adapters in UI
-
 const MAX_ADAPTERS = 2
 
 const SIDE_FRONT = "front"
@@ -135,6 +133,11 @@ const BRAND_ASSOLUTION = "A.S. Solutions"
 const BRAND_NSB = "North Shore Billet"
 // const BRAND_KCNC = "KCNC"
 
+const UNOFFICIAL_DEFAULT = "Unofficial adaptation, but likely to work."
+
+const unofficialSubstituteFor = officialName =>
+  `Unofficial adaptation. If possible, use ${officialName}.`
+
 const allAdapters = [
   // 1.5mm Washers
   {
@@ -192,8 +195,8 @@ const allAdapters = [
     mpn: "00.5318.009.004",
     upc: "710845714566",
     configs: [
-      [MOUNT_IS160F, MOUNT_PM220], // unsupported (guess)
       [MOUNT_IS160R, MOUNT_PM200],
+      [MOUNT_IS160F, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -222,7 +225,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM180],
       [MOUNT_PM160, MOUNT_PM200],
-      [MOUNT_PM180, MOUNT_PM220], // unsupported (guess)
+      [MOUNT_PM180, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -288,7 +291,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM180],
       [MOUNT_PM160, MOUNT_PM200],
-      [MOUNT_PM180, MOUNT_PM220], // unsupported (guess)
+      [MOUNT_PM180, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -324,7 +327,7 @@ const allAdapters = [
     upc: "689228108127",
     configs: [
       [MOUNT_IS160F, MOUNT_PM203],
-      // [MOUNT_IS160R, MOUNT_PM183], // unsupported, but might work
+      [MOUNT_IS160R, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Shimano doesn't have 183mm rotors)
     ],
   },
   {
@@ -341,7 +344,7 @@ const allAdapters = [
     upc: "689228108158",
     configs: [
       [MOUNT_IS160R, MOUNT_PM160],
-      // [MOUNT_IS160F, MOUNT_PM180], // unsupported, use SM-MA-F180P/S
+      [MOUNT_IS160F, MOUNT_PM180, unofficialSubstituteFor("SM-MA-F180P/S")],
     ],
   },
   {
@@ -396,7 +399,7 @@ const allAdapters = [
     upc: "689228108103",
     configs: [
       [MOUNT_IS160F, MOUNT_PM160],
-      // [MOUNT_IS160R, MOUNT_PM140], // unsupported, use SM-MA90-R140P/S
+      [MOUNT_IS160R, MOUNT_PM140, unofficialSubstituteFor("SM-MA90-R140P/S")],
     ],
   },
   {
@@ -406,7 +409,7 @@ const allAdapters = [
     upc: "689228108141",
     configs: [
       [MOUNT_IS160F, MOUNT_PM180],
-      // [MOUNT_IS160R, MOUNT_PM160], // unsupported, use SM-MA-R160P/S
+      [MOUNT_IS160R, MOUNT_PM160, unofficialSubstituteFor("SM-MA-R160P/S")],
     ],
   },
   {
@@ -416,7 +419,7 @@ const allAdapters = [
     upc: "689228108165",
     configs: [
       [MOUNT_IS160R, MOUNT_PM180],
-      // [MOUNT_IS160F, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+      [MOUNT_IS160F, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Shimano doesn't have 200mm rotors)
     ],
   },
   {
@@ -426,7 +429,7 @@ const allAdapters = [
     upc: "689228430457",
     configs: [
       [MOUNT_IS160R, MOUNT_PM160],
-      // [MOUNT_IS160F, MOUNT_PM180], // unsupported, use SM-MA90-F180P/S
+      [MOUNT_IS160F, MOUNT_PM180, unofficialSubstituteFor("SM-MA90-F180P/S")],
     ],
   },
   {
@@ -436,7 +439,7 @@ const allAdapters = [
     upc: "689228887435",
     configs: [
       [MOUNT_PM180, MOUNT_PM203],
-      // [MOUNT_PM160, MOUNT_PM183], // unsupported, but might work
+      [MOUNT_PM160, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Shimano doesn't have 183mm rotors)
     ],
   },
   {
@@ -446,8 +449,8 @@ const allAdapters = [
     upc: "689228595576",
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
-      // [MOUNT_PM140, MOUNT_PM160], // unsupported
-      // [MOUNT_PM180, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Shimano doesn't have 200mm rotors)
     ],
   },
   {
@@ -457,7 +460,7 @@ const allAdapters = [
     upc: "689228430440",
     configs: [
       [MOUNT_IS160R, MOUNT_PM180],
-      // [MOUNT_IS160F, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+      [MOUNT_IS160F, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Shimano doesn't have 200mm rotors)
     ],
   },
   {
@@ -467,7 +470,7 @@ const allAdapters = [
     upc: "689228430488",
     configs: [
       [MOUNT_IS160F, MOUNT_PM160],
-      // [MOUNT_IS160R, MOUNT_PM140], // unsupported, use SM-MA90-R140P/S
+      [MOUNT_IS160R, MOUNT_PM140, unofficialSubstituteFor("SM-MA90-R140P/S")],
     ],
   },
   {
@@ -477,7 +480,7 @@ const allAdapters = [
     upc: "689228430495",
     configs: [
       [MOUNT_IS160R, MOUNT_PM140],
-      // [MOUNT_IS160F, MOUNT_PM160], // unsupported, use SM-MA90-F160P/S
+      [MOUNT_IS160F, MOUNT_PM160, unofficialSubstituteFor("SM-MA90-F160P/S")],
     ],
   },
   {
@@ -487,8 +490,8 @@ const allAdapters = [
     upc: "192790506128",
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
-      // [MOUNT_PM140, MOUNT_PM160], // unsupported
-      // [MOUNT_PM180, MOUNT_PM200], // unsupported (Shimano doesn't have 200mm rotors)
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Shimano doesn't have 200mm rotors)
     ],
   },
   {
@@ -532,7 +535,7 @@ const allAdapters = [
     upc: "4717592029239",
     configs: [
       [MOUNT_PM180, MOUNT_PM203],
-      [MOUNT_PM160, MOUNT_PM183], // unsupported (guess)
+      [MOUNT_PM160, MOUNT_PM183, UNOFFICIAL_DEFAULT], // unsupported
     ],
   },
   {
@@ -543,7 +546,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM160],
       [MOUNT_PM160, MOUNT_PM180],
-      // [MOUNT_PM180, MOUNT_PM200], // unsupported (TRP doesn't have 200mm rotors)
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (TRP doesn't have 200mm rotors)
     ],
   },
   {
@@ -610,7 +613,7 @@ const allAdapters = [
     upc: "657993207178",
     configs: [
       [MOUNT_IS160R, MOUNT_PM180],
-      [MOUNT_IS160F, MOUNT_PM200], // unsupported
+      [MOUNT_IS160F, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Promax doesn't have 200mm rotors)
     ],
   },
   {
@@ -622,7 +625,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
       [MOUNT_PM140, MOUNT_PM160],
-      [MOUNT_PM180, MOUNT_PM200], // unsupported
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Promax doesn't have 200mm rotors)
     ],
   },
   {
@@ -692,7 +695,7 @@ const allAdapters = [
     upc: "657993207352",
     configs: [
       [MOUNT_PM160, MOUNT_PM203],
-      [MOUNT_PM140, MOUNT_PM183], // unsupported
+      [MOUNT_PM140, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Promax doesn't have 183mm rotors)
     ],
   },
 
@@ -704,8 +707,8 @@ const allAdapters = [
     upc: "5055168088419",
     configs: [
       [MOUNT_PM160, MOUNT_PM200],
-      [MOUNT_PM140, MOUNT_PM180], // unsupported
-      [MOUNT_PM180, MOUNT_PM220], // unsupported
+      [MOUNT_PM140, MOUNT_PM180, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -729,8 +732,8 @@ const allAdapters = [
     upc: "5055168088389",
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
-      [MOUNT_PM140, MOUNT_PM160], // unsupported
-      [MOUNT_PM180, MOUNT_PM200], // unsupported
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -750,7 +753,7 @@ const allAdapters = [
     upc: "5055168037325",
     configs: [
       [MOUNT_PM160, MOUNT_PM203],
-      [MOUNT_PM140, MOUNT_PM183], // unsupported
+      [MOUNT_PM140, MOUNT_PM183, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -767,7 +770,7 @@ const allAdapters = [
     upc: "5055168033716",
     configs: [
       [MOUNT_IS160R, MOUNT_PM160],
-      [MOUNT_IS160F, MOUNT_PM180], // unsupported
+      [MOUNT_IS160F, MOUNT_PM180, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -777,7 +780,7 @@ const allAdapters = [
     upc: "5055168037363",
     configs: [
       [MOUNT_PM160, MOUNT_PM183],
-      [MOUNT_PM180, MOUNT_PM203], // unsupported
+      [MOUNT_PM180, MOUNT_PM203, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -806,7 +809,7 @@ const allAdapters = [
     upc: "4717592009200",
     configs: [
       [MOUNT_IS160F, MOUNT_PM160],
-      // [MOUNT_IS160R, MOUNT_PM140], // unsupported
+      [MOUNT_IS160R, MOUNT_PM140, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -816,7 +819,7 @@ const allAdapters = [
     upc: "4717592009217",
     configs: [
       [MOUNT_IS160R, MOUNT_PM160],
-      // [MOUNT_IS160F, MOUNT_PM180], // unsupported
+      [MOUNT_IS160F, MOUNT_PM180, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -826,7 +829,7 @@ const allAdapters = [
     upc: "4717592010565",
     configs: [
       [MOUNT_IS160R, MOUNT_PM180],
-      // [MOUNT_IS160F, MOUNT_PM200], // unsupported
+      [MOUNT_IS160F, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Tektro doesn't have 200mm rotors)
     ],
   },
   {
@@ -852,7 +855,7 @@ const allAdapters = [
     upc: "4055184004968",
     configs: [
       [MOUNT_PM180, MOUNT_PM203],
-      [MOUNT_PM160, MOUNT_PM183], // unsupported (guess)
+      [MOUNT_PM160, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Magura doesn't make 183mm rotors)
     ],
   },
   {
@@ -875,7 +878,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM180],
       [MOUNT_PM180, MOUNT_PM220],
-      [MOUNT_PM160, MOUNT_PM200], // unsupported
+      [MOUNT_PM160, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Magura doesn't make 200mm rotors)
     ],
   },
   {
@@ -885,7 +888,7 @@ const allAdapters = [
     upc: "4055184026878",
     configs: [
       [MOUNT_PM180, MOUNT_PM203],
-      [MOUNT_PM160, MOUNT_PM183], // unsupported
+      [MOUNT_PM160, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Magura doesn't make 183mm rotors)
     ],
   },
   {
@@ -895,8 +898,8 @@ const allAdapters = [
     upc: "4055184010266",
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
-      [MOUNT_PM140, MOUNT_PM160], // unsupported
-      // [MOUNT_PM180, MOUNT_PM200], // unsupported (Magura doesn't have 200mm rotors)
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Magura doesn't make 200mm rotors)
     ],
   },
   {
@@ -913,7 +916,7 @@ const allAdapters = [
     upc: "4055184010273",
     configs: [
       [MOUNT_IS160R, MOUNT_PM180],
-      // [MOUNT_IS160F, MOUNT_PM200], // unsupported (Magura doesn't have 200mm rotors)
+      [MOUNT_IS160F, MOUNT_PM200, UNOFFICIAL_DEFAULT], // (Magura doesn't have 200mm rotors)
     ],
   },
   {
@@ -933,7 +936,7 @@ const allAdapters = [
     upc: "844171001035",
     configs: [
       [MOUNT_IS160F, MOUNT_PM180],
-      // [MOUNT_IS160R, MOUNT_PM160], // unsupported, use 98-15073
+      [MOUNT_IS160R, MOUNT_PM160, unofficialSubstituteFor("Hayes 98-15073")],
     ],
   },
   {
@@ -955,7 +958,7 @@ const allAdapters = [
     upc: "844171057773",
     configs: [
       [MOUNT_PM180, MOUNT_PM203],
-      [MOUNT_PM160, MOUNT_PM183], // unsupported
+      [MOUNT_PM160, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Hayes doesn't make 183mm rotors)
     ],
   },
   {
@@ -966,8 +969,8 @@ const allAdapters = [
     upc: "844171036266",
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
-      [MOUNT_PM140, MOUNT_PM160], // unsupported
-      [MOUNT_PM180, MOUNT_PM200], // unsupported
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -999,7 +1002,7 @@ const allAdapters = [
     upc: "844171000427",
     configs: [
       [MOUNT_IS160F, MOUNT_PM203],
-      [MOUNT_IS160R, MOUNT_PM183], // unsupported
+      [MOUNT_IS160R, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Hayes doesn't make 183mm rotors)
     ],
   },
   {
@@ -1010,7 +1013,7 @@ const allAdapters = [
     upc: "844171000441",
     configs: [
       [MOUNT_PM160, MOUNT_PM203],
-      [MOUNT_PM140, MOUNT_PM183], // unsupported
+      [MOUNT_PM140, MOUNT_PM183, UNOFFICIAL_DEFAULT], // (Hayes doesn't make 183mm rotors)
     ],
   },
   {
@@ -1020,7 +1023,7 @@ const allAdapters = [
     upc: "844171000458",
     configs: [
       [MOUNT_IS160R, MOUNT_PM160],
-      [MOUNT_IS160F, MOUNT_PM180], // unsupported
+      [MOUNT_IS160F, MOUNT_PM180, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1070,7 +1073,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM160],
       [MOUNT_PM160, MOUNT_PM180],
-      // [MOUNT_PM180, MOUNT_PM200], // unsupported
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1081,7 +1084,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM180],
       [MOUNT_PM160, MOUNT_PM200],
-      // [MOUNT_PM180, MOUNT_PM220], // unsupported
+      [MOUNT_PM180, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1122,7 +1125,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM160],
       [MOUNT_PM160, MOUNT_PM180],
-      // [MOUNT_PM180, MOUNT_PM200], // unsupported
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1133,7 +1136,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM140, MOUNT_PM180],
       [MOUNT_PM160, MOUNT_PM200],
-      // [MOUNT_PM180, MOUNT_PM220], // unsupported
+      [MOUNT_PM180, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
 
@@ -1197,8 +1200,8 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_PM160, MOUNT_PM200],
-      [MOUNT_PM140, MOUNT_PM180], // unsupported
-      [MOUNT_PM180, MOUNT_PM220], // unsupported
+      [MOUNT_PM140, MOUNT_PM180, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM180, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1215,7 +1218,7 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_PM180, MOUNT_PM203],
-      [MOUNT_PM160, MOUNT_PM183], // unsupported
+      [MOUNT_PM160, MOUNT_PM183, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1225,8 +1228,8 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
-      [MOUNT_PM140, MOUNT_PM160], // unsupported
-      [MOUNT_PM200, MOUNT_PM220], // unsupported
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_DEFAULT],
+      [MOUNT_PM200, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1243,7 +1246,11 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_IS160R, MOUNT_PM140],
-      [MOUNT_IS160F, MOUNT_PM160], // unsupported
+      [
+        MOUNT_IS160F,
+        MOUNT_PM160,
+        unofficialSubstituteFor("North Shore Billet 1112864089"),
+      ],
     ],
   },
   {
@@ -1253,7 +1260,7 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_IS160R, MOUNT_PM160],
-      [MOUNT_IS160F, MOUNT_PM180], // unsupported
+      [MOUNT_IS160F, MOUNT_PM180, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1263,7 +1270,11 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_IS160F, MOUNT_PM160],
-      [MOUNT_IS160R, MOUNT_PM140], // unsupported
+      [
+        MOUNT_IS160R,
+        MOUNT_PM140,
+        unofficialSubstituteFor("North Shore Billet 1112864081"),
+      ],
     ],
   },
   {
@@ -1273,7 +1284,7 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_IS160R, MOUNT_PM180],
-      [MOUNT_IS160F, MOUNT_PM200], // unsupported
+      [MOUNT_IS160F, MOUNT_PM200, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1283,7 +1294,7 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_IS160R, MOUNT_PM183],
-      [MOUNT_IS160F, MOUNT_PM203], // unsupported
+      [MOUNT_IS160F, MOUNT_PM203, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1300,7 +1311,7 @@ const allAdapters = [
     upc: null,
     configs: [
       [MOUNT_IS160R, MOUNT_PM200],
-      [MOUNT_IS160F, MOUNT_PM220], // unsupported
+      [MOUNT_IS160F, MOUNT_PM220, UNOFFICIAL_DEFAULT],
     ],
   },
   {
@@ -1446,11 +1457,23 @@ function allAdapterPaths(from, to) {
     })
 }
 
+function matchAdapterConfigMessage(adapter, from, to) {
+  const matchedConfig = adapter.configs.find(([f, t]) => f === from && t === to)
+  return (matchedConfig && matchedConfig[2]) || null
+}
+
 function pathToAdapters(path) {
   const [from, to, ...restPath] = path
   switch (path.length) {
     case 2:
-      return [[...adapterLookup[from][to]].map(i => allAdapters[i])]
+      return [
+        [...adapterLookup[from][to]]
+          .map(i => allAdapters[i])
+          .map(adapter => ({
+            ...adapter,
+            matchedConfigMessage: matchAdapterConfigMessage(adapter, from, to),
+          })),
+      ]
     case 3:
     case 4:
       return pathToAdapters([from, to]).concat(
@@ -1462,9 +1485,10 @@ function pathToAdapters(path) {
 }
 
 const AdapterList = ({ adapters }) => {
+  // TODO sort adapters, putting those containing "unofficial" (case-insensitive) at the bottom
   return (
     <div>
-      {adapters.map(({ brand, model, mpn, upc }) => (
+      {adapters.map(({ brand, model, mpn, upc, matchedConfigMessage }) => (
         <div key={`${brand}%%%${model}`} style={{ margin: "1em 0" }}>
           <strong>{brand}</strong> {model}
           {brand === BRAND_ASSOLUTION && (
@@ -1477,16 +1501,26 @@ const AdapterList = ({ adapters }) => {
               </small>
             </>
           )}
+          {matchedConfigMessage && (
+            <>
+              <br />
+              <small>Note: {matchedConfigMessage}</small>
+            </>
+          )}
           {mpn && (
             <>
               <br />
-              <small>Manufacturer Part Number: {mpn}</small>
+              <small>
+                <em>Manufacturer Part Number</em>: {mpn}
+              </small>
             </>
           )}
           {upc && (
             <>
               <br />
-              <small>UPC: {upc}</small>
+              <small>
+                <em>UPC</em>: {upc}
+              </small>
             </>
           )}
         </div>
@@ -1721,6 +1755,44 @@ const DiscBrakeAdapterFinder = () => {
         </div>
       </form>
 
+      {mount && mount.startsWith("IS") && (
+        <>
+          <p>IS mount exceptions:</p>
+          <ul>
+            <li>
+              Pre-2014 Fox 40, Marzocchi Monster, and Marzocchi 888 Downhill
+              Forks (IS203F a.k.a. IS 8"). Use a virtual rotor size of 160mm
+              (size actual 200-205mm rotor down 40-45mm).
+            </li>
+            <li>
+              Pre-2010 Rockshox BoXXer has a proprietary adapter. Use Hayes
+              #98-15071 (UPC 844171000434) or DiscoBrakes #OBE-BMS920 (UPC
+              5055429913641) with 203mm rotor.
+            </li>
+            <li>
+              Forks with 20mm thru-axles (20x110mm <em>non-boost</em>) and a
+              normal IS mount should use Hayes #98-15282 (UPC 844171000472) to
+              offset the post mount inboard. See{" "}
+              <a
+                href="https://www.notubes.com/news/say-what-the-difference-between-20x110mm-thru-axles-and-20x110mm-boost-thru-axles-explained/"
+                title="20x110mm explained"
+              >
+                this article
+              </a>
+              .
+            </li>
+            <li>
+              PVD StepDown Rear (~IS140R) should size actual rotor up 20mm (e.g.
+              160mm actual rotor should use 180mm adapter).
+            </li>
+            <li>
+              Surly Troll/Ogre/ECR/Pugsley w/ adjustable dropouts have a
+              proprietary adapter.
+            </li>
+            <li>All-City Nature Boy has a proprietary adapter.</li>
+          </ul>
+        </>
+      )}
       {isCompleted && (
         <>
           <h2>Results</h2>
@@ -1755,48 +1827,11 @@ const DiscBrakeAdapterFinder = () => {
           {caliper === CALIPER_POST && (
             <p>
               If you have an Avid/SRAM CPS caliper (found on OEM and lower-end
-              bikes), you must purchase an Avid/SRAM adapter. For all Avid/SRAM
-              adapters (CPS <em>or</em> standard), consult Avid/SRAM's manual to
-              determine washer order (if any are required at all).
+              bikes), you must purchase an Avid/SRAM adapter for its cup washers
+              that bring it to the correct position. For all Avid/SRAM adapters
+              (CPS <em>or</em> standard), consult Avid/SRAM's manual to
+              determine cup washer order (if any are required at all).
             </p>
-          )}
-          {mount.startsWith("IS") && caliper === CALIPER_POST && (
-            <>
-              <p>IS mount exceptions:</p>
-              <ul>
-                <li>
-                  Pre-2014 Fox 40, Marzocchi Monster, and Marzocchi 888 Downhill
-                  Forks (IS203F a.k.a. IS 8"). Use a virtual rotor size of 160mm
-                  (size actual 200-205mm rotor down 40-45mm).
-                </li>
-                <li>
-                  Pre-2010 Rockshox BoXXer has a proprietary adapter. Use Hayes
-                  #98-15071 (UPC 844171000434) or DiscoBrakes #OBE-BMS920 (UPC
-                  5055429913641) with 203mm rotor.
-                </li>
-                <li>
-                  Forks with 20mm thru-axles (20x110mm <em>non-boost</em>) and a
-                  normal IS mount should use Hayes #98-15282 (UPC 844171000472)
-                  to offset the post mount inboard. See{" "}
-                  <a
-                    href="https://www.notubes.com/news/say-what-the-difference-between-20x110mm-thru-axles-and-20x110mm-boost-thru-axles-explained/"
-                    title="20x110mm explained"
-                  >
-                    this article
-                  </a>
-                  .
-                </li>
-                <li>
-                  PVD StepDown Rear (~IS140R) should size actual rotor up 20mm
-                  (e.g. 160mm actual rotor should use 180mm adapter).
-                </li>
-                <li>
-                  Surly Troll/Ogre/ECR/Pugsley w/ adjustable dropouts have a
-                  proprietary adapter.
-                </li>
-                <li>All-City Nature Boy has a proprietary adapter.</li>
-              </ul>
-            </>
           )}
           <Results mount={mount} caliper={caliper} rotor={rotor} />
         </>
