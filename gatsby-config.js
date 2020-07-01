@@ -75,7 +75,7 @@ module.exports = {
               return allMdx.edges.map(edge => {
                 const postUrl = url.resolve(
                   site.siteMetadata.siteUrl,
-                  edge.node.fields.slug
+                  edge.node.fields.slugWithPath.path
                 )
 
                 // NOTE excerpt was used for description, but now I'm
@@ -134,7 +134,9 @@ module.exports = {
                     node {
                       mdxAST
                       fields {
-                        slug
+                        slugWithPath {
+                          path
+                        }
                         tagsWithPaths {
                           tag
                         }
