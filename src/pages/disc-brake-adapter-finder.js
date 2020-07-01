@@ -1737,6 +1737,24 @@ const MountOption = ({ mount, ...restProps }) => (
   </option>
 )
 
+const Expander = ({ title, children }) => {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <button
+        className="text-button"
+        onClick={e => {
+          e.preventDefault()
+          setOpen(!open)
+        }}
+      >
+        {title}
+      </button>
+      {open && children}
+    </>
+  )
+}
+
 const DiscBrakeAdapterFinder = () => {
   const [mount, setMount] = useState(null)
   const [caliper, setCaliper] = useState(null)
@@ -1807,7 +1825,21 @@ const DiscBrakeAdapterFinder = () => {
                 <MountOption mount={MOUNT_PM203} />
               </optgroup>
             </select>
-          </label>
+          </label>{" "}
+          <Expander title={<small>Which post mount do I have?</small>}>
+            <p>
+              Measure the distance from the center of the wheel's axle to the
+              center of the closest post mount hole face (projected to the YZ
+              plane, not direct, i.e. your ruler must not be rotated toward the
+              center of the frame).
+            </p>
+            <ul>
+              <li>Post Mount 140: ~47.5mm</li>
+              <li>Post Mount 160: ~56.3mm</li>
+              <li>Post Mount 180: ~65.5mm</li>
+              <li>Post Mount 203: ~76.3mm</li>
+            </ul>
+          </Expander>
         </div>
         <div className="field">
           <label htmlFor="dbaf-caliper">

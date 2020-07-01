@@ -1,7 +1,33 @@
 @import "./include-media.scss";
 
+$body-font-family: TimesNewRoman, "Times New Roman", Times, Baskerville, Georgia,
+  serif;
+$heading-font-family: sans-serif;
+$form-font-family: sans-serif;
 $lightgray: rgb(221, 221, 221);
 $lightyellow: lightyellow;
+$blue: rgb(0, 0, 238); // chrome link default
+$red: rgb(255, 0, 0); // chrome link active default
+$purple: rgb(85, 26, 139); // chrome link visited default
+$link-color: $blue;
+$link-active-color: $red;
+$link-visited-color: $purple;
+
+@mixin link-color-behavior {
+  color: $link-color;
+
+  &:active {
+    color: $link-active-color;
+  }
+
+  &:visited {
+    color: $link-visited-color;
+
+    &:active {
+      color: $link-active-color;
+    }
+  }
+}
 
 /* Reset */
 
@@ -44,6 +70,14 @@ img {
 
 /* Styles */
 
+body {
+  font-family: $body-font-family;
+}
+
+a {
+  @include link-color-behavior();
+}
+
 h1,
 h2,
 h3,
@@ -51,11 +85,15 @@ h4,
 h5,
 h6 {
   font-weight: bold;
-  font-family: sans-serif;
+  font-family: $heading-font-family;
 
   a {
     text-decoration: none;
   }
+}
+
+input, textarea {
+  font-family: $form-font-family;
 }
 
 .container {
@@ -153,8 +191,10 @@ h6 {
       list-style: decimal inside;
     }
 
-    ul, ol {
-      ul, ol {
+    ul,
+    ol {
+      ul,
+      ol {
         margin-left: 1.5em;
       }
     }
@@ -527,6 +567,18 @@ textarea {
 
 .success-message {
   color: green;
+}
+
+.text-button {
+  display: inline-block;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: inherit;
+  font-family: $body-font-family;
+  background: transparent;
+
+  @include link-color-behavior();
 }
 
 .big-button-link {
