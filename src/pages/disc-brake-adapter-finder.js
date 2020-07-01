@@ -337,15 +337,15 @@ const allAdapters = [
   // Shimano
   {
     brand: BRAND_SHIMANO,
-    model: "SM-MA-F203S/S",
-    mpn: "ISMMAF203PPA [warning: multiple products with this code]",
+    model: "SM-MA-F203P/P",
+    mpn: "ISMMAF203PPA",
     upc: "689228108110",
     configs: [[MOUNT_PM160, MOUNT_PM203]],
   },
   {
     brand: BRAND_SHIMANO,
     model: "SM-MA-F203P/S",
-    mpn: "ISMMAF203PPA [warning: multiple products with this code]",
+    mpn: "ISMMAF203PSA",
     upc: "689228108127",
     configs: [
       [MOUNT_IS160F, MOUNT_PM203],
@@ -778,8 +778,8 @@ const allAdapters = [
     upc: "5055168088389",
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
+      [MOUNT_PM180, MOUNT_PM200],
       [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_PMPLUS20],
-      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_PMPLUS20],
     ],
   },
   {
@@ -996,9 +996,9 @@ const allAdapters = [
     mpn: "98-18639",
     upc: "844171001028",
     configs: [
-      [MOUNT_PM140, MOUNT_PM160],
       [MOUNT_PM160, MOUNT_PM180],
-      [MOUNT_PM180, MOUNT_PM200],
+      [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_PMPLUS20],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_PMPLUS20],
     ],
   },
   {
@@ -1279,7 +1279,7 @@ const allAdapters = [
     configs: [
       [MOUNT_PM160, MOUNT_PM180],
       [MOUNT_PM140, MOUNT_PM160, UNOFFICIAL_PMPLUS20],
-      [MOUNT_PM200, MOUNT_PM220, UNOFFICIAL_PMPLUS20],
+      [MOUNT_PM180, MOUNT_PM200, UNOFFICIAL_PMPLUS20],
     ],
   },
   {
@@ -1632,6 +1632,7 @@ const Results = ({ mount, caliper, rotor }) => {
             // No adapter
             return (
               <div key={path[0]}>
+                <hr />
                 <h3>No Adapter Required</h3>
                 <Path path={path} />
                 <p>
@@ -1652,6 +1653,7 @@ const Results = ({ mount, caliper, rotor }) => {
             const isWashers = pathHasWashers(path)
             return (
               <div key={`${path[0]}-${path[1]}`}>
+                <hr />
                 <h3>
                   {hasMultiplePaths && `${i + 1}. `}
                   {isWashers ? "Washers" : "Solution With Single Adapter"}
@@ -1677,6 +1679,7 @@ const Results = ({ mount, caliper, rotor }) => {
 
             return (
               <div key={`${path[0]}-${path[1]}-${path[2]}`}>
+                <hr />
                 <h3>
                   {hasMultiplePaths && `${i + 1}. `}Solution With{" "}
                   {hasOneAdapterAndWashers ? "Single Adapter" : "Two Adapters"}
@@ -1685,13 +1688,21 @@ const Results = ({ mount, caliper, rotor }) => {
                     `${intermediateName} Intermediate`}
                 </h3>
                 <Path path={path} />
-                <p>
-                  Uses two adapters with {intermediateName} as an intermediate
-                  step{hasWashers && ", and 1.5mm washers on top"}. Pick one of
-                  the lower adapters and one of the upper adapters for this
-                  brake. Not as ideal as a single adapter, but it should work.
-                </p>
-                <h4>{!hasOneAdapterAndWashers && "Lower "}Adapters</h4>
+                {hasOneAdapterAndWashers ? (
+                  <p>Pick one adapter (and use M6 1.5mm washers):</p>
+                ) : (
+                  <>
+                    <p>
+                      Uses two adapters with {intermediateName} as an
+                      intermediate step
+                      {hasWashers && ", and 1.5mm washers on top"}. Pick one of
+                      the lower adapters and one of the upper adapters for this
+                      brake. Not as ideal as a single adapter, but it should
+                      work.
+                    </p>
+                    <h4>Lower Adapters</h4>
+                  </>
+                )}
                 <AdapterList adapters={lowerAdapters} />
                 {!hasOneAdapterAndWashers && (
                   <>
@@ -1849,7 +1860,7 @@ const DiscBrakeAdapterFinder = () => {
               (size actual ~203mm rotor down ~43mm).
             </li>
             <li>
-              Pre-2010 Rockshox BoXXer has a proprietary adapter. Use Hayes
+              Pre-2009 Rockshox BoXXer has a proprietary adapter. Use Hayes
               #98-15071 (UPC 844171000434) or DiscoBrakes #OBE-BMS920 (UPC
               5055429913641) with 203mm rotor.
             </li>
