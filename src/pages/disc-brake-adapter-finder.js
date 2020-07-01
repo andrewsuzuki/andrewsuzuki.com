@@ -17,11 +17,11 @@ const MOUNT_PM180 = "PM180"
 const MOUNT_PM183 = "PM183" // output-only
 const MOUNT_PM185 = "PM185" // output-only
 const MOUNT_PM200 = "PM200" // output-only
-const MOUNT_PM203 = "PM203" // output-only
+const MOUNT_PM203 = "PM203"
 const MOUNT_PM220 = "PM220" // output-only
 const MOUNT_FM140F = "FM140F"
 const MOUNT_FM140R = "FM140R"
-const MOUNT_FM160R = "FM160R" // output-only
+const MOUNT_FM160R = "FM160R"
 const MOUNT_FM180R = "FM180R" // output-only
 const CALIPER_POST = "post"
 const CALIPER_FLAT = "flat"
@@ -151,6 +151,9 @@ const UNOFFICIAL_PMPLUS20 = `${UNOFFICIAL_DEFAULT} Serves as +20mm PM adapter.`
 const UNOFFICIAL_PMPLUS23 = `${UNOFFICIAL_DEFAULT} Serves as +23mm PM adapter.`
 const UNOFFICIAL_PMPLUS40 = `${UNOFFICIAL_DEFAULT} Serves as +40mm PM adapter.`
 const UNOFFICIAL_PMPLUS43 = `${UNOFFICIAL_DEFAULT} Serves as +43mm PM adapter.`
+const UNOFFICIAL_FMPLUS20 = `${UNOFFICIAL_DEFAULT} Serves as +20mm FM adapter.`
+const UNOFFICIAL_FMPMPLUS0 = `${UNOFFICIAL_DEFAULT} Serves as +0mm FM-PM adapter.`
+const UNOFFICIAL_FMPMPLUS20 = `${UNOFFICIAL_DEFAULT} Serves as +20mm FM-PM adapter.`
 
 const MESSAGE_ASSOLUTION_WARNING =
   `${BRAND_ASSOLUTION} adapters are not compatible ` +
@@ -331,7 +334,10 @@ const allAdapters = [
     model: "20mm Flat Mount, Fits 160mm Rear Rotors",
     mpn: "00.5318.018.001",
     upc: "710845780646",
-    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_FM160R],
+      [MOUNT_FM160R, MOUNT_FM180R, UNOFFICIAL_FMPLUS20],
+    ],
   },
 
   // Shimano
@@ -357,7 +363,10 @@ const allAdapters = [
     model: "SM-MA-R140P/D",
     mpn: "ISMMAR140PDH",
     upc: "689228874961",
-    configs: [[MOUNT_FM140R, MOUNT_PM140]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_PM140],
+      [MOUNT_FM160R, MOUNT_PM160, UNOFFICIAL_FMPMPLUS0],
+    ],
   },
   {
     brand: BRAND_SHIMANO,
@@ -378,14 +387,20 @@ const allAdapters = [
     model: "SM-MA-R160P/D",
     mpn: "ISMMAR160PDH",
     upc: "689228874978",
-    configs: [[MOUNT_FM140R, MOUNT_PM160]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_PM160],
+      [MOUNT_FM160R, MOUNT_PM180, UNOFFICIAL_FMPMPLUS20],
+    ],
   },
   {
     brand: BRAND_SHIMANO,
     model: "SM-MA-R160D/D",
     mpn: "ISMMAR160DDA",
     upc: "689228561601",
-    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_FM160R],
+      [MOUNT_FM160R, MOUNT_FM180R, UNOFFICIAL_FMPLUS20],
+    ],
   },
   {
     brand: BRAND_SHIMANO,
@@ -564,7 +579,10 @@ const allAdapters = [
     model: "Flat Mount Frame to Flat Mount Caliper for 160 mm Rotor",
     mpn: "ABAD000099",
     upc: "4717592021875",
-    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_FM160R],
+      [MOUNT_FM160R, MOUNT_FM180R, UNOFFICIAL_FMPLUS20],
+    ],
   },
   {
     brand: BRAND_TRP,
@@ -601,7 +619,10 @@ const allAdapters = [
       "Rear Flat Mount Frame to Post Mount Caliper Adaptor for 160 mm Rotors",
     mpn: "ABAD000075",
     upc: "4717592021882",
-    configs: [[MOUNT_FM140R, MOUNT_PM160]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_PM160],
+      [MOUNT_FM160R, MOUNT_PM180, UNOFFICIAL_FMPMPLUS20],
+    ],
   },
   {
     brand: BRAND_TRP,
@@ -609,7 +630,10 @@ const allAdapters = [
       "Rear Flat Mount Frame to Post Mount Caliper Adaptor for 140 mm Rotors",
     mpn: "ABAD000067",
     upc: "4717592021844",
-    configs: [[MOUNT_FM140R, MOUNT_PM140]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_PM140],
+      [MOUNT_FM160R, MOUNT_PM160, UNOFFICIAL_FMPMPLUS0],
+    ],
   },
   {
     brand: BRAND_TRP,
@@ -691,7 +715,10 @@ const allAdapters = [
       "Flat Mount Disc Brake Adapter for Flat Mount Frame, Fits 160mm Rear Rotors",
     mpn: "FM160R",
     upc: "657993207239",
-    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_FM160R],
+      [MOUNT_FM160R, MOUNT_FM180R, UNOFFICIAL_FMPLUS20],
+    ],
   },
   {
     brand: BRAND_PROMAX,
@@ -723,7 +750,10 @@ const allAdapters = [
       "Post Mount Disc Brake Adapter - For Flat Mount Frame, Fits 140mm Rear Rotors",
     mpn: "FP140R",
     upc: "657993207314",
-    configs: [[MOUNT_FM140R, MOUNT_PM140]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_PM140],
+      [MOUNT_FM160R, MOUNT_PM160, UNOFFICIAL_FMPMPLUS0],
+    ],
   },
   {
     brand: BRAND_PROMAX,
@@ -731,7 +761,10 @@ const allAdapters = [
       "Post Mount Disc Brake Adapter - For Flat Mount Frame, Fits 160mm Rear Rotors",
     mpn: "FP160R",
     upc: "657993207338",
-    configs: [[MOUNT_FM140R, MOUNT_PM160]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_PM160],
+      [MOUNT_FM160R, MOUNT_PM180, UNOFFICIAL_FMPMPLUS20],
+    ],
   },
   {
     brand: BRAND_PROMAX,
@@ -741,7 +774,7 @@ const allAdapters = [
     upc: "657993207352",
     configs: [
       [MOUNT_PM160, MOUNT_PM203],
-      [MOUNT_PM140, MOUNT_PM183, UNOFFICIAL_PMPLUS23], // (Promax doesn't have 183mm rotors)
+      [MOUNT_PM140, MOUNT_PM183, UNOFFICIAL_PMPLUS43], // (Promax doesn't have 183mm rotors)
     ],
   },
 
@@ -1196,7 +1229,10 @@ const allAdapters = [
     model: "H11 Flat Mount Disc Adaptor Kit for 140mm to 160mm Rear Caliper",
     mpn: "AC18-DBADR6",
     upc: "8050046167399",
-    configs: [[MOUNT_FM140R, MOUNT_FM160R]],
+    configs: [
+      [MOUNT_FM140R, MOUNT_FM160R],
+      [MOUNT_FM160R, MOUNT_FM180R, UNOFFICIAL_FMPLUS20],
+    ],
   },
 
   // A.S. Solutions
@@ -1504,6 +1540,15 @@ function allAdapterPaths(from, to) {
         return false
       }
 
+      // Don't allow FM140[F/R] -> FM160R -> FM180R
+      if (
+        path[0].startsWith("FM140") &&
+        path[1] === MOUNT_FM160R &&
+        path[2] === MOUNT_FM180R
+      ) {
+        return false
+      }
+
       return true
     })
     .sort((pathA, pathB) => {
@@ -1733,7 +1778,7 @@ const Results = ({ mount, caliper, rotor }) => {
 const MountOption = ({ mount, ...restProps }) => (
   <option value={mount} {...restProps}>
     {mountNames[mount]}
-    {mount.startsWith("FM") && mount.endsWith("R") && " Rear"}
+    {mount.startsWith("FM") && mount.endsWith("R") && " Rear/Standard"}
   </option>
 )
 
@@ -1817,6 +1862,7 @@ const DiscBrakeAdapterFinder = () => {
               <optgroup label="Flat Mount">
                 <MountOption mount={MOUNT_FM140F} />
                 <MountOption mount={MOUNT_FM140R} />
+                <MountOption mount={MOUNT_FM160R} />
               </optgroup>
               <optgroup label="Post Mount">
                 <MountOption mount={MOUNT_PM140} />
@@ -1920,9 +1966,40 @@ const DiscBrakeAdapterFinder = () => {
           </ul>
         </>
       )}
+      {mount === MOUNT_FM160R && (
+        <>
+          <p>
+            As of 2020, Flat Mount 160 is only found on a few setups. You can
+            use a 160mm rotor with no adapter, or a 180mm rotor with a flat
+            mount [rear] 140-to-160 adapter, or a 180mm rotor with an
+            integrated-adapter caliper such as the Hope RX4 Rear, or a 180mm+
+            rotor with a FM-to-PM adapter(s). Learn more{" "}
+            <a
+              href="http://www.peterverdone.com/flat-mount-mtb/"
+              title="Flat Mount MTB"
+            >
+              here
+            </a>
+            . Known setups with Flat Mount 160:
+          </p>
+          <ul>
+            <li>Salsa Cutthroat V2 fork</li>
+            <li>
+              A few Paragon Machine Works dropouts (DR4041, B4041, DR4048,
+              B4048)
+            </li>
+            <li>A few Whyte frames (rear)</li>
+          </ul>
+        </>
+      )}
       {isCompleted && (
         <>
           <h2>Results</h2>
+          <p>
+            Just because you can adapt it doesn't mean your frame/fork has
+            clearance for your chosen rotor. Clearance depends on chainstay /
+            fork blade geometry. Refer to frame/fork specs.
+          </p>
           <p>
             Generally, try to use the same brand adapter(s) as your caliper. In
             practice, most brands are compatible. Most adapter and caliper
@@ -1956,8 +2033,14 @@ const DiscBrakeAdapterFinder = () => {
               If you have an Avid/SRAM CPS caliper (found on OEM and lower-end
               bikes), you must purchase an Avid/SRAM adapter for its cup washers
               that bring it to the correct position. For all Avid/SRAM adapters
-              (CPS <em>or</em> standard), consult Avid/SRAM's manual to
-              determine cup washer order (if any are required at all).
+              (CPS <em>or</em> standard), consult{" "}
+              <a
+                href="https://www.sram.com/globalassets/document-hierarchy/frame-fit-specifications/gen.5232-disc-brake-caliper-specs-road-mtb-rev-g.pdf"
+                title="Avid/SRAM Disc Brake Caliper Mounting Specifications"
+              >
+                Avid/SRAM's disc brake mounting specs
+              </a>{" "}
+              to determine cup washer order.
             </p>
           )}
           <Results mount={mount} caliper={caliper} rotor={rotor} />
