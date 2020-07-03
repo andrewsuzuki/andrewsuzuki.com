@@ -11,6 +11,7 @@ import BigButtonLink from "../components/BigButtonLink"
 import Tag from "../components/Tag"
 import FullImageMDX from "../components/FullImageMDX"
 import GalleryMDX from "../components/GalleryMDX"
+import { ForcePostsActiveContext } from "../components/Header"
 
 const mdxComponents = {
   BigButtonLink,
@@ -55,17 +56,19 @@ const PostPage = props => {
   const { series } = props.pageContext
 
   return (
-    <Layout>
-      <SEO title={title} description={description} />
-      <PageTitle>{title}</PageTitle>
-      <PostInfo date={date} tagsWithPaths={tagsWithPaths} />
-      <SeriesMessage series={series} thisPostSlug={slugWithPath.slug} />
-      <Content>
-        <MDXProvider components={mdxComponents}>
-          <MDXRenderer>{body}</MDXRenderer>
-        </MDXProvider>
-      </Content>
-    </Layout>
+    <ForcePostsActiveContext.Provider value={true}>
+      <Layout>
+        <SEO title={title} description={description} />
+        <PageTitle>{title}</PageTitle>
+        <PostInfo date={date} tagsWithPaths={tagsWithPaths} />
+        <SeriesMessage series={series} thisPostSlug={slugWithPath.slug} />
+        <Content>
+          <MDXProvider components={mdxComponents}>
+            <MDXRenderer>{body}</MDXRenderer>
+          </MDXProvider>
+        </Content>
+      </Layout>
+    </ForcePostsActiveContext.Provider>
   )
 }
 

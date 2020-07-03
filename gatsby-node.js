@@ -14,7 +14,7 @@ const { flexSearchCreateOptions } = require("./src/flexSearchCreateOptions")
 // Helpers
 
 function postSlugToPath(postSlug) {
-  return `/posts/${postSlug}`
+  return `/${postSlug}`
 }
 
 function tagSlugToPath(tagSlug) {

@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react"
 
-import Layout, { Content } from "../components/Layout"
-import SEO from "../components/SEO"
-import PageTitle from "../components/PageTitle"
-
 const MAX_ADAPTERS = 2
 
 const SIDE_FRONT = "front"
@@ -2059,24 +2055,4 @@ const DiscBrakeAdapterFinder = () => {
   /* eslint-enable jsx-a11y/no-onchange */
 }
 
-const DiscBrakeAdapterFinderPage = () => (
-  <Layout>
-    <SEO
-      title="Disc Brake Adapter Finder"
-      description="Find the correct disc brake adapter for your frame, fork, calipers, and rotors"
-    />
-    <PageTitle>Disc Brake Adapter Finder</PageTitle>
-    <Content>
-      <p>
-        I think almost every bike mechanic has accidentally ordered the wrong
-        disc brake adapter at one time or another. I decided to make a simple
-        online wizard to make it easy. Simply enter your frame/fork mount
-        standard, caliper standard, and rotor size. It should return a list of
-        possible adapters, or adapter combinations if necessary.
-      </p>
-      <DiscBrakeAdapterFinder />
-    </Content>
-  </Layout>
-)
-
-export default DiscBrakeAdapterFinderPage
+export default DiscBrakeAdapterFinder
