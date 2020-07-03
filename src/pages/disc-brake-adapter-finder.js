@@ -1874,10 +1874,18 @@ const DiscBrakeAdapterFinder = () => {
           </label>{" "}
           <Expander title={<small>Which post mount do I have?</small>}>
             <p>
-              Measure the distance from the center of the wheel's axle to the
+              First, Google your frame/fork specs. If that fails, you can
+              measure the distance from the center of the wheel's axle to the
               center of the closest post mount hole face (projected to the YZ
               plane, not direct, i.e. your ruler must not be rotated toward the
-              center of the frame).
+              center of the frame), then compare to numbers below. See{" "}
+              <a
+                href="https://i.imgur.com/3lhPY46.jpg"
+                title="Measuring post mount size"
+              >
+                visual explanation
+              </a>
+              .
             </p>
             <ul>
               <li>Post Mount 140: ~47.5mm</li>
