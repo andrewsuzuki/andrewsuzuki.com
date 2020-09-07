@@ -46,13 +46,13 @@ The enclosure is pretty simple. I-Spec II mount, shifter body with an inset bed 
 ## Aerobar Shifter
 
 ```gallery
-![Printing the aerobar shifter on MakeHaven's new Prusa](./20200829_191909.jpg)
+![Printing the aerobar shifter on the new Prusa at MakeHaven](./20200829_191909.jpg)
 ![Soldering in wires](./20200831_200911.jpg)
 ![Shifter done](./20200831_200949.jpg)
 ![Zip-tied to aerobar](./20200907_165458.jpg)
 ```
 
-Since this is going on a mountain bike, the aerobar shifter should be in a position that is less likely to be damaged in a crash, i.e. not plug directly into the end of the aerobar tubes. I decided to mount it to the inner side. Because it's flush with the tube, it can simply be secured with a zip tie instead of a fancy clamp. The bottom side is radiused to fit with the standard 22.2mm tube diameter.
+Since this is going on a mountain bike, the aerobar shifter should be in a position that is less likely to be damaged in a crash, i.e. not plugged directly into the end of the aerobar tubes. I decided to mount it to the inner side, secured with zip ties. The bottom side is radiused to fit the standard 22.2mm tube diameter.
 
 ## Done
 
