@@ -48,6 +48,12 @@ const Layout = ({ children }) => {
                 >
                   Github
                 </a>
+                <a
+                  href="https://instagram.com/andrewsuzuki/"
+                  title="@andrewsuzuki on Instagram"
+                >
+                  Instagram
+                </a>
                 <Link to="/contact" title="Contact">
                   Contact
                 </Link>
